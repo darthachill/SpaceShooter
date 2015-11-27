@@ -445,7 +445,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193332}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 11.3900003}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 477864}
@@ -1271,7 +1271,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24398924, guid: 313991fdd3b7f274f8b5dfe6de6cdbc3,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: a12f3180a97b49c4899237ebf29da1ce, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7763a3a80d6e5414db17c784e6e88676, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1499,16 +1499,22 @@ MonoBehaviour:
   maxHealth: 60
   horizontalMove: 0
   verticalMove: -1
-  destroyExplosion: {fileID: 183240, guid: a74b8eac27f2a214f9034305f1106c0c, type: 2}
+  destroyExplosion: {fileID: 141406, guid: aa9232bbb0dc7ce4f9d2b47eab6461d4, type: 2}
   destroySound: {fileID: 8265466}
   destroyVolume: .5
-  boundryPosition: {x: 0, y: 0, z: 0}
+  boundryPosition:
+    left: 0
+    right: 0
+    bottom: 0
+    up: 0
   isShooting: 0
   isMoving: 1
   visualWeapons: []
   weaponLevel: 1
   pointForKill: 30
   white: {fileID: 2100000, guid: a2b28c37441690a45868b2c821b22cde, type: 2}
+  isTakingCollisionDamage: 0
+  DamageByCollision: 0
   detectRange: 4
 --- !u!114 &11464816
 MonoBehaviour:
@@ -1617,6 +1623,14 @@ Prefab:
       propertyPath: destroySound
       value: 
       objectReference: {fileID: 8300000, guid: a12f3180a97b49c4899237ebf29da1ce, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7763a3a80d6e5414db17c784e6e88676, type: 3}
+    - target: {fileID: 0}
+      propertyPath: destroyExplosion
+      value: 
+      objectReference: {fileID: 141406, guid: aa9232bbb0dc7ce4f9d2b47eab6461d4, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 193332}

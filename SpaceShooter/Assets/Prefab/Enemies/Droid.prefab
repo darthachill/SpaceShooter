@@ -146,7 +146,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24398924, guid: 313991fdd3b7f274f8b5dfe6de6cdbc3,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: a12f3180a97b49c4899237ebf29da1ce, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 2350370e458dacf4a886fee7b07986c8, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -241,7 +241,11 @@ MonoBehaviour:
   destroyExplosion: {fileID: 186920, guid: c11c6e10fed42634e964582b6e62a812, type: 2}
   destroySound: {fileID: 8234056}
   destroyVolume: .5
-  boundryPosition: {x: 0, y: 0, z: 0}
+  boundryPosition:
+    left: 0
+    right: 0
+    bottom: 0
+    up: 0
   isShooting: 1
   isMoving: 1
   visualWeapons:
@@ -251,6 +255,8 @@ MonoBehaviour:
   weaponLevel: 1
   pointForKill: 30
   white: {fileID: 2100000, guid: a2b28c37441690a45868b2c821b22cde, type: 2}
+  isTakingCollisionDamage: 0
+  DamageByCollision: 0
 --- !u!135 &13589870
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -290,6 +296,10 @@ Prefab:
       propertyPath: destroySound
       value: 
       objectReference: {fileID: 8300000, guid: a12f3180a97b49c4899237ebf29da1ce, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 2350370e458dacf4a886fee7b07986c8, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 143396}

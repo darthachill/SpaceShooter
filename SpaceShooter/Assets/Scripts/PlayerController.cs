@@ -79,6 +79,8 @@ public class PlayerController : ObjectController
 
     void Update()
     {
+        if (!isAlive) return;                                      // if player is death do nothing
+
         if (Input.GetKeyDown(KeyCode.Escape))                      // TEST
             Application.Quit();
 
@@ -137,17 +139,15 @@ public class PlayerController : ObjectController
     public override void TakeDamage(int damage, Vector3 damagePosition)
     {
         if (isShieldActive) return;                                                     // if shield is active don't take damage to player
-
         ExplosionController.instance.RandomExplosionEffect(damagePosition);
         currentHealth -= damage;
         StartCoroutine(DamageScreen());                                                 // show red screen
-
-        if (currentHealth <= 0 && isAlive)                                              // if player haven't health but he isn't dead
-            Death();                                                                    // kill the player
-
         smokeController.UpdateSmoke(currentHealth, maxHealth);                          // if damage is too high create damage smoke
         CameraShake.instance.DamageShake();                                             // shake camera effect on screen
         healthBar.UpdateBar(currentHealth, maxHealth);                                  // update healthBar 
+
+        if (currentHealth <= 0 && isAlive)                                              // if player haven't health but he isn't dead
+            Death();                                                                    // kill the player
     }
 
 

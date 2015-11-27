@@ -13,7 +13,7 @@ public class VisualBar : MonoBehaviour
     public Transform barIcone;                          // icone bar represents visual bar, it could be  icon heart or fuel
 
 
-    [Range(0,1)]
+    [Range(0, 1)]
     [Tooltip("how many percent of total amount bar value is necesarry to play warning animation")]
     public float warningPercent;
 
@@ -38,10 +38,10 @@ public class VisualBar : MonoBehaviour
     public void UpdateBar(float currentValue, float maxValue)
     {
         float percent = currentValue / (float)maxValue;
-
         if (percent < 0)                                                                  // it's prevent scale bar in left side
             percent = 0;
-        else if (isEffects)
+
+        if (isEffects)
             EffectHandle(percent);
 
         transform.localScale = new Vector3(percent, 1, 1);
@@ -71,13 +71,13 @@ public class VisualBar : MonoBehaviour
     void EffectHandle(float percent)
     {
         iconeAnimation = barIcone.gameObject.GetComponent<Animator>();                 // Get reference to icone animation that allows to control when play animation
-        if (percent < warningPercent && !isEffectPlaying)                              // if  bar's  fall to warningPercent value and effects isn't playing 
+        if (percent < warningPercent && !isEffectPlaying && percent != 0)              // if  bar's  fall to warningPercent value and effects isn't playing, and player is still alive 
         {
             if (audioSource) audioSource.Play();
             iconeAnimation.SetBool(nameWarning, true);
             isEffectPlaying = true;
         }
-        else if (percent > warningPercent && isEffectPlaying)                          // stop play effect if currentValue of bar is greatest than warningPercent and effects is Playing
+        else if (percent > warningPercent && isEffectPlaying || percent == 0)          // stop play effect if currentValue of bar is greatest than warningPercent and effects is Playing, or valie is zero
         {
             if (audioSource) audioSource.Stop();
             iconeAnimation.SetBool(nameWarning, false);
@@ -88,7 +88,7 @@ public class VisualBar : MonoBehaviour
     public void BlueIcone(bool enable)                                                 // this method allows turn off/on blue heart on screen playerController has access
     {
         if (!iconeAnimation)                                                           // if there is no component attached
-            iconeAnimation = barIcone.gameObject.GetComponent<Animator>();                 // Get reference to icone animation that allows to control when play animation
+            iconeAnimation = barIcone.gameObject.GetComponent<Animator>();             // Get reference to icone animation that allows to control when play animation
         iconeAnimation.SetBool("blueIcone", enable);
     }
 }   // Karol Sobanski

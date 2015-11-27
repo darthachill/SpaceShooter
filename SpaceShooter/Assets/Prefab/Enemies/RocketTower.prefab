@@ -65,7 +65,6 @@ GameObject:
   - 54: {fileID: 5483180}
   - 82: {fileID: 8208850}
   - 65: {fileID: 6521634}
-  - 114: {fileID: 11406098}
   - 114: {fileID: 11476160}
   m_Layer: 8
   m_Name: RocketTower
@@ -126,7 +125,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 132884}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106709}
-  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: .100000001, y: .100000001, z: .100000001}
   m_Children:
   - {fileID: 446040}
@@ -282,8 +281,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24398924, guid: 313991fdd3b7f274f8b5dfe6de6cdbc3,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: a12f3180a97b49c4899237ebf29da1ce, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: fd81f0f9def8c4c47b76eecd49d67792, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -392,41 +391,6 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
---- !u!114 &11406098
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 132884}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf214da1cb0702644926fcdce91e4202, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  horizontalMove: 0
-  verticalMove: -2
-  destroyExplosion: {fileID: 183240, guid: a74b8eac27f2a214f9034305f1106c0c, type: 2}
-  destroySound: {fileID: 8208850}
-  destroyVolume: 1
-  boundryPosition:
-    left: 0
-    right: 0
-    bottom: 0
-    up: 0
-  isShooting: 1
-  isMoving: 1
-  visualWeapons:
-  - weapon: {fileID: 133526, guid: 8b085e955e653b74997bad2466c03fa2, type: 2}
-    weaponSpawn: {fileID: 487740}
-    weaponScripts: {fileID: 0}
-  weaponLevel: 1
-  pointForKill: 50
-  white: {fileID: 2100000, guid: a2b28c37441690a45868b2c821b22cde, type: 2}
-  isTakingCollisionDamage: 0
-  DamageByCollision: 0
-  smoke: {fileID: 19883908}
-  destroyClip: {fileID: 8300000, guid: a12f3180a97b49c4899237ebf29da1ce, type: 3}
 --- !u!114 &11461168
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -453,7 +417,7 @@ MonoBehaviour:
   maxHealth: 100
   horizontalMove: 0
   verticalMove: -1
-  destroyExplosion: {fileID: 141406, guid: aa9232bbb0dc7ce4f9d2b47eab6461d4, type: 2}
+  destroyExplosion: {fileID: 183240, guid: a74b8eac27f2a214f9034305f1106c0c, type: 2}
   destroySound: {fileID: 8208850}
   destroyVolume: .5
   boundryPosition:
@@ -2704,7 +2668,19 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: a12f3180a97b49c4899237ebf29da1ce, type: 3}
+      objectReference: {fileID: 8300000, guid: fd81f0f9def8c4c47b76eecd49d67792, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: destroyExplosion
+      value: 
+      objectReference: {fileID: 183240, guid: a74b8eac27f2a214f9034305f1106c0c, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 132884}
