@@ -49,7 +49,7 @@ public class PickUpsController : MonoBehaviour
             else if (shield)
                 other.GetComponent<ShieldController>().ActiveShield(value);                      // get refenence to shield Controller and active player shield
             else if (star)
-                GameMaster.instance.IncreaseScore(value);                                        // increase player score
+                GameMaster.instance.AddStars(value);                                             // increase player score and add star
             else if (bulletTime)
                 GameMaster.instance.BulletTimeOn();                                              // change timeScale to achive bullettime effect
             else if (gun)                                                                        // if there is any gun attached

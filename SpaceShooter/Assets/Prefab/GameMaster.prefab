@@ -268,6 +268,7 @@ GameObject:
   - 114: {fileID: 11444430}
   - 114: {fileID: 11412298}
   - 114: {fileID: 11415516}
+  - 114: {fileID: 11426158}
   m_Layer: 0
   m_Name: GameMaster
   m_TagString: Background
@@ -931,7 +932,7 @@ AudioSource:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 178314}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24393348, guid: 313991fdd3b7f274f8b5dfe6de6cdbc3,
     type: 2}
@@ -1212,9 +1213,9 @@ MonoBehaviour:
     up: 18
   hierarchyGuard: {fileID: 0}
   playerHolder: {fileID: 147344, guid: 3fc36c20a2655ff46a5b23113f1f66dd, type: 2}
+  goldenScore: 100
   scoreText: {fileID: 0}
   score: 0
-  isEnemySpawn: 0
   enemies:
   - {fileID: 163528, guid: 7121bbf836b0bab4fbdcac02acfcfc00, type: 2}
   - {fileID: 156208, guid: ac6ecdfd08d9a8e4aac4252915a54c66, type: 2}
@@ -1224,12 +1225,10 @@ MonoBehaviour:
   - {fileID: 132884, guid: 18bfc38611f4b524683f4e945c3c9268, type: 2}
   - {fileID: 143396, guid: 7a4dde4e32ea7dc4995d4491205b05ca, type: 2}
   - {fileID: 128844, guid: ccb527842547f634aa45c5e256d70939, type: 2}
-  enemyPosition:
-    left: 18
-    right: 7.5
-    bottom: 0
-    up: 22
-  enemySpawnTime: 1.20000005
+  formations:
+  - {fileID: 135064, guid: 08cca268c614cd14da5fed013d43a30c, type: 2}
+  pickUps:
+  - {fileID: 187904, guid: 1876ad5de0dde6c449f3f4e7206af0e9, type: 2}
   dropItems:
   - {fileID: 186748, guid: 2c438dd0e8b2f9042ba085c99aee2d51, type: 2}
   - {fileID: 106282, guid: e579a07c12ffd7d4d965aec951ba1998, type: 2}
@@ -1241,23 +1240,41 @@ MonoBehaviour:
   - {fileID: 184438, guid: cb0e426832ac34b41abaac4c86f01abb, type: 2}
   - {fileID: 185676, guid: 094892aac4f3e804cbcb6fda2acd03cd, type: 2}
   - {fileID: 187904, guid: 1876ad5de0dde6c449f3f4e7206af0e9, type: 2}
-  dropPercent: 25
-  isPickUpSpawn: 0
-  pickUps:
-  - {fileID: 187904, guid: 1876ad5de0dde6c449f3f4e7206af0e9, type: 2}
+  fuelTank: {fileID: 195356, guid: 514f33d8f249a54408417069edc5d7ff, type: 2}
+  ammo: {fileID: 184438, guid: cb0e426832ac34b41abaac4c86f01abb, type: 2}
   pickUpPosition:
     left: 18
     right: 7.5
     bottom: 0
     up: 22
+  enemyPosition:
+    left: 18
+    right: 7.5
+    bottom: 0
+    up: 22
+  enemySpawnTime: 1.20000005
+  formationSpawnTime: 3
   pickUpTime: 50
-  fuelTank: {fileID: 195356, guid: 514f33d8f249a54408417069edc5d7ff, type: 2}
   fuelSpawnTime: 30
-  ammo: {fileID: 184438, guid: cb0e426832ac34b41abaac4c86f01abb, type: 2}
   ammoSpawnTime: 20
-  goldenScore: 100
   startWait: 0
   endWait: 2
+  dropPercent: 25
+  isEnemySpawn: 1
+  isPickUpSpawn: 0
+--- !u!114 &11426158
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41948fac8dcbe864183995a74e8c7330, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kill:
+    medalController: {fileID: 0}
 --- !u!114 &11444430
 MonoBehaviour:
   m_ObjectHideFlags: 1

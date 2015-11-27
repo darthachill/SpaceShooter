@@ -37,6 +37,7 @@ AudioMixerController:
     - d50e84451fe28474aa4b19fc2edec252
     - c444bd36507b14242b8332bcd4f7f368
     - b8d39d7bb1f65084c9aabe9858bf18d4
+    - a66d64ccf2d10c146b042e33a8142896
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500003}
@@ -60,6 +61,7 @@ AudioMixerGroupController:
   - {fileID: 24359978}
   - {fileID: 24366210}
   - {fileID: 24325768}
+  - {fileID: 24333796}
   m_Volume: e4f1529bf45a1384e81cf05e42a93127
   m_Pitch: 21a7ee4e2f194fc4188e8e4176ecf5d9
   m_Effects:
@@ -184,6 +186,23 @@ AudioMixerGroupController:
   m_Pitch: 974c7fd221a2cf3469e479a4aea15c42
   m_Effects:
   - {fileID: 24414042}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!243 &24333796
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: MedalSnd
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: a66d64ccf2d10c146b042e33a8142896
+  m_Children: []
+  m_Volume: a1139f76c1670884aaeaa93bd3c5ec73
+  m_Pitch: fadc542edb3e59a468afe336caae3304
+  m_Effects:
+  - {fileID: 24442888}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -641,6 +660,19 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!244 &24442888
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_EffectID: ad2d6d924cc181746992a60232c30453
+  m_EffectName: Attenuation
+  m_MixLevel: 40c38e24a9f266f43887d67f4e8ab711
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &24453750
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -762,13 +794,14 @@ AudioMixerSnapshotController:
     38c1dad48b235dc42a89f555554907a3: -5.72247744
     ca4104366db295e48929e54572cba07b: 1.74776649
     237b5266d68dfc24aa58806ebed1ded9: -10.3452072
+    a1139f76c1670884aaeaa93bd3c5ec73: 0
     8082f39664a9a7f47aaccb8fbea0582b: 0
     b3ca4607624ed7b4f9d3ef296a55c6d7: 11.3133059
     54eb966718356e543a1a7c15d9c2eadb: -.0257765595
     4e2e18a7963e2b142b4310219e611ee2: -17.9387169
     47f622b8d76563c4f8a050e0b01a9563: -2.01803493
     bc0b386baebb35544b1916397ba6dadb: 2.85022593
-    46fb0d1d67199014689812b492f09f7c: -3.84685755
+    46fb0d1d67199014689812b492f09f7c: -10.3452072
     897c207deafce82459f6ae41c1232a37: -48.7999992
     f781b07e31dc87d42baa90b57f9f77af: -5
     a9d9daff0cd63df4a8894ea89559a6a5: -4.93564129

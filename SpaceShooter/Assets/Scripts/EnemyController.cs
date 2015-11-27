@@ -77,6 +77,7 @@ public class EnemyController : ObjectController
 
         GameMaster.instance.IncreaseScore(pointForKill);                        // points for player 
         GameMaster.instance.DropRandomItem(transform.position);                 // choose random item to drop
+        GameMaster.instance.AddKilledEnemy();                                   // Add Killed enemy to stats
 
         yield return StartCoroutine(base.DestroyEffect());                      // play musics and particle effects
 
@@ -90,7 +91,7 @@ public class EnemyController : ObjectController
     }
 
 
-    protected override void CheckBoundry()                       // Enemy Boundry
+    protected override void CheckBoundry()                                      // Enemy Boundry
     {
         rigidbody.position = new Vector3(
         Mathf.Clamp(rigidbody.position.x, -boundryPosition.left, boundryPosition.right),

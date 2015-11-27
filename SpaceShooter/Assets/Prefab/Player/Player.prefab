@@ -754,7 +754,7 @@ MonoBehaviour:
   weaponSpawnMain: {fileID: 405178}
   weaponSpawnLeft: {fileID: 428476}
   weaponSpawnRight: {fileID: 477774}
-  maxammunition: 1
+  maxammunition: 150
   tiltSpeed: 5
   sight: 20
   changeColor: 3
@@ -4144,7 +4144,7 @@ Prefab:
         type: 2}
     - target: {fileID: 0}
       propertyPath: maxammunition
-      value: 1
+      value: 150
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

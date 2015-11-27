@@ -53,7 +53,9 @@ public class GameMaster : MonoBehaviour
     public bool isPickUpSpawn = true;
 
     private const string scoreAnimation = "GoldLabel";
-    private BulletTime bulletTime;             // reference to BulletTime script
+    private BulletTime bulletTime;                     // reference to BulletTime script
+    private MedalAwardingFor medalAwardingFor;               // reference to the medal Awarding;
+
 
 
     void Awake()
@@ -72,6 +74,7 @@ public class GameMaster : MonoBehaviour
         scoreText.text = "Score: 0";
 
         bulletTime = GetComponent<BulletTime>();
+        medalAwardingFor = GetComponent<MedalAwardingFor>();
 
         hierarchyGuard = new GameObject("HierarchyGuard").transform;
     }
@@ -149,7 +152,7 @@ public class GameMaster : MonoBehaviour
     }
 
 
-    public void IncreaseScore(int amount)
+    public void IncreaseScore(int amount)                                                // for killing enemies
     {
         this.score += amount;
         scoreText.text = "Score: " + score;
@@ -176,6 +179,19 @@ public class GameMaster : MonoBehaviour
     public bool CheckIfPlayerIsAlive()                                                    // check if player is still alive
     {
         return IsplayerAlive ? true : false;
+    }
+
+
+    public void AddStars(int extraPoints)
+    {
+        medalAwardingFor.CollectingStars();         // check if player get Medal
+        IncreaseScore(extraPoints);                 // increase player score
+    }
+
+
+    public void AddKilledEnemy()
+    {
+        medalAwardingFor.KillingEnemies();
     }
 
 
@@ -206,8 +222,7 @@ public class GameMaster : MonoBehaviour
 
         }
     }
-
-
+    
 
     IEnumerator RandomObjectSpawner(GameObject objectsToSpawn, Boundry objectsPosition, float objectSpawnTime)                                  // method for only one gameobject
     {
