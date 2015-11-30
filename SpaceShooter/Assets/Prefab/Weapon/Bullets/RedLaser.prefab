@@ -27,9 +27,9 @@ GameObject:
   - 4: {fileID: 407742}
   - 136: {fileID: 13688600}
   - 54: {fileID: 5435916}
+  - 82: {fileID: 8259778}
   - 114: {fileID: 11434678}
   - 114: {fileID: 11405156}
-  - 82: {fileID: 8259778}
   m_Layer: 0
   m_Name: RedLaser
   m_TagString: PlayerBullet

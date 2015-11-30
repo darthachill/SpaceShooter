@@ -6,8 +6,8 @@ using System.Collections;
 [RequireComponent(typeof(Button))]
 public class ButtonSound : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
 {
-    public AudioClip pressedSound;
-    public AudioClip hoveredSound;
+    [HideInInspector] public AudioClip pressedSound;
+    [HideInInspector] public AudioClip hoveredSound;
 
     private AudioSource audioSource { get { return GetComponent<AudioSource>(); } }
     private Button button { get { return GetComponent<Button>(); } }
@@ -27,5 +27,4 @@ public class ButtonSound : MonoBehaviour, IPointerEnterHandler, IPointerDownHand
     {
         audioSource.PlayOneShot(pressedSound);
     }
-
-}
+}   // Karol Sobański

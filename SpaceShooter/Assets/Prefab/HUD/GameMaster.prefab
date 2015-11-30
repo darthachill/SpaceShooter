@@ -1182,7 +1182,7 @@ MonoBehaviour:
   spaceRocketSpawn: {x: 20, y: -2, z: 15}
   objectsTime: 10
   asteroidsTime: 40
-  nebulasTime: 30
+  nebulasTime: 10
   spaceRocketsTime: 60
 --- !u!114 &11414444
 MonoBehaviour:
@@ -1215,7 +1215,6 @@ MonoBehaviour:
   playerHolder: {fileID: 147344, guid: 3fc36c20a2655ff46a5b23113f1f66dd, type: 2}
   goldenScore: 100
   scoreText: {fileID: 0}
-  score: 0
   enemies:
   - {fileID: 163528, guid: 7121bbf836b0bab4fbdcac02acfcfc00, type: 2}
   - {fileID: 156208, guid: ac6ecdfd08d9a8e4aac4252915a54c66, type: 2}
@@ -1252,11 +1251,11 @@ MonoBehaviour:
     right: 7.5
     bottom: 0
     up: 22
-  enemySpawnTime: 1.20000005
+  enemySpawnTime: 1.29999995
   formationSpawnTime: 3
   pickUpTime: 50
   fuelSpawnTime: 30
-  ammoSpawnTime: 20
+  ammoSpawnTime: 30
   startWait: 0
   endWait: 2
   dropPercent: 25
@@ -1274,6 +1273,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kill:
+    medalController: {fileID: 0}
+  stars:
     medalController: {fileID: 0}
 --- !u!114 &11444430
 MonoBehaviour:

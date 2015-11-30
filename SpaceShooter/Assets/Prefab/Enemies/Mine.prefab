@@ -1360,7 +1360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3fb7fc71c06704a849fcd8e29f3fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 12
   volume: .5
   destroyEffects: []
   destroySnd: {fileID: 0}
@@ -1377,7 +1377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3fb7fc71c06704a849fcd8e29f3fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 12
   volume: .5
   destroyEffects: []
   destroySnd: {fileID: 0}
@@ -1394,7 +1394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3fb7fc71c06704a849fcd8e29f3fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 12
   volume: .5
   destroyEffects: []
   destroySnd: {fileID: 0}
@@ -1411,7 +1411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3fb7fc71c06704a849fcd8e29f3fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 12
   volume: .5
   destroyEffects: []
   destroySnd: {fileID: 0}
@@ -1428,7 +1428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3fb7fc71c06704a849fcd8e29f3fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 12
   volume: .5
   destroyEffects: []
   destroySnd: {fileID: 0}
@@ -1445,7 +1445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3fb7fc71c06704a849fcd8e29f3fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 12
   volume: .5
   destroyEffects: []
   destroySnd: {fileID: 0}
@@ -1462,7 +1462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3fb7fc71c06704a849fcd8e29f3fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 12
   volume: .5
   destroyEffects: []
   destroySnd: {fileID: 0}
@@ -1479,7 +1479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3fb7fc71c06704a849fcd8e29f3fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 12
   volume: .5
   destroyEffects: []
   destroySnd: {fileID: 0}
@@ -1527,7 +1527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3fb7fc71c06704a849fcd8e29f3fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 12
   volume: .5
   destroyEffects: []
   destroySnd: {fileID: 0}
@@ -1544,7 +1544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3fb7fc71c06704a849fcd8e29f3fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 12
   volume: .5
   destroyEffects: []
   destroySnd: {fileID: 0}
@@ -1561,7 +1561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3fb7fc71c06704a849fcd8e29f3fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 12
   volume: .5
   destroyEffects: []
   destroySnd: {fileID: 0}
@@ -1578,7 +1578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3fb7fc71c06704a849fcd8e29f3fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 12
   volume: .5
   destroyEffects: []
   destroySnd: {fileID: 0}
@@ -1613,7 +1613,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: damage
-      value: 20
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.z

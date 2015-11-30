@@ -10,11 +10,13 @@ TagManager:
   - Life
   - PlayerBullet
   - Weapon
-  - PausePanel
   - HighScore
   - Thruster
   - EnemyBullet
   - Canvas
+  - MainMenu
+  - PickUp
+  - GameOver
   layers:
   - Default
   - TransparentFX

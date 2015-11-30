@@ -17,7 +17,6 @@ public class GameMaster : MonoBehaviour
     [HideInInspector]
     public int goldenScore = 100;                       // max score value, when label change his color to gold for a while
     public Text scoreText;                              // player score label on screen
-    public int score;
 
 
     [Header("Spawn Objects")]
@@ -29,6 +28,7 @@ public class GameMaster : MonoBehaviour
     public GameObject ammo;
 
 
+    [Header("Spawn Positions")]
     public Boundry pickUpPosition;
     public Boundry enemyPosition;
 
@@ -41,6 +41,7 @@ public class GameMaster : MonoBehaviour
 
     [Space(5)]
     private int nextGoldenScore;                       // nextGoldenScore is sum of all previous goldenScores
+    private int score;                                 // how many scores player has
     private bool IsplayerAlive;
 
     [Header("GameSettings")]
@@ -54,8 +55,9 @@ public class GameMaster : MonoBehaviour
 
     private const string scoreAnimation = "GoldLabel";
     private BulletTime bulletTime;                     // reference to BulletTime script
-    private MedalAwardingFor medalAwardingFor;               // reference to the medal Awarding;
-
+    private MedalAwardingFor medalAwardingFor;         // reference to the medal Awarding;
+    private HighScoreController highScoreController;   // reference to highScore Controller it will e invoke after end game to save scores;
+    
 
 
     void Awake()
@@ -70,13 +72,13 @@ public class GameMaster : MonoBehaviour
 
 
         nextGoldenScore = goldenScore;           // initial first golden Score
-        GetGUIReferences();                      // ger references to GUI components
         scoreText.text = "Score: 0";
 
         bulletTime = GetComponent<BulletTime>();
         medalAwardingFor = GetComponent<MedalAwardingFor>();
 
         hierarchyGuard = new GameObject("HierarchyGuard").transform;
+        highScoreController = GameObject.FindGameObjectWithTag("HighScore").GetComponent<HighScoreController>();  // Get reference to hight score
     }
 
 
@@ -127,9 +129,10 @@ public class GameMaster : MonoBehaviour
         isEnemySpawn = false;
         isPickUpSpawn = false;
         yield return new WaitForSeconds(endWait);
-        Menu highscoreMenu = GameObject.FindGameObjectWithTag("HighScore").GetComponent<Menu>();                        // get reference to high score menu to
-        GameObject.FindGameObjectWithTag("HighScore").GetComponent<HighScoreController>().SaveScoreInHighScore(score);  // Upload scores in High scores
-        GameObject.FindGameObjectWithTag("Canvas").GetComponent<MenuManager>().ShowMenu(highscoreMenu);                 // find MenuManager and switch menu to high Score
+        Menu gameOverMenu = GameObject.FindGameObjectWithTag("GameOver").GetComponent<Menu>();                        // get reference to menu
+        gameOverMenu.gameObject.GetComponent<GatesController>().UpdateGateState(true);                                // set gates to open state
+        GameObject.FindGameObjectWithTag("Canvas").GetComponent<MenuManager>().ShowMenu(gameOverMenu);                // find MenuManager and switch menu to gameOver
+        highScoreController.SaveScoreInHighScore(score);                                                              // save player score in highscore
     }
 
 
@@ -195,19 +198,13 @@ public class GameMaster : MonoBehaviour
     }
 
 
-    void GetGUIReferences()
-    {
-        scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
-    }
-
 
     void SpawnPlayer()
     {
         IsplayerAlive = true;
         Instantiate(playerHolder, new Vector3(0, 0, -4.0f), Quaternion.identity);
     }
-
-
+    
 
     IEnumerator RandomObjectSpawner(GameObject[] objectsToSpawn, Boundry objectsPosition, float objectSpawnTime)
     {

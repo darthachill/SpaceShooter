@@ -292,7 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100c69f696653bc428eef1e222f640b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 40
+  maxHealth: 30
   horizontalMove: 2
   verticalMove: -1
   destroyExplosion: {fileID: 186920, guid: c11c6e10fed42634e964582b6e62a812, type: 2}
@@ -310,7 +310,7 @@ MonoBehaviour:
     weaponSpawn: {fileID: 434970}
     weaponScripts: {fileID: 0}
   weaponLevel: 1
-  pointForKill: 0
+  pointForKill: 20
   white: {fileID: 2100000, guid: a2b28c37441690a45868b2c821b22cde, type: 2}
   isTakingCollisionDamage: 0
   DamageByCollision: 0
@@ -1388,7 +1388,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: maxHealth
-      value: 40
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: bar
@@ -1408,7 +1408,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: pointForKill
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: isMoving
