@@ -86,21 +86,20 @@ public class PlayerController : ObjectController
 
         if (Input.GetKeyDown(KeyCode.Q))                           // TEST
             TakeDamage(60, transform.position);
-
-
+        
         if (Input.GetKeyDown(KeyCode.R))                           // TEST
             IncreaseHealth(50);
 
         if (Input.GetKeyDown(KeyCode.E))                           // Create Bombs 
             bombController.CreateBoombs();
 
-        IsEnemyOnSight();                                          // if player can see enemy, display his health bar
-        CheckBoundry();                                            // check if player try leave mthe map
-
         if (isShooting)                                            // if player is able to shot
             Shot();                                                // shot
 
         if (isMoving) Move();                                      // if player is able to move, move his ship
+
+        IsEnemyOnSight();                                          // if player can see enemy, display his health bar
+        CheckBoundry();                                            // check if player try leave mthe map
     }
 
 
@@ -316,11 +315,9 @@ public class PlayerController : ObjectController
         isAlive = false;
         gameObject.GetComponent<SphereCollider>().enabled = false;                           // disenabled collider
         transform.FindChild("Model").transform.gameObject.SetActive(false);                  // hide player model;
-
         Instantiate(destroyExplosion, transform.position, Quaternion.identity);
 
         destroySound.Play();
-
         GameMaster.instance.PlayerDie();
 
         Destroy(gameObject,1);

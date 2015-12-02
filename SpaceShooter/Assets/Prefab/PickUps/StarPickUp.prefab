@@ -218,7 +218,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24318554, guid: 313991fdd3b7f274f8b5dfe6de6cdbc3,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 92c116254b511ea438dbf31c0fbf9173, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 251d5181fb195834792acc41fadb0f87, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -308,7 +308,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 50
-  volume: .400000006
   recoveryPackage: 0
   fuel: 0
   ammo: 0
@@ -316,6 +315,7 @@ MonoBehaviour:
   shield: 0
   star: 1
   bulletTime: 0
+  gun: {fileID: 0}
 --- !u!114 &11431302
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4689,7 +4689,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 92c116254b511ea438dbf31c0fbf9173, type: 3}
+      objectReference: {fileID: 8300000, guid: 251d5181fb195834792acc41fadb0f87, type: 3}
     - target: {fileID: 0}
       propertyPath: m_PlayOnAwake
       value: 0

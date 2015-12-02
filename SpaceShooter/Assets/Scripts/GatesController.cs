@@ -63,11 +63,11 @@ public class GatesController : MonoBehaviour
     IEnumerator IECloseGatesAndChangeSceene()
     {
         yield return StartCoroutine(IECloseGates());
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(closedTime);
 
         menu.gameObject.GetComponent<GatesController>().UpdateGateState(false);
         menuManager.ShowMenu(menu);
-
+        GameMaster.instance.ClearScenee();
     }
 
 
@@ -120,7 +120,7 @@ public class GatesController : MonoBehaviour
             StartCoroutine(IEOpenGatesAfterTime());
         }
     }
-
+    
 
     void BeginFromClosedGates()
     {

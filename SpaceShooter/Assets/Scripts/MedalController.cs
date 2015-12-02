@@ -9,9 +9,11 @@ public class MedalController : MonoBehaviour
     Animator animator;
 
     public Sprite medalSprite;
-
+    public Sprite medalHole;
 
     private Image image;
+    public bool IsMedalShown { get; set; }
+
 
 
     void Start()
@@ -22,16 +24,17 @@ public class MedalController : MonoBehaviour
     }
 
 
-    void Update()
+    public void ShowMedalOnBoard()         // MedalAward invoke this
     {
-        if (Input.GetKeyDown(KeyCode.M))
-            animator.SetBool("ShowMedal", true);
+        IsMedalShown = true;
+        animator.SetBool("ShowMedal", true);
     }
 
 
-    public void ShowMedalOnBoard()         // MedalAword invoke this
+    public void HideMedal()             
     {
-        animator.SetBool("ShowMedal", true);
+        IsMedalShown = false;
+        image.sprite = medalHole;
     }
 
 
@@ -46,5 +49,4 @@ public class MedalController : MonoBehaviour
     {
         animator.SetBool("ShowMedal", false);
     }
-
 }   // Karol Sobański

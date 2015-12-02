@@ -58,7 +58,6 @@ public class PickUpsController : MonoBehaviour
                 playerController.AddAmmo(value);                                                 // add aditional ammo
             }
                        
- 
 
             if (audioSource)                                                                     // if there is sound attached
                 audioSource.Play();
@@ -72,7 +71,7 @@ public class PickUpsController : MonoBehaviour
 
     void DestroyPickUp()                                                                         // Animation will use this method after play collected animation
     {
-            Destroy(gameObject);
+            Destroy(gameObject, audioSource.clip.length);
     }
 
 }   // Karol Sobanski

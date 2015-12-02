@@ -43,6 +43,7 @@ AudioMixerController:
     - c29eb2b4eafbb5047af84ecc810a334b
     - 100fb1e645face0439b7841663670bac
     - 5141715603a93fb45a4df28fff25fd19
+    - cf2471366eccf6b478ace163820120f8
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500003}
@@ -124,6 +125,23 @@ AudioMixerGroupController:
   m_Pitch: c0d36930ef749b744aaedd077a6dd3e0
   m_Effects:
   - {fileID: 24464662}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!243 &24313534
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: ScoreCounter
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: cf2471366eccf6b478ace163820120f8
+  m_Children: []
+  m_Volume: 45c811b24ea84c448b0da5f9f45ccba3
+  m_Pitch: 35012b1f42a78b64c84708f09cef77e6
+  m_Effects:
+  - {fileID: 24467108}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -379,6 +397,7 @@ AudioMixerGroupController:
   m_GroupID: 100fb1e645face0439b7841663670bac
   m_Children:
   - {fileID: 24315192}
+  - {fileID: 24313534}
   m_Volume: e9c24c8fe0523c64aa4dfe22de09ef64
   m_Pitch: c769db10b41503642b2d7aacb4f9cc21
   m_Effects:
@@ -822,6 +841,19 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!244 &24467108
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_EffectID: 61522be000ae7644d8895e89f35cdc37
+  m_EffectName: Attenuation
+  m_MixLevel: 08196e016fe882b42aa41d65defb5cd1
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &24468476
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -922,9 +954,11 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 784dc23b2ed880746b3d36d370374214
   m_FloatValues:
+    cdd08840511bd4f42b6e453512b2796a: 10
     a02978b0f4c91b54aa66e9107687df8a: 2.85022593
     551babc0a7df89745a587ff6de0cc90d: -.0837488323
     18efbf61a21ac5742b497ad53b92b223: -18.5923901
+    45c811b24ea84c448b0da5f9f45ccba3: -2.87229443
     e2ffc62392c474344a86fb6bb7254374: .100000001
     61b6f163dc01ed0488a0c719f5a981b1: 5.67851019
     eb7cbc834bf87d84c877c9fe92d274d4: -10.3452072

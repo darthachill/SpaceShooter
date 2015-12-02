@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-
+using System.Collections.Generic;                       // Lists
 
 public class GameMaster : MonoBehaviour
 {
@@ -40,8 +40,8 @@ public class GameMaster : MonoBehaviour
     public float ammoSpawnTime;
 
     [Space(5)]
-    private int nextGoldenScore;                       // nextGoldenScore is sum of all previous goldenScores
-    private int score;                                 // how many scores player has
+    private int nextGoldenScore;                                  // nextGoldenScore is sum of all previous goldenScores
+    private int score;                                            // how many scores player has
     private bool IsplayerAlive;
 
     [Header("GameSettings")]
@@ -49,15 +49,16 @@ public class GameMaster : MonoBehaviour
     public float endWait = 1;
 
     [Range(0, 100)]
-    public int dropPercent;                            // how offen item will drop from enemies
+    public int dropPercent;                                       // how offen item will drop from enemies
     public bool isEnemySpawn = true;
     public bool isPickUpSpawn = true;
 
     private const string scoreAnimation = "GoldLabel";
-    private BulletTime bulletTime;                     // reference to BulletTime script
-    private MedalAwardingFor medalAwardingFor;         // reference to the medal Awarding;
-    private HighScoreController highScoreController;   // reference to highScore Controller it will e invoke after end game to save scores;
-    
+    private BulletTime bulletTime;                                // reference to BulletTime script
+    private MedalAwardingFor medalAwardingFor;                    // reference to the medal Awarding;
+    private HighScoreController highScoreController;              // reference to highScore Controller it will e invoke after end game to save scores;
+    private List<Transform> objectsList = new List<Transform>();  // list to keep references to all spawned objects, it will be helpful to destroy them after player death
+
 
 
     void Awake()
@@ -126,18 +127,20 @@ public class GameMaster : MonoBehaviour
 
     IEnumerator EndGame()
     {
-        isEnemySpawn = false;
-        isPickUpSpawn = false;
-        yield return new WaitForSeconds(endWait);
-        Menu gameOverMenu = GameObject.FindGameObjectWithTag("GameOver").GetComponent<Menu>();                        // get reference to menu
-        gameOverMenu.gameObject.GetComponent<GatesController>().UpdateGateState(true);                                // set gates to open state
-        GameObject.FindGameObjectWithTag("Canvas").GetComponent<MenuManager>().ShowMenu(gameOverMenu);                // find MenuManager and switch menu to gameOver
+        isEnemySpawn = false;                                                                                         // stop spawning enemy
+        isPickUpSpawn = false;                                                                                        // stop spawning pick ups
+        yield return new WaitForSeconds(endWait);                                                                     // wait some time that player will se his death
+
+        medalAwardingFor.SaveMedals();                                                                                // save all player medals information that will be necessary to display in gameOver screen
         highScoreController.SaveScoreInHighScore(score);                                                              // save player score in highscore
+
+        GameObject.FindGameObjectWithTag("GameOver").GetComponent<GameOverController>().UpdateStats(score);                // update stats on gameOver canvas;
     }
 
 
     void Reset()
     {
+        medalAwardingFor.Reset();
         score = 0;
         scoreText.text = "Score: 0";
     }
@@ -175,6 +178,7 @@ public class GameMaster : MonoBehaviour
         if (randomPercent > dropPercent) return;                                          // if randomPercent is greatest than dropPErcent, create item
 
         GameObject newDrop = Instantiate(dropItems[Random.Range(0, dropItems.Length)], spawnPoint, Quaternion.identity) as GameObject;
+        objectsList.Add(newDrop.transform);                                               // add to object list new drop item
         newDrop.transform.SetParent(hierarchyGuard);
     }
 
@@ -198,36 +202,44 @@ public class GameMaster : MonoBehaviour
     }
 
 
+    public void ClearScenee()
+    {
+        foreach (Transform o in objectsList)                                              // ho through all list with objects
+            if (o)                                                                        // if object is't destroy yet
+                Destroy(o.gameObject);                                                    // destroy it
+    }
+
 
     void SpawnPlayer()
     {
         IsplayerAlive = true;
         Instantiate(playerHolder, new Vector3(0, 0, -4.0f), Quaternion.identity);
     }
-    
+
 
     IEnumerator RandomObjectSpawner(GameObject[] objectsToSpawn, Boundry objectsPosition, float objectSpawnTime)
     {
-        while (IsplayerAlive)                                                                                                                       // spawn objects all the time
+        while (IsplayerAlive)                                                                                                                   // spawn objects all the time
         {
 
             yield return new WaitForSeconds(objectSpawnTime);
             GameObject randObject = objectsToSpawn[Random.Range(0, objectsToSpawn.Length)];                                                     // choose random object
             Vector3 randPosition = new Vector3(Random.Range(-objectsPosition.left, objectsPosition.right), 0, objectsPosition.up);              // choose random object position
             GameObject newObject = Instantiate(randObject, randPosition, Quaternion.identity) as GameObject;                                    // create new object
+            objectsList.Add(newObject.transform);                                                                                               // add object to list
             newObject.transform.SetParent(hierarchyGuard);                                                                                      // parent Enemy to  hierarchyGuard
-
         }
     }
-    
 
-    IEnumerator RandomObjectSpawner(GameObject objectsToSpawn, Boundry objectsPosition, float objectSpawnTime)                                  // method for only one gameobject
+
+    IEnumerator RandomObjectSpawner(GameObject objectToSpawn, Boundry objectsPosition, float objectSpawnTime)                                   // method for only one gameobject
     {
         while (IsplayerAlive)                                                                                                                   // spawn objects all the time
         {
             yield return new WaitForSeconds(objectSpawnTime);
             Vector3 randPosition = new Vector3(Random.Range(-objectsPosition.left, objectsPosition.right), 0, objectsPosition.up);              // choose random object position
-            GameObject newObject = Instantiate(objectsToSpawn, randPosition, Quaternion.identity) as GameObject;                                // create new object
+            GameObject newObject = Instantiate(objectToSpawn, randPosition, Quaternion.identity) as GameObject;                                 // create new object
+            objectsList.Add(newObject.transform);                                                                                               // add object to list
             newObject.transform.SetParent(hierarchyGuard);                                                                                      // parent Enemy to  hierarchyGuard
         }
     }
