@@ -6,10 +6,10 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: SciFi_Props-Pack03-diffuse
+  m_Name: Silver Guarder
   m_Shader: {fileID: 10705, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
-  m_LightmapFlags: 1
+  m_LightmapFlags: 5
   m_CustomRenderQueue: 2000
   stringTagMap: {}
   m_SavedProperties:
@@ -19,14 +19,14 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 90d6105f6579db945b53ce1b4d958c97, type: 3}
+          m_Texture: {fileID: 2800000, guid: 84debcbf672832d4ba7483f7437f3d57, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _BumpMap
         second:
-          m_Texture: {fileID: 2800000, guid: 2c09cd913570e9f4bacdc71368313a00, type: 3}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -34,13 +34,6 @@ Material:
           name: _DetailNormalMap
         second:
           m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _Illum
-        second:
-          m_Texture: {fileID: 2800000, guid: cd16a4cc2d9f60b48a24af5e90bf9000, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -85,20 +78,6 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _Detail
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _Cube
-        second:
-          m_Texture: {fileID: 8900000, guid: 077441d7f83eb9e4c8cb1af28dbfb8b2, type: 2}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -115,15 +94,11 @@ Material:
       data:
         first:
           name: _Shininess
-        second: .0741743073
-      data:
-        first:
-          name: _EmissionLM
-        second: 0
+        second: .078125
       data:
         first:
           name: _Parallax
-        second: .00499999989
+        second: .0199999996
       data:
         first:
           name: _ZWrite
@@ -156,10 +131,6 @@ Material:
         first:
           name: _Metallic
         second: 0
-      data:
-        first:
-          name: _Emission
-        second: 1
     m_Colors:
       data:
         first:
@@ -168,12 +139,4 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .426470578, g: .426470578, b: .426470578, a: 1}
-      data:
-        first:
-          name: _SpecColor
-        second: {r: .182758614, g: .182758614, b: .182758614, a: 1}
-      data:
-        first:
-          name: _ReflectColor
-        second: {r: .272058845, g: .272058845, b: .272058845, a: .501960814}
+        second: {r: 1, g: 1, b: 1, a: 1}

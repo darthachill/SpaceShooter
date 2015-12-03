@@ -9,7 +9,7 @@ public class EnemyController : ObjectController
     public Material white;
     public bool isTakingCollisionDamage;              // take damage with colider with player
     public int DamageByCollision;                     // how many damage player will take with collision
-    
+
     // object take damage to player when hit
     [Tooltip("How many frames object will change his material to white after taking damage")]
     private float whiteFrames = 2;
@@ -28,8 +28,11 @@ public class EnemyController : ObjectController
 
     protected virtual void Update()
     {
-        if (isShooting)
-            Shot();
+        if (isShooting)                                                    // check if enemy can shoot
+            if (GameMaster.instance.CheckIfPlayerIsAlive())                // check if player is still alive 
+                Shot();
+            else  
+                isShooting = false;                                        // if player is death stop shooting
 
         if (isMoving)
             Move();
@@ -136,7 +139,7 @@ public class EnemyController : ObjectController
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.tag.Equals("Player") && isTakingCollisionDamage)
+        if (other.tag.Equals("Player") && isTakingCollisionDamage)
         {
             other.GetComponent<PlayerController>().TakeDamage(DamageByCollision, transform.position);         // take damage to player
             TakeDamage(maxHealth, transform.position);                                                        // destroy object after collision

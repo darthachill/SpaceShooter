@@ -45,6 +45,7 @@ public class GameMaster : MonoBehaviour
     private bool IsplayerAlive;
 
     [Header("GameSettings")]
+    public Vector3 playerSpawnSpot;
     public float startWait = 3;
     public float endWait = 1;
 
@@ -134,7 +135,8 @@ public class GameMaster : MonoBehaviour
         medalAwardingFor.SaveMedals();                                                                                // save all player medals information that will be necessary to display in gameOver screen
         highScoreController.SaveScoreInHighScore(score);                                                              // save player score in highscore
 
-        GameObject.FindGameObjectWithTag("GameOver").GetComponent<GameOverController>().UpdateStats(score);                // update stats on gameOver canvas;
+        GameObject.FindGameObjectWithTag("GameOver").GetComponent<GameOverController>().UpdateStats(score);           // update stats on gameOver canvas;
+        StopAllCoroutines();                                                                                          // it prevents to spawn objects after end the game
     }
 
 
@@ -213,7 +215,7 @@ public class GameMaster : MonoBehaviour
     void SpawnPlayer()
     {
         IsplayerAlive = true;
-        Instantiate(playerHolder, new Vector3(0, 0, -4.0f), Quaternion.identity);
+        Instantiate(playerHolder, playerSpawnSpot, Quaternion.identity);
     }
 
 
@@ -221,7 +223,6 @@ public class GameMaster : MonoBehaviour
     {
         while (IsplayerAlive)                                                                                                                   // spawn objects all the time
         {
-
             yield return new WaitForSeconds(objectSpawnTime);
             GameObject randObject = objectsToSpawn[Random.Range(0, objectsToSpawn.Length)];                                                     // choose random object
             Vector3 randPosition = new Vector3(Random.Range(-objectsPosition.left, objectsPosition.right), 0, objectsPosition.up);              // choose random object position

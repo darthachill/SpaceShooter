@@ -2,7 +2,7 @@
 using System.Collections;
 
 
-public class Bee : EnemyController
+public class SilverGuard : EnemyController
 {
     [Header("AI Enemy")]
     [Tooltip("random times to change direction frome one to other")]
@@ -11,15 +11,6 @@ public class Bee : EnemyController
 
 
     private float directionTimeLeft;            // time left to change direction
-
-
-    protected override void Move()             
-    {
-        base.Move();
-
-        ChangeDirectionX();
-        CheckBoundry();
-    }
 
 
     void ChangeDirectionX()                     // change direction on X axis ( turn to left or right)
@@ -32,4 +23,12 @@ public class Bee : EnemyController
         horizontalMove = -horizontalMove;                                           // change direction on X axis                     
     }
 
-}   // Karol Sobanski
+
+    protected override void Move()
+    {
+        base.Move();
+
+        ChangeDirectionX();
+        CheckBoundry();
+    }
+}

@@ -7,8 +7,11 @@ public class Jet : EnemyController
     protected override void Update()
     {
         if (isShooting)
-            for (int i = 0; i < visualWeapons.Count; i++)             // Shot from all weapons
-                visualWeapons[i].weaponScripts.Shot(true);      // parented bullets
+            if (GameMaster.instance.CheckIfPlayerIsAlive())
+                for (int i = 0; i < visualWeapons.Count; i++)             // Shot from all weapons
+                    visualWeapons[i].weaponScripts.Shot(true);            // parented bullets
+            else
+                isShooting = false;
 
         if (isMoving)
             Move();

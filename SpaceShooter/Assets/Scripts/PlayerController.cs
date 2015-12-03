@@ -30,7 +30,7 @@ public class PlayerController : ObjectController
 
     [Space(10)]
     public int ammunitionLeft;                              // current amount of ammunition that player has 
- 
+
 
     private float currentFuel;                              // how many fuel player has in current time
     private bool isFuelOver;                                // flag which inform if there is any fuel
@@ -38,7 +38,7 @@ public class PlayerController : ObjectController
     private bool isTiltSoundPlaying;                        // check if tilt sound is still playing
     private Ray ray;                                        // ray from player to forward
     private int enemyLayer;                                 // player shoots ray and check if its enemy layer
-    private Image enemyHealthBar;                           // it is visual enemy health bar on screen
+    private VisualBar enemyHealthBar;                       // it is visual enemy health bar on screen
     private VisualBar fuelBar;                              // it is visual bar script, that control color of fuel bar on screen
     private Text ammunitionText;                            // ammount of ammunition display on screen
     private Image damageImage;                              // damage image will show on screen when player take damage
@@ -67,7 +67,7 @@ public class PlayerController : ObjectController
 
         // get references
         damageImage = GameObject.Find("DamageImage").GetComponent<Image>();
-        enemyHealthBar = GameObject.Find("EnemyHealth").GetComponent<Image>();
+        enemyHealthBar = GameObject.Find("EnemyHealth").GetComponent<VisualBar>();
         ammunitionText = GameObject.Find("Ammunition").GetComponent<Text>();
         smokeController = GetComponent<SmokeController>();
         ammunitionText.text = "Ammo: " + ammunitionLeft;
@@ -81,12 +81,15 @@ public class PlayerController : ObjectController
     {
         if (!isAlive) return;                                      // if player is death do nothing
 
+        IsEnemyOnSight();                                          // if player can see enemy, display his health bar
+        CheckBoundry();                                            // check if player try leave mthe map
+
         if (Input.GetKeyDown(KeyCode.Escape))                      // TEST
             Application.Quit();
 
         if (Input.GetKeyDown(KeyCode.Q))                           // TEST
             TakeDamage(60, transform.position);
-        
+
         if (Input.GetKeyDown(KeyCode.R))                           // TEST
             IncreaseHealth(50);
 
@@ -98,8 +101,6 @@ public class PlayerController : ObjectController
 
         if (isMoving) Move();                                      // if player is able to move, move his ship
 
-        IsEnemyOnSight();                                          // if player can see enemy, display his health bar
-        CheckBoundry();                                            // check if player try leave mthe map
     }
 
 
@@ -131,7 +132,7 @@ public class PlayerController : ObjectController
 
         smokeController.UpdateSmoke(currentHealth, maxHealth);                           // Update smoke, allows to change type of smoke
         healthBar.UpdateBar(currentHealth, maxHealth);                                   // update health bar on screen
-        
+
     }
 
 
@@ -263,7 +264,7 @@ public class PlayerController : ObjectController
         if (Physics.Raycast(ray, out raycastHit, sight, enemyLayer))                                 // if ray hit enemy
             raycastHit.transform.GetComponent<EnemyController>().DisplayHealthBar();
         else
-            enemyHealthBar.color = new Color(0, 0, 0, 0);                                            // bar will be unvisible
+            enemyHealthBar.HideBar();                                                                // bar will be unvisible
     }
 
 
@@ -314,13 +315,13 @@ public class PlayerController : ObjectController
     {
         isAlive = false;
         gameObject.GetComponent<SphereCollider>().enabled = false;                           // disenabled collider
-        transform.FindChild("Model").transform.gameObject.SetActive(false);                  // hide player model;
+        transform.FindChild("PlayerModel").transform.gameObject.SetActive(false);                  // hide player model;
         Instantiate(destroyExplosion, transform.position, Quaternion.identity);
 
         destroySound.Play();
         GameMaster.instance.PlayerDie();
-
-        Destroy(gameObject,1);
+        enemyHealthBar.HideBar();
+        Destroy(gameObject, 1);
     }
 
 

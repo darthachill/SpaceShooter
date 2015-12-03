@@ -250,7 +250,7 @@ MonoBehaviour:
   volume: .5
   destroyEffects:
   - {fileID: 127030, guid: c18787bff771b2f41ae9661840bb9710, type: 2}
-  destroySnd: {fileID: 0}
+  destroySnd: {fileID: 8293178}
   disableControl: 1
   howLong: 1
 --- !u!198 &19811556
@@ -2446,6 +2446,10 @@ Prefab:
       propertyPath: speed
       value: -7
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: destroySnd
+      value: 
+      objectReference: {fileID: 8293178}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 114580}

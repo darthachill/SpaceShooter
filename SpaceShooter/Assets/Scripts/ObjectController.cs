@@ -28,11 +28,8 @@ public abstract class ObjectController : MonoBehaviour
     public float verticalMove = -1f;
     public GameObject destroyExplosion;               // destroy explosion particle effect
     public AudioSource destroySound;
-
-
-    [Range(0, 1)]
-    public float destroyVolume = 0.5f;                // how loud will be destroy
-    public Boundry boundryPosition;
+   
+    protected Boundry boundryPosition;
 
     [Header("Control")]
     public bool isShooting = true;                    // some weapons can disable object ability to shot

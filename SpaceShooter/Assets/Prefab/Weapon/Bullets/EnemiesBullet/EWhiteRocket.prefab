@@ -102,9 +102,9 @@ AudioSource:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 170246}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24323380, guid: 313991fdd3b7f274f8b5dfe6de6cdbc3,
+  OutputAudioMixerGroup: {fileID: 24395692, guid: 313991fdd3b7f274f8b5dfe6de6cdbc3,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 33cd429e81395944088573e40e271f18, type: 3}
   m_PlayOnAwake: 0
@@ -227,7 +227,7 @@ MonoBehaviour:
   - {fileID: 150196, guid: 97a0b9c9ec055674393da85179fa753c, type: 2}
   - {fileID: 150196, guid: 9ab86dadb94fa4a4bb56fd5665c61ae8, type: 2}
   - {fileID: 150196, guid: 29652526c97e5f2468f3e66980dfd234, type: 2}
-  destroySnd: {fileID: 0}
+  destroySnd: {fileID: 8207992}
   disableControl: 0
   howLong: 2
 --- !u!136 &13656800
@@ -1361,7 +1361,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: InitialModule.startLifetime.scalar
@@ -1394,7 +1394,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: OutputAudioMixerGroup
       value: 
-      objectReference: {fileID: 24323380, guid: 313991fdd3b7f274f8b5dfe6de6cdbc3,
+      objectReference: {fileID: 24395692, guid: 313991fdd3b7f274f8b5dfe6de6cdbc3,
         type: 2}
     - target: {fileID: 0}
       propertyPath: m_audioClip
@@ -1404,6 +1404,10 @@ Prefab:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: destroySnd
+      value: 
+      objectReference: {fileID: 8207992}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 170246}
