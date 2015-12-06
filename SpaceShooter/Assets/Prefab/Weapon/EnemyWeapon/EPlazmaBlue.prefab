@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd7b764b5ec54d947a76d1e30ab7b78a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenBullets: .349999994
+  timeBetweenBullets: 1
   bulletSpawn: {fileID: 457628}
   gunAudio: {fileID: 8300000, guid: cf910a0f5276fcb45942bbd4c7ee2022, type: 3}
   bullet: {fileID: 106638, guid: c08239c9801548b4c9f23e6414687a2b, type: 2}
@@ -1322,7 +1322,7 @@ Prefab:
       objectReference: {fileID: 106638, guid: c08239c9801548b4c9f23e6414687a2b, type: 2}
     - target: {fileID: 0}
       propertyPath: timeBetweenBullets
-      value: .349999994
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: gunAudios.Array.data[0]

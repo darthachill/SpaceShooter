@@ -20,6 +20,7 @@ public class RotateObject : MonoBehaviour
     [Space(5)]
     [Tooltip("UpdateRotator can change object rotation in every frame")]
     public bool isUpdateRotatorOn = true;
+    public bool isUpdateRotatonOnY = false;
     public float rotateSpeed = 2;
 
 
@@ -44,7 +45,9 @@ public class RotateObject : MonoBehaviour
         Vector3 startRotation = new Vector3(x, y, transform.rotation.z);
         transform.rotation = Quaternion.Euler(startRotation);
 
-        if (isUpdateRotatorOn)
+        if (isUpdateRotatonOnY)
+            StartCoroutine(UpdateRotator(y));
+        else if (isUpdateRotatorOn)
             StartCoroutine(UpdateRotator(x, y));
     }
 
@@ -54,6 +57,16 @@ public class RotateObject : MonoBehaviour
         while (true)
         {
             Vector3 newRotation = new Vector3(x, y, rotateSpeed * Time.time);
+            transform.rotation = Quaternion.Euler(newRotation);
+            yield return null;
+        }
+    }
+
+    IEnumerator UpdateRotator(float y)
+    {
+        while (true)
+        {
+            Vector3 newRotation = new Vector3(0, rotateSpeed * Time.time *y, 0);
             transform.rotation = Quaternion.Euler(newRotation);
             yield return null;
         }
