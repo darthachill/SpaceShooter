@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-[RequireComponent(typeof(Button))]
+[RequireComponent(typeof(Button), typeof(AudioSource))]
 public class ButtonSound : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
 {
     [HideInInspector] public AudioClip pressedSound;
@@ -12,16 +12,19 @@ public class ButtonSound : MonoBehaviour, IPointerEnterHandler, IPointerDownHand
     private AudioSource audioSource { get { return GetComponent<AudioSource>(); } }
     private Button button { get { return GetComponent<Button>(); } }
 
+
     void Start()
     {
         gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
     }
 
+
     public void OnPointerEnter(PointerEventData ped)
     {
         audioSource.PlayOneShot(hoveredSound);
     }
+
 
     public void OnPointerDown(PointerEventData ped)
     {

@@ -149,7 +149,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24398924, guid: 313991fdd3b7f274f8b5dfe6de6cdbc3,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 9e2f88744ee646d498e539c14f16c1a1, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -291,6 +291,10 @@ Prefab:
       propertyPath: visualWeapons.Array.data[0].weapon
       value: 
       objectReference: {fileID: 162388, guid: 9a65ce8c05bbb864eb74ce84141879e6, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 183098}

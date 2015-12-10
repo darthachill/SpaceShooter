@@ -3,8 +3,6 @@ using System.Collections;
 
 public class BackgroundController : MonoBehaviour
 {
-
-
     public bool spawnObjects = true;                                  // flag lets to spawning objects on background
 
     [Header("Objects")]
@@ -19,19 +17,20 @@ public class BackgroundController : MonoBehaviour
     public Vector3 asteroidSpawn;                                     // asteroid rand spawn position
     public Vector3 spaceRocketSpawn;                                  // space rocket rand span position
 
-    [Header("Time between spawn objects")]                            
-    public float objectsTime;                                                       
+    [Header("Time between spawn objects")]
+    public float objectsTime;
     public float asteroidsTime;
     public float nebulasTime;
     public float spaceRocketsTime;
 
-
+    private Boundry boundryMap;                                       // boundry where player can move
     private float objectsTimeLeft, asteroidsTimeLeft, nebulasTimeLeft, spaceRocketsTimeLeft;   // how many times left to spawn objects
 
     void Start()
     {
         if (!spawnObjects) return;               // if there is no spawnObjets, do nothing
 
+        boundryMap = GameMaster.instance.boundry;
         CreateObjectOnStart(2);                  // create objets that will appeare on screen from begining
         StartCoroutine(SpawnObjectUpdate());     // start loop that create objects on background
     }
@@ -77,10 +76,11 @@ public class BackgroundController : MonoBehaviour
         GameObject randObject = objects[randIndex];                                                                                 // choose GameObject in array
 
         if (isRandPositionX)                                                                                                        // if is nessesery to set random position
-            position = new Vector3(Random.Range(-position.x, position.x), position.y, position.z);                                  // choose random position on X axis
+            position = new Vector3(Random.Range(boundryMap.left, boundryMap.right), position.y, position.z);                                  // choose random position on X axis
+
 
         if (isRandPositionZ)                                                                                                        // if is nessesery to set random position
-            position = new Vector3(position.x, position.y, Random.Range(1, position.z));                                            // choose random position on Y axis
+            position = new Vector3(position.x, position.y, Random.Range(1, boundryMap.up));                                         // choose random position on Y axis
 
         GameObject newObject = Instantiate(randObject, position, randObject.transform.rotation) as GameObject;                      // create new GameObject
         newObject.transform.SetParent(GameMaster.instance.hierarchyGuard);                                                          // set parent to hierarchy guard
@@ -89,13 +89,7 @@ public class BackgroundController : MonoBehaviour
 
     void CreateObjectOnStart(int howMany)                                                                                           // create few galaxy objets on start
     {
-        for (int i = 0; i < howMany; i++)
-        {
-            Boundry startSpawn = GameMaster.instance.boundry;
-            float randX = Random.Range(startSpawn.left, -startSpawn.right);
-            float randZ = Random.Range(0, startSpawn.up);
-
-            CreateRandomObject(ref galaxyObjects, new Vector3(randX, galaxyObjectsSpawn.y, randZ), false, false);
-        }
+        for (int i = 0; i < howMany; i++)                                                                                           
+            CreateRandomObject(ref galaxyObjects, new Vector3(0, galaxyObjectsSpawn.y, 0), true, true);
     }
 }  // Karol Sobanski

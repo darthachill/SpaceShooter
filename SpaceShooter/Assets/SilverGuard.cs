@@ -12,15 +12,17 @@ public class SilverGuard : EnemyController
 
     private float directionTimeLeft;            // time left to change direction
 
-
+    
     void ChangeDirectionX()                     // change direction on X axis ( turn to left or right)
     {
         directionTimeLeft -= Time.deltaTime;
         if (directionTimeLeft > 0) return;
 
+        
         float randomTime = Random.Range(minDirectionTime, maxDirectionTime);        // set new Time to change direction
         directionTimeLeft = randomTime;
-        horizontalMove = -horizontalMove;                                           // change direction on X axis                     
+        horizontalMove = -horizontalMove;                                           // change direction on X axis      
+        print(horizontalMove);       
     }
 
 
@@ -31,4 +33,5 @@ public class SilverGuard : EnemyController
         ChangeDirectionX();
         CheckBoundry();
     }
+
 }

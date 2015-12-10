@@ -36,26 +36,25 @@ public class GatesController : MonoBehaviour
         leftGateBeginX = leftGate.transform.position.x;
         rightGateBeginX = rightGate.transform.position.x;
 
+
         if (closed)
-            BeginFromClosedGates();
+            BeginFromClosedGates();     // set position to closed gates
         else
-            BeginFromOpenedGates();
+            BeginFromOpenedGates();     // set position to opened gates
     }
 
 
     public void OpenGates()
     {
+        ShowGates(true);                // show gates
         StartCoroutine(IEOpenGates());
     }
 
 
-    public void CloseGates()
-    {
-        StartCoroutine(IECloseGates());
-    }
 
     public void CloseGatesAndChangeSceene()
     {
+        ShowGates(true);
         StartCoroutine(IECloseGatesAndChangeSceene());
     }
 
@@ -88,6 +87,8 @@ public class GatesController : MonoBehaviour
             rightGate.position = Vector3.Lerp(rightGate.position, rightGateEnd.position, gateOpenSpeed * Time.deltaTime);
             yield return null;
         }
+
+        ShowGates(false); // inactive gates 
     }
 
 
@@ -105,7 +106,7 @@ public class GatesController : MonoBehaviour
             yield return null;
         }
 
-        leftGate.position = leftGateBegin;      
+        leftGate.position = leftGateBegin;
         rightGate.position = rightGateBegin;
     }
 
@@ -120,10 +121,12 @@ public class GatesController : MonoBehaviour
             StartCoroutine(IEOpenGatesAfterTime());
         }
     }
-    
 
-    void BeginFromClosedGates()
+
+    public void BeginFromClosedGates() // button will invoke this in another canvas
     {
+        ShowGates(true);                 // gates will be active
+
         leftGate.position = new Vector3(leftGateBeginX, leftGate.position.y, leftGate.position.z);
         rightGate.position = new Vector3(rightGateBeginX, rightGate.position.y, rightGate.position.z);
     }
@@ -131,7 +134,15 @@ public class GatesController : MonoBehaviour
 
     void BeginFromOpenedGates()
     {
+        ShowGates(false);               // gates will be inactive, it prevents to show gates when we change sceenes
+
         leftGate.position = new Vector3(leftGateEnd.position.x, leftGate.position.y, leftGate.position.z);
         rightGate.position = new Vector3(rightGateEnd.position.x, rightGate.position.y, rightGate.position.z);
+    }
+
+    void ShowGates(bool state)
+    {
+        leftGate.gameObject.SetActive(state);
+        rightGate.gameObject.SetActive(state);
     }
 }   // Karol Sobański

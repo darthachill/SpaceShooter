@@ -11,7 +11,7 @@ public class GameMaster : MonoBehaviour
 
     [HideInInspector]
     public Transform hierarchyGuard;                    // to keep all created (Clone) in one Transform
-    public GameObject playerHolder;                     // player ship reference
+
 
     [Header("UI")]
     [HideInInspector]
@@ -32,6 +32,7 @@ public class GameMaster : MonoBehaviour
     public Boundry pickUpPosition;
     public Boundry enemyPosition;
 
+
     [Header("Time between spawning objects")]
     public float enemySpawnTime = 3;
     public float formationSpawnTime = 5;
@@ -43,6 +44,7 @@ public class GameMaster : MonoBehaviour
     private int nextGoldenScore;                                  // nextGoldenScore is sum of all previous goldenScores
     private int score;                                            // how many scores player has
     private bool IsplayerAlive;
+
 
     [Header("GameSettings")]
     public Vector3 playerSpawnSpot;
@@ -59,7 +61,7 @@ public class GameMaster : MonoBehaviour
     private MedalAwardingFor medalAwardingFor;                    // reference to the medal Awarding;
     private HighScoreController highScoreController;              // reference to highScore Controller it will e invoke after end game to save scores;
     private List<Transform> objectsList = new List<Transform>();  // list to keep references to all spawned objects, it will be helpful to destroy them after player death
-
+    private GameObject playerShip;                                // player ship reference
 
 
     void Awake()
@@ -140,6 +142,12 @@ public class GameMaster : MonoBehaviour
     }
 
 
+    public void ChooseShip(GameObject newShip)                   // Button will invoke this
+    {
+        playerShip = newShip;
+    }
+
+
     void Reset()
     {
         medalAwardingFor.Reset();
@@ -215,7 +223,7 @@ public class GameMaster : MonoBehaviour
     void SpawnPlayer()
     {
         IsplayerAlive = true;
-        Instantiate(playerHolder, playerSpawnSpot, Quaternion.identity);
+        Instantiate(playerShip, playerSpawnSpot, Quaternion.identity);
     }
 
 

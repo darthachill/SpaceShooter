@@ -231,7 +231,7 @@ public class PlayerController : ObjectController
     protected override void CheckBoundry()                                            // Check if player try leave the boundy
     {
         rigidbody.position = new Vector3(                                             // set his position in boundry
-        Mathf.Clamp(rigidbody.position.x, -boundryPosition.left, boundryPosition.right),
+        Mathf.Clamp(rigidbody.position.x, boundryPosition.left, boundryPosition.right),
         rigidbody.transform.position.y,
         Mathf.Clamp(rigidbody.position.z, 0, boundryPosition.up));
     }

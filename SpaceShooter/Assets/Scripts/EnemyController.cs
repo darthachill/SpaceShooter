@@ -97,7 +97,7 @@ public class EnemyController : ObjectController
     protected override void CheckBoundry()                                      // Enemy Boundry
     {
         rigidbody.position = new Vector3(
-        Mathf.Clamp(rigidbody.position.x, -boundryPosition.left, boundryPosition.right),
+        Mathf.Clamp(rigidbody.position.x, boundryPosition.left, boundryPosition.right),
         rigidbody.transform.position.y,
         rigidbody.transform.position.z);
     }
