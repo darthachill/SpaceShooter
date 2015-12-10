@@ -13,6 +13,8 @@ public class PickUpsController : MonoBehaviour
     public bool bomb;
     public bool shield;
     public bool star;
+	public bool magnet;
+    public bool silverCoin;
     public bool bulletTime;
     public GameObject gun;
 
@@ -28,10 +30,27 @@ public class PickUpsController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
     }
+	
+	void OnTriggerStay(Collider other)
+    {
+        if (other.name.Equals("MagnetingSphere") && silverCoin)
+        {
 
+            this.GetComponent<Rigidbody>().velocity = (GameObject.FindGameObjectWithTag("Player").transform.position - transform.position) *80 * Time.deltaTime;
+
+
+        }
+
+    }
 
     void OnTriggerEnter(Collider other)
     {
+		  if (other.name.Equals("MagnetingSphere") && silverCoin)
+        {
+       
+        this.GetComponent<Rigidbody>().velocity = (GameObject.FindGameObjectWithTag("Player").transform.position - transform.position) * 80* Time.deltaTime;
+         }
+    
         if (other.tag.Equals("Player") && !isCollected)
         {
             isCollected = true;
@@ -57,7 +76,17 @@ public class PickUpsController : MonoBehaviour
                 playerController.ChangeWeapons(ref gun);                                         // change player weapon 
                 playerController.AddAmmo(value);                                                 // add aditional ammo
             }
-                       
+            else if (magnet)
+            {
+              
+                other.GetComponent<MagnetController>().AddMagnet(); 
+            }
+            else if (silverCoin)
+            {
+
+                GameMaster.instance.IncreaseScore(1);
+            }
+         
 
             if (audioSource)                                                                     // if there is sound attached
                 audioSource.Play();

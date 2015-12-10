@@ -47,7 +47,7 @@ public class PlayerController : ObjectController
     // References
     private BombController bombController;                  // reference, controlls all bomb operations
     private SmokeController smokeController;
-
+	private MagnetController magnetController;
     private const string namePlayerHealth = "PlayerHealth";
     private const string namePlayerFuel = "PlayerFuel";
 
@@ -64,7 +64,7 @@ public class PlayerController : ObjectController
         base.Start();
         ammunitionLeft = maxammunition;
         bombController = GetComponent<BombController>();
-
+		magnetController = GetComponent<MagnetController>();
         // get references
         damageImage = GameObject.Find("DamageImage").GetComponent<Image>();
         enemyHealthBar = GameObject.Find("EnemyHealth").GetComponent<VisualBar>();
@@ -95,7 +95,18 @@ public class PlayerController : ObjectController
 
         if (Input.GetKeyDown(KeyCode.E))                           // Create Bombs 
             bombController.CreateBoombs();
-
+		if (Input.GetKeyDown(KeyCode.F))
+        {
+            magnetController.UseMagnet();
+        }
+		if (Input.GetKeyDown(KeyCode.O))                        //TEST
+		{
+         GameMaster.instance.GetComponent<SilverCoinSpawnController>().SpawnCoins(GameMaster.instance.pickUps[1]);
+         }
+        if (Input.GetKeyDown(KeyCode.H))                        //TEST
+        {
+            magnetController.AddMagnet();
+        }
         if (isShooting)                                            // if player is able to shot
             Shot();                                                // shot
 

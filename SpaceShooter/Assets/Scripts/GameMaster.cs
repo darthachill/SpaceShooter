@@ -122,7 +122,7 @@ public class GameMaster : MonoBehaviour
             StartCoroutine(RandomObjectSpawner(fuelTank, pickUpPosition, fuelSpawnTime));     // spawn every  time fuel
             StartCoroutine(RandomObjectSpawner(ammo, pickUpPosition, fuelSpawnTime));         // spawn every  ytime ammo
         }
-
+		StartCoroutine(SilverCoinSpawner());
         while (CheckIfPlayerIsAlive())                                                        // if player will die quit the loop
             yield return null;
     }
@@ -239,7 +239,14 @@ public class GameMaster : MonoBehaviour
             newObject.transform.SetParent(hierarchyGuard);                                                                                      // parent Enemy to  hierarchyGuard
         }
     }
-
+		IEnumerator SilverCoinSpawner()                
+    {
+        while (IsplayerAlive)                                                                                                                   // spawn objects all the time
+        {
+            yield return new WaitForSeconds(10);
+            GetComponent<SilverCoinSpawnController>().SpawnCoins(pickUps[1]);                                                                                    // parent Enemy to  hierarchyGuard
+        }
+    }
 
     IEnumerator RandomObjectSpawner(GameObject objectToSpawn, Boundry objectsPosition, float objectSpawnTime)                                   // method for only one gameobject
     {
