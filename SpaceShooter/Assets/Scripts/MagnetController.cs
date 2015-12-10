@@ -6,6 +6,7 @@ public class MagnetController : MonoBehaviour {
     private int currentMagnets;
     private int maxMagnets;
     private float lastingSphereTime;
+    public  GameObject spherePub;
     private GameObject sphere;
     public GameObject magnet;//
     private MagnetGUI[] magnetGUIController;
@@ -47,7 +48,8 @@ public class MagnetController : MonoBehaviour {
               colliderReference.radius = 3F;
             magnetingSphere.transform.position = GameObject.FindGameObjectWithTag("Player").transform.position;
             magnetingSphere.tag = "PickUp"; // To avoid triggering shots
-              sphere = GameObject.Find("MagnetShperePrefab");
+            sphere = Instantiate(spherePub);
+            if (!sphere) Debug.Log("Error with sphere reference");
             sphere.transform.SetParent(GameObject.FindGameObjectWithTag("Player").transform);
             sphere.transform.position = magnetingSphere.transform.position;
             sphere.transform.localScale =new Vector3( 6f, 6f, 6f);

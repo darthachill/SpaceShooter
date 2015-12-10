@@ -132,6 +132,7 @@ GameObject:
   - 114: {fileID: 11461624}
   - 114: {fileID: 11480520}
   - 114: {fileID: 11445370}
+  - 114: {fileID: 11428658}
   m_Layer: 9
   m_Name: Shadow
   m_TagString: Player
@@ -597,7 +598,7 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - time: 0
-      value: 1
+      value: .588999987
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -620,6 +621,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11428658
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e964ee9e8350554dbeb94a2d2e0322f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spherePub: {fileID: 110052, guid: 3ed0e38a44a7ef14792dfb770e9b4ac5, type: 2}
+  magnet: {fileID: 0}
 --- !u!114 &11445370
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3903,6 +3917,18 @@ Prefab:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: reverbZoneMixCustomCurve.m_Curve.Array.data[0].value
+      value: .588999987
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: sphere
+      value: 
+      objectReference: {fileID: 110052, guid: 3ed0e38a44a7ef14792dfb770e9b4ac5, type: 2}
+    - target: {fileID: 0}
+      propertyPath: spherePub
+      value: 
+      objectReference: {fileID: 110052, guid: 3ed0e38a44a7ef14792dfb770e9b4ac5, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 158458}
