@@ -101,7 +101,7 @@ public class PlayerController : ObjectController
         }
 		if (Input.GetKeyDown(KeyCode.O))                        //TEST
 		{
-         GameMaster.instance.GetComponent<SilverCoinSpawnController>().SpawnCoins(GameMaster.instance.pickUps[1]);
+         GameMaster.instance.GetComponent<SilverCoinSpawnController>().SpawnCoins();
          }
         if (Input.GetKeyDown(KeyCode.H))                        //TEST
         {

@@ -36,8 +36,11 @@ public class PickUpsController : MonoBehaviour
         if (other.name.Equals("MagnetingSphere") && silverCoin)
         {
 
-            this.GetComponent<Rigidbody>().velocity = (GameObject.FindGameObjectWithTag("Player").transform.position - transform.position) *80 * Time.deltaTime;
-
+            //  Vector3 distanceVector = GameObject.FindGameObjectWithTag("Player").transform.position - transform.position;
+            Vector3 distanceVector =other.GetComponentInParent<Transform>().position - transform.position;
+            float startingDistance = other.GetComponentInParent<MagnetController>().getStartingdDistance();
+			GetComponent<Rigidbody>().velocity = distanceVector.normalized  * startingDistance * startingDistance / distanceVector.magnitude * 40 * Time.deltaTime;
+           
 
         }
 
@@ -47,8 +50,13 @@ public class PickUpsController : MonoBehaviour
     {
 		  if (other.name.Equals("MagnetingSphere") && silverCoin)
         {
-       
-        this.GetComponent<Rigidbody>().velocity = (GameObject.FindGameObjectWithTag("Player").transform.position - transform.position) * 80* Time.deltaTime;
+
+         
+            //this.GetComponent<Rigidbody>().velocity = (GameObject.FindGameObjectWithTag("Player").transform.position - transform.position) * 40* Time.deltaTime;
+            this.GetComponent<Rigidbody>().velocity = (other.GetComponentInParent<Transform>().position - transform.position) *40 * Time.deltaTime;
+            // float distance = (GameObject.FindGameObjectWithTag("Player").transform.position - transform.position).magnitude;
+            float distance = (other.GetComponentInParent<Transform>().position - transform.position).magnitude;
+            other.GetComponentInParent<MagnetController>().setStartingDistance(distance);
          }
     
         if (other.tag.Equals("Player") && !isCollected)

@@ -7,18 +7,17 @@ public class SilverCoinSpawnController : MonoBehaviour {
     private Vector3 spawnPosistionVector;
     private bool areCoinsOnTheField;
     public GameObject SilverCoinGuard;
- 
-      GameObject silverCoin;
+
+    public  GameObject silverCoin;
     GameObject coinTmp;
    private float randomX;
   private  float randomZ;
-    public void SpawnCoins(GameObject silverCoin)
+    public void SpawnCoins()
     {
         randomX = Random.Range(-17, 5); 
         randomZ = Random.Range(1, 15);
-
-       //  silverCoin = GameObject.Find("SilverCoinPickUp");
-     // silverCoin = Resources.Load("Prefab/PicUps/SilverCoinPickUp") as GameObject;
+      
+     //   silverCoin = GameObject.Find("SilverCoinPickUp");
       
        spawnPosistionVector = new Vector3(randomX, 0, randomZ);
         for (int i =0; i < 3; i++)

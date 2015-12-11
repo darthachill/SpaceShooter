@@ -16,7 +16,7 @@ public class MagnetGUI : MonoBehaviour {
     {
         
         magnetImage = GetComponent<Image>();
-
+      
     }
 	
 	// Update is called once per frame

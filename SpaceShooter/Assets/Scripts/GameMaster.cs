@@ -244,7 +244,7 @@ public class GameMaster : MonoBehaviour
         while (IsplayerAlive)                                                                                                                   // spawn objects all the time
         {
             yield return new WaitForSeconds(10);
-            GetComponent<SilverCoinSpawnController>().SpawnCoins(pickUps[1]);                                                                                    // parent Enemy to  hierarchyGuard
+            GetComponent<SilverCoinSpawnController>().SpawnCoins();                                                                                    // parent Enemy to  hierarchyGuard
         }
     }
 

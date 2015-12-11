@@ -8,7 +8,11 @@ public class MagnetController : MonoBehaviour {
     private float lastingSphereTime;
     public  GameObject spherePub;
     private GameObject sphere;
-    public GameObject magnet;//
+    private float maxSpeed = 400f;
+    private float minSpeed = 40f;
+    private float startingDistance;
+    public GameObject magnet;
+    GameObject shipReference;
     private MagnetGUI[] magnetGUIController;
 	// Use this for initialization
 	void Start () {
@@ -21,6 +25,13 @@ public class MagnetController : MonoBehaviour {
    }
 }
     
+   public float getStartingdDistance()
+    {
+        return startingDistance;
+     //  return ( minSpeed  + (startingDistance - distance) /startingDistance * maxSpeed);
+
+    }
+     
 	
 	// Update is called once per frame
 	void Update () {
@@ -33,24 +44,45 @@ public class MagnetController : MonoBehaviour {
             magnetGUIController[i] = GameObject.Find("Magnet" + i).GetComponent<MagnetGUI>();
     }
 
+    public void setStartingDistance(float distance)
+    {
+        startingDistance = distance;
+
+    }
     public void UseMagnet()
     {
+       
         if (currentMagnets > 0)
         {
             magnetGUIController[currentMagnets - 1].hideImage();
             currentMagnets--;
             // GameMaster.instance.playerHolder.
             GameObject magnetingSphere = new GameObject();
-            magnetingSphere.gameObject.transform.SetParent(GameObject.FindGameObjectWithTag("Player").transform);
+            
+            if (GameObject.Find("Eagle(Clone)"))
+            {
+                shipReference = GameObject.Find("Eagle(Clone)");
+             //  magnetingSphere.gameObject.transform.SetParent(GameObject.Find("Eagle(Clone)").transform);
+            }
+           else if (GameObject.Find("Shadow(Clone)"))
+            {
+                shipReference = GameObject.Find("Shadow(Clone)");
+              //  magnetingSphere.gameObject.transform.SetParent(GameObject.Find("Shadow(Clone)").transform);
+                
+            }
+            magnetingSphere.gameObject.transform.SetParent(shipReference.transform);
+         //   magnetingSphere.gameObject.transform.SetParent(GameObject.FindGameObjectWithTag("Player").transform);
             magnetingSphere.name = "MagnetingSphere";
             magnetingSphere.AddComponent<SphereCollider>();
             SphereCollider colliderReference = magnetingSphere.GetComponent<SphereCollider>();
               colliderReference.radius = 3F;
-            magnetingSphere.transform.position = GameObject.FindGameObjectWithTag("Player").transform.position;
+            //  magnetingSphere.transform.position = GameObject.FindGameObjectWithTag("Player").transform.position;
+            magnetingSphere.transform.position = shipReference.transform.position;
             magnetingSphere.tag = "PickUp"; // To avoid triggering shots
             sphere = Instantiate(spherePub);
             if (!sphere) Debug.Log("Error with sphere reference");
-            sphere.transform.SetParent(GameObject.FindGameObjectWithTag("Player").transform);
+            // sphere.transform.SetParent(GameObject.FindGameObjectWithTag("Player").transform);
+            sphere.transform.SetParent(shipReference.transform);
             sphere.transform.position = magnetingSphere.transform.position;
             sphere.transform.localScale =new Vector3( 6f, 6f, 6f);
                   sphere.GetComponent<MeshRenderer>().enabled = true;
