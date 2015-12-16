@@ -13,7 +13,7 @@ public class PickUpsController : MonoBehaviour
     public bool bomb;
     public bool shield;
     public bool star;
-	public bool magnet;
+    public bool magnet;
     public bool silverCoin;
     public bool bulletTime;
     public GameObject gun;
@@ -24,23 +24,23 @@ public class PickUpsController : MonoBehaviour
     private const string collected = "collected";
     private bool isCollected;                               // its prevent to collect item more times
 
-    
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
     }
-	
-	void OnTriggerStay(Collider other)
+
+    void OnTriggerStay(Collider other)
     {
         if (other.name.Equals("MagnetingSphere") && silverCoin)
         {
 
             //  Vector3 distanceVector = GameObject.FindGameObjectWithTag("Player").transform.position - transform.position;
-            Vector3 distanceVector =other.GetComponentInParent<Transform>().position - transform.position;
+            Vector3 distanceVector = other.GetComponentInParent<Transform>().position - transform.position;
             float startingDistance = other.GetComponentInParent<MagnetController>().getStartingdDistance();
-			GetComponent<Rigidbody>().velocity = distanceVector.normalized  * startingDistance * startingDistance / distanceVector.magnitude * 40 * Time.deltaTime;
-           
+            GetComponent<Rigidbody>().velocity = distanceVector.normalized * startingDistance * startingDistance / distanceVector.magnitude * 40 * Time.deltaTime;
+
 
         }
 
@@ -48,17 +48,17 @@ public class PickUpsController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-		  if (other.name.Equals("MagnetingSphere") && silverCoin)
+        if (other.name.Equals("MagnetingSphere") && silverCoin)
         {
 
-         
+
             //this.GetComponent<Rigidbody>().velocity = (GameObject.FindGameObjectWithTag("Player").transform.position - transform.position) * 40* Time.deltaTime;
-            this.GetComponent<Rigidbody>().velocity = (other.GetComponentInParent<Transform>().position - transform.position) *40 * Time.deltaTime;
+            this.GetComponent<Rigidbody>().velocity = (other.GetComponentInParent<Transform>().position - transform.position) * 40 * Time.deltaTime;
             // float distance = (GameObject.FindGameObjectWithTag("Player").transform.position - transform.position).magnitude;
             float distance = (other.GetComponentInParent<Transform>().position - transform.position).magnitude;
             other.GetComponentInParent<MagnetController>().setStartingDistance(distance);
-         }
-    
+        }
+
         if (other.tag.Equals("Player") && !isCollected)
         {
             isCollected = true;
@@ -86,29 +86,35 @@ public class PickUpsController : MonoBehaviour
             }
             else if (magnet)
             {
-              
-                other.GetComponent<MagnetController>().AddMagnet(); 
+
+                other.GetComponent<MagnetController>().AddMagnet();
             }
             else if (silverCoin)
             {
 
                 GameMaster.instance.IncreaseScore(1);
             }
-         
+
 
             if (audioSource)                                                                     // if there is sound attached
                 audioSource.Play();
             if (animator)                                                                        // if there is Animator attached
                 animator.SetTrigger(collected);
             else
-                DestroyPickUp();               
+                DestroyPickUp();
         }
     }
 
 
     void DestroyPickUp()                                                                         // Animation will use this method after play collected animation
     {
-            Destroy(gameObject, audioSource.clip.length);
+        Destroy(gameObject, audioSource.clip.length);
+    }
+
+
+    void DestroyNow()                                                                            // Animation will use this method after play collected animation
+    {
+        Destroy(gameObject);
     }
 
 }   // Karol Sobanski

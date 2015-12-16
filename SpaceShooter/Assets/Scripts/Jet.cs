@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Jet : EnemyController
 {
-
     protected override void Update()
     {
         if (isShooting)

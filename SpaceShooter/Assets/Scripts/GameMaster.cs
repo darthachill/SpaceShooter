@@ -40,12 +40,6 @@ public class GameMaster : MonoBehaviour
     public float fuelSpawnTime;
     public float ammoSpawnTime;
 
-    [Space(5)]
-    private int nextGoldenScore;                                  // nextGoldenScore is sum of all previous goldenScores
-    private int score;                                            // how many scores player has
-    private bool IsplayerAlive;
-
-
     [Header("GameSettings")]
     public Vector3 playerSpawnSpot;
     public float startWait = 3;
@@ -56,12 +50,17 @@ public class GameMaster : MonoBehaviour
     public bool isEnemySpawn = true;
     public bool isPickUpSpawn = true;
 
+
+    private int nextGoldenScore;                                  // nextGoldenScore is sum of all previous goldenScores
+    private int score;                                            // how many scores player has
+    private bool IsplayerAlive;
     private const string scoreAnimation = "GoldLabel";
     private BulletTime bulletTime;                                // reference to BulletTime script
     private MedalAwardingFor medalAwardingFor;                    // reference to the medal Awarding;
     private HighScoreController highScoreController;              // reference to highScore Controller it will e invoke after end game to save scores;
     private List<Transform> objectsList = new List<Transform>();  // list to keep references to all spawned objects, it will be helpful to destroy them after player death
     private GameObject playerShip;                                // player ship reference
+    private Pause pause;                                          // reference to Pause script
 
 
     void Awake()
@@ -72,37 +71,42 @@ public class GameMaster : MonoBehaviour
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
-        DontDestroyOnLoad(scoreText);
 
-
-        nextGoldenScore = goldenScore;           // initial first golden Score
+        nextGoldenScore = goldenScore;                            // initial first golden Score
         scoreText.text = "Score: 0";
-
-        bulletTime = GetComponent<BulletTime>();
-        medalAwardingFor = GetComponent<MedalAwardingFor>();
 
         hierarchyGuard = new GameObject("HierarchyGuard").transform;
         highScoreController = GameObject.FindGameObjectWithTag("HighScore").GetComponent<HighScoreController>();  // Get reference to hight score
+
+        // Get references
+        bulletTime = GetComponent<BulletTime>();
+        medalAwardingFor = GetComponent<MedalAwardingFor>();
+        pause = GetComponent<Pause>();
     }
 
 
-    public void NewGame()                             // New Game canvas will invoke this
+
+    public void NewGame()                              // Hangar canvas will invoke this
     {
-        Reset();
         StartCoroutine(GameLoop());
     }
 
 
     public IEnumerator GameLoop()
     {
-        yield return StartCoroutine(StartGame());     // wait before StartGame will finish
-        yield return StartCoroutine(PlayGame());      // wait before PlayGame  will finish
-        yield return StartCoroutine(EndGame());       // wait before endGame   will Finish
+        yield return StartCoroutine(StartGame());      // wait before StartGame will finish
+        yield return StartCoroutine(PlayGame());       // wait before PlayGame  will finish
+        yield return StartCoroutine(EndGame());        // wait before endGame   will Finish
     }
 
 
     IEnumerator StartGame()
     {
+        Reset();                                       // reset HUD elements
+
+        CursorController.instance.HideCursor();                 // hide cursor on screen
+        pause.ActivePauseControll();                   // now player can stop game by pressing escape
+
         isEnemySpawn = true;
         isPickUpSpawn = true;
 
@@ -122,7 +126,8 @@ public class GameMaster : MonoBehaviour
             StartCoroutine(RandomObjectSpawner(fuelTank, pickUpPosition, fuelSpawnTime));     // spawn every  time fuel
             StartCoroutine(RandomObjectSpawner(ammo, pickUpPosition, fuelSpawnTime));         // spawn every  ytime ammo
         }
-		StartCoroutine(SilverCoinSpawner());
+        StartCoroutine(SilverCoinSpawner());
+
         while (CheckIfPlayerIsAlive())                                                        // if player will die quit the loop
             yield return null;
     }
@@ -139,6 +144,9 @@ public class GameMaster : MonoBehaviour
 
         GameObject.FindGameObjectWithTag("GameOver").GetComponent<GameOverController>().UpdateStats(score);           // update stats on gameOver canvas;
         StopAllCoroutines();                                                                                          // it prevents to spawn objects after end the game
+
+        CursorController.instance.ShowCursor();                                                                                // player has possibility to move the cursor
+        pause.InactivePauseControll();                                                                                // now player can't call the pause menu
     }
 
 
@@ -239,14 +247,17 @@ public class GameMaster : MonoBehaviour
             newObject.transform.SetParent(hierarchyGuard);                                                                                      // parent Enemy to  hierarchyGuard
         }
     }
-		IEnumerator SilverCoinSpawner()                
+
+
+    IEnumerator SilverCoinSpawner()
     {
         while (IsplayerAlive)                                                                                                                   // spawn objects all the time
         {
             yield return new WaitForSeconds(10);
-            GetComponent<SilverCoinSpawnController>().SpawnCoins();                                                                                    // parent Enemy to  hierarchyGuard
+            GetComponent<SilverCoinSpawnController>().SpawnCoins();                                                                             // parent Enemy to  hierarchyGuard
         }
     }
+
 
     IEnumerator RandomObjectSpawner(GameObject objectToSpawn, Boundry objectsPosition, float objectSpawnTime)                                   // method for only one gameobject
     {

@@ -2,7 +2,6 @@
 using System.Collections;
 
 
-
 public class SlowWeapon : Weapon
 {
     public GameObject bullet;                                                             // bullet tkat takes damage to object

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 [RequireComponent(typeof(AudioSource))]
 public abstract class Weapon : MonoBehaviour
 {
