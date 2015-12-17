@@ -412,7 +412,17 @@ PlayerSettings:
   boolPropertyNames:
   - XboxOne::enus
   XboxOne::enus: 1
+<<<<<<< HEAD
+  stringPropertyNames:
+  - WebGL::emscriptenArgs
+  - WebGL::template
+  - additionalIl2CppArgs::additionalIl2CppArgs
+  WebGL::emscriptenArgs: 
+  WebGL::template: APPLICATION:Default
+  additionalIl2CppArgs::additionalIl2CppArgs: 
+=======
   stringPropertyNames: []
+>>>>>>> 935df7799b45fc50ba29271e572d242ac7a2e1d2
   cloudProjectId: 
   projectName: 
   organizationId: 

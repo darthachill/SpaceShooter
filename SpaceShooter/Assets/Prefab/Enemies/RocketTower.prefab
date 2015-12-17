@@ -426,7 +426,7 @@ MonoBehaviour:
   isShooting: 1
   isMoving: 1
   visualWeapons:
-  - weapon: {fileID: 133526, guid: 8b085e955e653b74997bad2466c03fa2, type: 2}
+  - weapon: {fileID: 178872, guid: 3212ac4edf6b2964da59e59cf2260574, type: 2}
     weaponSpawn: {fileID: 487740}
     weaponScripts: {fileID: 0}
   weaponLevel: 1
@@ -2683,6 +2683,10 @@ Prefab:
       propertyPath: destroyExplosion
       value: 
       objectReference: {fileID: 183240, guid: a74b8eac27f2a214f9034305f1106c0c, type: 2}
+    - target: {fileID: 0}
+      propertyPath: visualWeapons.Array.data[0].weapon
+      value: 
+      objectReference: {fileID: 178872, guid: 3212ac4edf6b2964da59e59cf2260574, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 132884}
