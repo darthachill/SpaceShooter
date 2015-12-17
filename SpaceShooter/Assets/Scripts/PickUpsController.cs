@@ -30,51 +30,25 @@ public class PickUpsController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
     }
-<<<<<<< HEAD
-	
 
-	void OnTriggerStay(Collider other)
-    {
-        if (other.name.Equals("MagnetingSphere") && silverCoin)
-        {
-            Vector3 distanceVector =other.GetComponentInParent<Transform>().position - transform.position; // Player.transform
-            float startingDistance = other.GetComponentInParent<MagnetController>().getStartingdDistance();
-			GetComponent<Rigidbody>().velocity = distanceVector.normalized  * startingDistance * startingDistance / distanceVector.magnitude * 40 * Time.deltaTime;
-         }
-=======
 
     void OnTriggerStay(Collider other)
     {
         if (other.name.Equals("MagnetingSphere") && silverCoin)
         {
-
-            //  Vector3 distanceVector = GameObject.FindGameObjectWithTag("Player").transform.position - transform.position;
-            Vector3 distanceVector = other.GetComponentInParent<Transform>().position - transform.position;
+            Vector3 distanceVector = other.GetComponentInParent<Transform>().position - transform.position; // Player.transform
             float startingDistance = other.GetComponentInParent<MagnetController>().getStartingdDistance();
             GetComponent<Rigidbody>().velocity = distanceVector.normalized * startingDistance * startingDistance / distanceVector.magnitude * 40 * Time.deltaTime;
-
-
         }
->>>>>>> 935df7799b45fc50ba29271e572d242ac7a2e1d2
-
     }
 
 
     void OnTriggerEnter(Collider other)
     {
-<<<<<<< HEAD
-		  if (other.name.Equals("MagnetingSphere") && silverCoin)
-           {
-             this.GetComponent<Rigidbody>().velocity = (other.GetComponentInParent<Transform>().position - transform.position) *40 * Time.deltaTime;
-=======
         if (other.name.Equals("MagnetingSphere") && silverCoin)
         {
-
-
-            //this.GetComponent<Rigidbody>().velocity = (GameObject.FindGameObjectWithTag("Player").transform.position - transform.position) * 40* Time.deltaTime;
             this.GetComponent<Rigidbody>().velocity = (other.GetComponentInParent<Transform>().position - transform.position) * 40 * Time.deltaTime;
-            // float distance = (GameObject.FindGameObjectWithTag("Player").transform.position - transform.position).magnitude;
->>>>>>> 935df7799b45fc50ba29271e572d242ac7a2e1d2
+
             float distance = (other.GetComponentInParent<Transform>().position - transform.position).magnitude;
             other.GetComponentInParent<MagnetController>().setStartingDistance(distance);
         }

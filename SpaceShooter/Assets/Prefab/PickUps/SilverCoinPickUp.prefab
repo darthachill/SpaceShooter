@@ -64,7 +64,6 @@ GameObject:
   - 65: {fileID: 6577384}
   - 54: {fileID: 5450068}
   - 82: {fileID: 8217982}
-  - 114: {fileID: 11494438}
   m_Layer: 0
   m_Name: SilverCoinPickUp
   m_TagString: PickUp
@@ -322,17 +321,6 @@ MonoBehaviour:
   silverCoin: 1
   bulletTime: 0
   gun: {fileID: 0}
---- !u!114 &11494438
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 165246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2794902313cf644e955b4f563a3826b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!198 &19807574
 ParticleSystem:
   m_ObjectHideFlags: 1

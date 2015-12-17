@@ -104,8 +104,8 @@ public class GameMaster : MonoBehaviour
     {
         Reset();                                       // reset HUD elements
 
-        CursorController.instance.HideCursor();                 // hide cursor on screen
-        pause.ActivePauseControll();                   // now player can stop game by pressing escape
+        CursorController.instance.HideCursor();        // hide cursor on screen
+        pause.CallMenu();                              // now player can stop game by pressing escape
 
         isEnemySpawn = true;
         isPickUpSpawn = true;
@@ -145,8 +145,8 @@ public class GameMaster : MonoBehaviour
         GameObject.FindGameObjectWithTag("GameOver").GetComponent<GameOverController>().UpdateStats(score);           // update stats on gameOver canvas;
         StopAllCoroutines();                                                                                          // it prevents to spawn objects after end the game
 
-        CursorController.instance.ShowCursor();                                                                                // player has possibility to move the cursor
-        pause.InactivePauseControll();                                                                                // now player can't call the pause menu
+        CursorController.instance.ShowCursor();                                                                       // player has possibility to move the cursor
+        pause.StopPause();                                                                                            // now player can't call the pause menu
     }
 
 

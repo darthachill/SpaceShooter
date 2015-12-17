@@ -1,36 +1,49 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Pause : MonoBehaviour
 {
-    public void ActivePauseControll()         // GameMaster in newGame state will invoke this
+    public GameObject menuPanel;
+    public bool pauseOn;
+
+
+    void Start()
     {
-        StartCoroutine(IEWaitForKeyPress());   
+        menuPanel.gameObject.SetActive(false);
     }
 
 
-    public void InactivePauseControll()      // After end the game will end, GameMaster will disable possibility to call the pause menu by invoke this
+    public void CallMenu()
     {
-        StopCoroutine(IEWaitForKeyPress());
+        StartCoroutine(IECallMenu());
     }
 
 
-    IEnumerator IEWaitForKeyPress()
+    public void StopPause()  // After end the game will end, GameMaster will disable possibility to call the pause menu by invoke this
     {
-        while (true)                         
+        StopAllCoroutines();
+    }
+
+
+    IEnumerator IECallMenu()      
+    {
+        while (true)
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                CursorController.instance.SetCursorLock();
-                CallMenu();
-            }
+            if (Input.GetKeyDown(KeyCode.Escape))               // if player press escape
+                 SetPause();
+
             yield return null;
         }
     }
 
-
-    void CallMenu()
+    public void SetPause()
     {
+        CursorController.instance.SetCursorLock();      // hide the cursor
 
+        pauseOn = !pauseOn;
+
+        menuPanel.gameObject.SetActive(pauseOn);
+        Time.timeScale = pauseOn ? 0 : 1;
     }
-}
+}   // Karol Sobański
