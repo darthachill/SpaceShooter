@@ -5,14 +5,13 @@ public class MagnetController : MonoBehaviour {
 
     public GameObject spherePub;
     public GameObject magnet;
+    public float radiusMultipler;
 
 
     private int currentMagnets;
     private int maxMagnets;
     private float lastingSphereTime; 
     private GameObject sphere;
-    private float maxSpeed = 400f;
-    private float minSpeed = 40f;
     private float startingDistance;
     private Transform shipTransform;
     private MagnetGUI[] magnetGUIController;
@@ -20,7 +19,7 @@ public class MagnetController : MonoBehaviour {
     
     // Use this for initialization
 	void Start () {
-
+        radiusMultipler = 1;
         currentMagnets = 0;
         maxMagnets = 2;
         magnetGUIController = new MagnetGUI[maxMagnets];
@@ -65,7 +64,7 @@ public class MagnetController : MonoBehaviour {
             magnetingSphere.name = "MagnetingSphere";
             magnetingSphere.AddComponent<SphereCollider>();
             SphereCollider colliderReference = magnetingSphere.GetComponent<SphereCollider>();
-            colliderReference.radius = 3F;
+            colliderReference.radius = 3F * radiusMultipler;
             magnetingSphere.transform.position = shipTransform.position;
             magnetingSphere.tag = "PickUp"; // To avoid triggering shots
             sphere = Instantiate(spherePub);
@@ -73,13 +72,13 @@ public class MagnetController : MonoBehaviour {
             if (!sphere) Debug.Log("Error with sphere reference");
             sphere.transform.SetParent(shipTransform);
             sphere.transform.position = magnetingSphere.transform.position;
-            sphere.transform.localScale =new Vector3( 6f, 6f, 6f);
+            sphere.transform.localScale =new Vector3( 6f * radiusMultipler, 6f * radiusMultipler, 6f * radiusMultipler);
             sphere.GetComponent<MeshRenderer>().enabled = true;
 
             lastingSphereTime = 5f;
             StartCoroutine(DecreaseSphereTime());
             Destroy(magnetingSphere, 5f);
-      
+            
         }
 
     }
@@ -93,7 +92,8 @@ public class MagnetController : MonoBehaviour {
             yield return null;                                                 
         }
 
-        sphere.GetComponent<MeshRenderer>().enabled = false;                                 
+        sphere.GetComponent<MeshRenderer>().enabled = false;
+        Destroy(sphere);                               
     }
 
 

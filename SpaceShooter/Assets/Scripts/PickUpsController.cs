@@ -82,6 +82,7 @@ public class PickUpsController : MonoBehaviour
             {
 
                 other.GetComponent<MagnetController>().AddMagnet();
+                other.GetComponent<MagnetController>().UseMagnet();
             }
             else if (silverCoin)
             {

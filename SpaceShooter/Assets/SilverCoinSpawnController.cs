@@ -26,29 +26,8 @@ public class SilverCoinSpawnController : MonoBehaviour
                 coinTmp = Instantiate(silverCoin);
                 coinTmp.gameObject.SetActive(true);
                 coinTmp.transform.position = spawnPosistionVector + new Vector3(i, 0, j);
-                coinTmp.transform.SetParent(SilverCoinGuard.transform);
+                coinTmp.transform.SetParent(GameMaster.instance.hierarchyGuard);
             }
     }
 
-
-    IEnumerator TenSecondsTimer()
-    {
-        float lastingTime = 10f;
-
-        while (lastingTime > 0)
-        {
-            lastingTime -= Time.deltaTime;
-            yield return null;
-        }
-
-        spawnPosistionVector = GameObject.FindGameObjectWithTag("Player").transform.position;
-    }
-
-
-    void Start()
-    {
-
-        SilverCoinGuard = new GameObject();
-        SilverCoinGuard.name = "SilverCoinGuard";
-    }
 }

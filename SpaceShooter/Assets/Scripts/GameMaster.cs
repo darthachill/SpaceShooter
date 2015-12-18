@@ -39,6 +39,7 @@ public class GameMaster : MonoBehaviour
     public float pickUpTime = 3;
     public float fuelSpawnTime;
     public float ammoSpawnTime;
+    public float silverCoinSpawnTime = 10;
 
     [Header("GameSettings")]
     public Vector3 playerSpawnSpot;
@@ -253,7 +254,7 @@ public class GameMaster : MonoBehaviour
     {
         while (IsplayerAlive)                                                                                                                   // spawn objects all the time
         {
-            yield return new WaitForSeconds(10);
+            yield return new WaitForSeconds(silverCoinSpawnTime);
             GetComponent<SilverCoinSpawnController>().SpawnCoins();                                                                             // parent Enemy to  hierarchyGuard
         }
     }

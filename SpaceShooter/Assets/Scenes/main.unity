@@ -22865,6 +22865,54 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 22437198, guid: 0920c247dbac3aa4abb7b32a886fd524, type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22437198, guid: 0920c247dbac3aa4abb7b32a886fd524, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -37.982338
+      objectReference: {fileID: 0}
+    - target: {fileID: 22437198, guid: 0920c247dbac3aa4abb7b32a886fd524, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: -0.035320282
+      objectReference: {fileID: 0}
+    - target: {fileID: 22419974, guid: 0920c247dbac3aa4abb7b32a886fd524, type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22419974, guid: 0920c247dbac3aa4abb7b32a886fd524, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -37.982338
+      objectReference: {fileID: 0}
+    - target: {fileID: 22419974, guid: 0920c247dbac3aa4abb7b32a886fd524, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: -0.035320282
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446580, guid: 0920c247dbac3aa4abb7b32a886fd524, type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446580, guid: 0920c247dbac3aa4abb7b32a886fd524, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -37.982338
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446580, guid: 0920c247dbac3aa4abb7b32a886fd524, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: -0.035320282
+      objectReference: {fileID: 0}
+    - target: {fileID: 22437198, guid: 0920c247dbac3aa4abb7b32a886fd524, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 22419974, guid: 0920c247dbac3aa4abb7b32a886fd524, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446580, guid: 0920c247dbac3aa4abb7b32a886fd524, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0920c247dbac3aa4abb7b32a886fd524, type: 2}
   m_IsPrefabParent: 0
@@ -41967,6 +42015,7 @@ MonoBehaviour:
   pickUpTime: 30
   fuelSpawnTime: 30
   ammoSpawnTime: 30
+  silverCoinSpawnTime: 10
   playerSpawnSpot: {x: -3.6, y: 0, z: 0}
   startWait: 0
   endWait: 2
@@ -42037,7 +42086,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
