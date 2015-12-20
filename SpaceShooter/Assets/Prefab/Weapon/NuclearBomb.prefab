@@ -42,7 +42,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 25, y: 1, z: 40}
-  m_Center: {x: 0, y: 0, z: -12.3201694}
+  m_Center: {x: 0, y: 0, z: -12.320169}
 --- !u!82 &8266764
 AudioSource:
   m_ObjectHideFlags: 1
@@ -54,10 +54,11 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: b7e3f559b6eaf9a46addedaec96261d9, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: .00100000005
+  m_Volume: 0.001
   m_Pitch: 1
   Loop: 0
   Mute: 0
+  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -82,6 +83,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   panLevelCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -92,6 +94,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -102,6 +105,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -112,6 +116,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &11469414
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -123,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f065c5badff221469aaff97540c6fba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionVolume: .100000001
+  explosionVolume: 0.1
   explosionSound: {fileID: 8300000, guid: b7e3f559b6eaf9a46addedaec96261d9, type: 3}
   explosionEffect: {fileID: 100000, guid: c8fd86fe5050dc04bb501b291c30f591, type: 2}
   damage: 1000
@@ -138,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de1804d0d606b7249b319b1436c482a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyTime: .100000001
+  destroyTime: 0.1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -153,6 +158,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: destroyTime
       value: .100000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: panLevelCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -19,7 +19,7 @@ public class NuclearBomb : MonoBehaviour
     }
 
 
-    void OnTriggerStay(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.tag != "Enemy") return;                           // if it is not enemy do nothing
 

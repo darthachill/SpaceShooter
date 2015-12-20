@@ -80,7 +80,6 @@ public class PickUpsController : MonoBehaviour
             }
             else if (magnet)
             {
-
                 other.GetComponent<MagnetController>().AddMagnet();
                 other.GetComponent<MagnetController>().UseMagnet();
             }
@@ -94,21 +93,17 @@ public class PickUpsController : MonoBehaviour
                 audioSource.Play();
             if (animator)                                                                        // if there is Animator attached
                 animator.SetTrigger(collected);
-            else
-                DestroyPickUp();
+
+            StartCoroutine(DestroyAfterFinishAnimation());
         }
     }
 
 
-    void DestroyPickUp()                                                                         // Animation will use this method after play collected animation
+    IEnumerator DestroyAfterFinishAnimation()
     {
-        Destroy(gameObject, audioSource.clip.length);
+        yield return new WaitForEndOfFrame();
+
+        float animationLength = animator.GetCurrentAnimatorStateInfo(0).length;
+        Destroy(gameObject, animationLength);
     }
-
-
-    void DestroyNow()                                                                            // Animation will use this method after play collected animation
-    {
-        Destroy(gameObject);
-    }
-
 }   // Karol Sobanski

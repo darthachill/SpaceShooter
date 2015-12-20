@@ -215,9 +215,9 @@ AudioSource:
   m_GameObject: {fileID: 165246}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24302640, guid: 313991fdd3b7f274f8b5dfe6de6cdbc3,
+  OutputAudioMixerGroup: {fileID: 24320234, guid: 313991fdd3b7f274f8b5dfe6de6cdbc3,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 964790673bf964743b9950dce033c2ec, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4d22e519ded72fe4bb36ee7d42bd15eb, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -6476,7 +6476,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 964790673bf964743b9950dce033c2ec, type: 3}
+      objectReference: {fileID: 8300000, guid: 4d22e519ded72fe4bb36ee7d42bd15eb, type: 3}
     - target: {fileID: 0}
       propertyPath: m_Enabled
       value: 1
@@ -6493,6 +6493,11 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: acd780ab5427bb2419909973d7501727, type: 2}
+    - target: {fileID: 0}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24320234, guid: 313991fdd3b7f274f8b5dfe6de6cdbc3,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 165246}
