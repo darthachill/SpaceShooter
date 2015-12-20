@@ -78,9 +78,8 @@ public class EnemyController : ObjectController
         isShooting = false;                                                     // disable moving
         isMoving = false;                                                       // disable shooting
 
-        GameMaster.instance.IncreaseScore(pointForKill);                        // points for player 
         GameMaster.instance.DropRandomItem(transform.position);                 // choose random item to drop
-        GameMaster.instance.AddKilledEnemy();                                   // Add Killed enemy to stats
+        GameMaster.instance.AddKilledEnemy(pointForKill);                       // Add Killed enemy to stats and send points for him
 
         yield return StartCoroutine(base.DestroyEffect());                      // play musics and particle effects
 

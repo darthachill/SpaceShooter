@@ -5,12 +5,16 @@ using System.Collections.Generic;                       // Lists
 
 public class GameMaster : MonoBehaviour
 {
+    [HideInInspector]
+    public bool StaminaByKill { get; set; }
+
     public static GameMaster instance;
     public Boundry boundry;                             // area where ships can move
 
-
     [HideInInspector]
     public Transform hierarchyGuard;                    // to keep all created (Clone) in one Transform
+    [HideInInspector]
+    public StaminaController staminaController;
     public Menu gameOverMenu;
 
     [Header("UI")]
@@ -59,8 +63,9 @@ public class GameMaster : MonoBehaviour
     private BulletTime bulletTime;                                // reference to BulletTime script
     private MedalAwardingFor medalAwardingFor;                    // reference to the medal Awarding;
     private List<Transform> objectsList = new List<Transform>();  // list to keep references to all spawned objects, it will be helpful to destroy them after player death
-    private GameObject playerShip;                                // player ship reference
+    private GameObject playerShipToInstatiate;                    // player ship reference
     private Pause pause;                                          // reference to Pause script
+
 
 
     void Awake()
@@ -110,6 +115,7 @@ public class GameMaster : MonoBehaviour
         isPickUpSpawn = true;
 
         SpawnPlayer();                                 // Create Player on Map
+
         yield return new WaitForSeconds(startWait);    // wait before player ship will appeare on screen
     }
 
@@ -156,7 +162,7 @@ public class GameMaster : MonoBehaviour
 
     public void ChooseShip(GameObject newShip)                   // Button will invoke this
     {
-        playerShip = newShip;
+        playerShipToInstatiate = newShip;
     }
 
 
@@ -224,8 +230,12 @@ public class GameMaster : MonoBehaviour
     }
 
 
-    public void AddKilledEnemy()
+    public void AddKilledEnemy(int points)
     {
+        if (StaminaByKill)
+            staminaController.IncreaseWithKilling(points);
+
+        IncreaseScore(points);
         medalAwardingFor.KillingEnemies();
     }
 
@@ -241,7 +251,7 @@ public class GameMaster : MonoBehaviour
     void SpawnPlayer()
     {
         IsplayerAlive = true;
-        Instantiate(playerShip, playerSpawnSpot, Quaternion.identity);
+        Instantiate(playerShipToInstatiate, playerSpawnSpot, Quaternion.identity);
     }
 
 

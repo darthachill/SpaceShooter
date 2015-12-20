@@ -133,6 +133,8 @@ GameObject:
   - 114: {fileID: 11480520}
   - 114: {fileID: 11445370}
   - 114: {fileID: 11428658}
+  - 114: {fileID: 11487282}
+  - 114: {fileID: 11414330}
   m_Layer: 9
   m_Name: Shadow
   m_TagString: Player
@@ -383,7 +385,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -458,7 +460,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -533,7 +535,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -608,7 +610,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -637,6 +639,23 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11414330
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f992b6c809e8e5a4da2ad0098c498cf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxStamina: 1000
+  skillStamina: 80
+  staminaIncreaseSpeed: 1
+  isIncreaseWithTime: 0
+  isIncreaseWithKill: 1
+  staminaBar: {fileID: 0}
 --- !u!114 &11428658
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -650,6 +669,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spherePub: {fileID: 110052, guid: 3ed0e38a44a7ef14792dfb770e9b4ac5, type: 2}
   magnet: {fileID: 0}
+  radiusMultipler: 1
 --- !u!114 &11445370
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -706,6 +726,8 @@ MonoBehaviour:
   tiltSpeed: 5
   sight: 20
   changeColor: 3
+  isStaminaByTime: 0
+  isStaminaByKill: 0
   maxFuel: 75
   factorMoveWithoutFuel: 3
   speedFallDownFuel: 6
@@ -737,6 +759,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c2f95feb89c1a54f934a3a0b48855f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11487282
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeeadc126171dc546805adb1f5e18491, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  horizontalMove: 0
+  verticalMove: -1
+  destroyExplosion: {fileID: 0}
+  destroySound: {fileID: 0}
+  isShooting: 1
+  isMoving: 0
+  visualWeapons: []
+  weaponLevel: 1
+  r: 2
+  t: 3
+  droidPrefab: {fileID: 106166, guid: 7c7fffea69a6a714ab549e1998b028a6, type: 2}
 --- !u!135 &13537378
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -5299,6 +5344,54 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: radiusMultipler
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: droidPrefab
+      value: 
+      objectReference: {fileID: 106166, guid: 7c7fffea69a6a714ab549e1998b028a6, type: 2}
+    - target: {fileID: 0}
+      propertyPath: r
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: t
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: isMoving
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: maxStamina
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: currentStamina
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: skillStamina
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: staminaIncreaseSpeed
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: isIncreaseWithTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: isIncreaseWithKill
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

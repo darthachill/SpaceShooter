@@ -84,15 +84,15 @@ public class PickUpsController : MonoBehaviour
                 other.GetComponent<MagnetController>().UseMagnet();
             }
             else if (silverCoin)
-            {
                 GameMaster.instance.IncreaseScore(1);
-            }
 
 
             if (audioSource)                                                                     // if there is sound attacheds
                 audioSource.Play();
-            if (animator)                                                                        // if there is Animator attached
-                animator.SetTrigger(collected);
+
+            animator.SetTrigger(collected);
+
+
 
             StartCoroutine(DestroyAfterFinishAnimation());
         }
@@ -102,8 +102,8 @@ public class PickUpsController : MonoBehaviour
     IEnumerator DestroyAfterFinishAnimation()
     {
         yield return new WaitForEndOfFrame();
-
         float animationLength = animator.GetCurrentAnimatorStateInfo(0).length;
+
         Destroy(gameObject, animationLength);
     }
 }   // Karol Sobanski

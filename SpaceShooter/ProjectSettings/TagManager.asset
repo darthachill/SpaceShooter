@@ -17,6 +17,8 @@ TagManager:
   - MainMenu
   - PickUp
   - GameOver
+  - ShieldBar
+  - StaminaBar
   layers:
   - Default
   - TransparentFX

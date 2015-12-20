@@ -25,7 +25,7 @@ public class VisualBar : MonoBehaviour
     private const string nameWarning = "warning";
 
 
-    void Start()
+    void Awake()
     {
         if (isEffects)
             audioSource = GetComponent<AudioSource>();
@@ -37,6 +37,13 @@ public class VisualBar : MonoBehaviour
 
     public void UpdateBar(float currentValue, float maxValue)
     {
+        StartCoroutine(IEUpdateBar(currentValue, maxValue));
+    }
+
+
+    public IEnumerator IEUpdateBar(float currentValue, float maxValue)
+    {
+        yield return null;
         float percent = currentValue / (float)maxValue;
         if (percent < 0)                                                                  // it's prevent scale bar in left side
             percent = 0;
@@ -71,6 +78,7 @@ public class VisualBar : MonoBehaviour
     void EffectHandle(float percent)
     {
         iconeAnimation = barIcone.gameObject.GetComponent<Animator>();                 // Get reference to icone animation that allows to control when play animation
+
         if (percent < warningPercent && !isEffectPlaying && percent != 0)              // if  bar's  fall to warningPercent value and effects isn't playing, and player is still alive 
         {
             if (audioSource) audioSource.Play();
@@ -84,6 +92,7 @@ public class VisualBar : MonoBehaviour
             isEffectPlaying = false;
         }
     }
+
 
     public void BlueIcone(bool enable)                                                 // this method allows turn off/on blue heart on screen playerController has access
     {

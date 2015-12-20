@@ -8,14 +8,16 @@ public class ShieldController : MonoBehaviour
     public GameObject shieldInstance;              // shield to instance
     public float maxShieldTime;                    // how long shiled will be active
 
+
     private float currentShieldTime;               // how many times left to deactivation shield
     private GameObject playerShield;               // instance of GameObject shield
     private VisualBar shieldBar;
 
 
-    void Start()
+
+    void Awake()
     {
-        shieldBar = GameObject.Find("ShieldBar").GetComponent<VisualBar>();
+        shieldBar = GameObject.FindWithTag("ShieldBar").GetComponent<VisualBar>();
         CreateShield();
     }
 

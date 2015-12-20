@@ -14,6 +14,8 @@ public class PlayerController : ObjectController
     public float tiltSpeed = 5f;                            // how fast wings'll be rotate
     public float sight = 20f;                               // how far player can display enemy health bar                    
     public float changeColor = 3f;                          // time to change color after take damage
+    public bool isStaminaByTime;                            // increase stamina with time
+    public bool isStaminaByKill;                            // increase stamina with killing enemies
 
 
     [Header("Fuel")]
@@ -47,7 +49,9 @@ public class PlayerController : ObjectController
     // References
     private BombController bombController;                  // reference, controlls all bomb operations
     private SmokeController smokeController;
-	private MagnetController magnetController;
+    private MagnetController magnetController;
+    private StaminaController staminaController;
+
     private const string namePlayerHealth = "PlayerHealth";
     private const string namePlayerFuel = "PlayerFuel";
 
@@ -55,7 +59,7 @@ public class PlayerController : ObjectController
 
     void Awake()
     {
-        AdjustVisualBars();               // this must be in Awake because other script: ShieldController need reference to VisualBar
+        AdjustVisualBars();                                 // this must be in Awake because other script: ShieldController need reference to VisualBar
     }
 
 
@@ -64,17 +68,22 @@ public class PlayerController : ObjectController
         base.Start();
         ammunitionLeft = maxammunition;
         bombController = GetComponent<BombController>();
-		magnetController = GetComponent<MagnetController>();
+        magnetController = GetComponent<MagnetController>();
         // get references
         damageImage = GameObject.Find("DamageImage").GetComponent<Image>();
         enemyHealthBar = GameObject.Find("EnemyHealth").GetComponent<VisualBar>();
         ammunitionText = GameObject.Find("Ammunition").GetComponent<Text>();
         smokeController = GetComponent<SmokeController>();
+        staminaController = GetComponent<StaminaController>();
+
         ammunitionText.text = "Ammo: " + ammunitionLeft;
         enemyLayer = LayerMask.GetMask("Enemy");                                        // Get enemy mask
         currentFuel = maxFuel;
         healthBar.UpdateBar(currentHealth, maxHealth);                                  // update healthBar
     }
+    //if(isStaminaByKill)
+
+
 
 
     void Update()
@@ -86,27 +95,21 @@ public class PlayerController : ObjectController
 
         if (Input.GetKeyDown(KeyCode.Escape))                      // TEST
             Application.Quit();
-
         if (Input.GetKeyDown(KeyCode.Q))                           // TEST
             TakeDamage(60, transform.position);
-
         if (Input.GetKeyDown(KeyCode.R))                           // TEST
             IncreaseHealth(50);
-
         if (Input.GetKeyDown(KeyCode.E))                           // Create Bombs 
             bombController.CreateBoombs();
-		if (Input.GetKeyDown(KeyCode.F))
-        {
+        if (Input.GetKeyDown(KeyCode.F))
             magnetController.UseMagnet();
-        }
-		if (Input.GetKeyDown(KeyCode.O))                        //TEST
-		{
-         GameMaster.instance.GetComponent<SilverCoinSpawnController>().SpawnCoins();
-         }
+        if (Input.GetKeyDown(KeyCode.O))                        //TEST
+            GameMaster.instance.GetComponent<SilverCoinSpawnController>().SpawnCoins();
         if (Input.GetKeyDown(KeyCode.H))                        //TEST
-        {
             magnetController.AddMagnet();
-        }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+            staminaController.UseSkill();
+
         if (isShooting)                                            // if player is able to shot
             Shot();                                                // shot
 
@@ -296,7 +299,6 @@ public class PlayerController : ObjectController
     }
 
 
-
     IEnumerator LerpMovementChange(float newHorizontal, float newVertical)                  // change player ship movement  from one value to another by using lerp
     {
         while (!Mathf.Approximately(horizontalMove, newHorizontal))                         // if  velocities aren't the same
@@ -326,7 +328,7 @@ public class PlayerController : ObjectController
     {
         isAlive = false;
         gameObject.GetComponent<SphereCollider>().enabled = false;                           // disenabled collider
-        transform.FindChild("PlayerModel").transform.gameObject.SetActive(false);                  // hide player model;
+        transform.FindChild("PlayerModel").transform.gameObject.SetActive(false);            // hide player model;
         Instantiate(destroyExplosion, transform.position, Quaternion.identity);
 
         destroySound.Play();
@@ -338,7 +340,7 @@ public class PlayerController : ObjectController
 
     void Shot()
     {
-        if (Input.GetKey(KeyCode.Mouse0) && !isAmmoOver)                                            // if player press fire button and he have ammo
+        if (Input.GetKey(KeyCode.Space) && !isAmmoOver)                                            // if player press fire button and he have ammo
         {
             CameraShake.instance.ShotShake();                                                       // shake camera when player shot
 
@@ -347,7 +349,7 @@ public class PlayerController : ObjectController
                     DecreaseAmmunition();                                                           // decrease ammunition
 
         }
-        else if (Input.GetKeyDown(KeyCode.Mouse0))                                                  // else if  player press fire button and he haven't ammo
+        else if (Input.GetKeyDown(KeyCode.Space))                                                  // else if  player press fire button and he haven't ammo
             SoundManager.instance.RandomizeSfx(ref emptyMagazineSnd);                               // play sound empty magazine
     }
 
