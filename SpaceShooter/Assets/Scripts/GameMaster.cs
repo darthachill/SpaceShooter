@@ -11,7 +11,7 @@ public class GameMaster : MonoBehaviour
 
     [HideInInspector]
     public Transform hierarchyGuard;                    // to keep all created (Clone) in one Transform
-
+    public Menu gameOverMenu;
 
     [Header("UI")]
     [HideInInspector]
@@ -58,7 +58,6 @@ public class GameMaster : MonoBehaviour
     private const string scoreAnimation = "GoldLabel";
     private BulletTime bulletTime;                                // reference to BulletTime script
     private MedalAwardingFor medalAwardingFor;                    // reference to the medal Awarding;
-    private HighScoreController highScoreController;              // reference to highScore Controller it will e invoke after end game to save scores;
     private List<Transform> objectsList = new List<Transform>();  // list to keep references to all spawned objects, it will be helpful to destroy them after player death
     private GameObject playerShip;                                // player ship reference
     private Pause pause;                                          // reference to Pause script
@@ -77,7 +76,6 @@ public class GameMaster : MonoBehaviour
         scoreText.text = "Score: 0";
 
         hierarchyGuard = new GameObject("HierarchyGuard").transform;
-        highScoreController = GameObject.FindGameObjectWithTag("HighScore").GetComponent<HighScoreController>();  // Get reference to hight score
 
         // Get references
         bulletTime = GetComponent<BulletTime>();
@@ -141,10 +139,15 @@ public class GameMaster : MonoBehaviour
         yield return new WaitForSeconds(endWait);                                                                     // wait some time that player will se his death
 
         medalAwardingFor.SaveMedals();                                                                                // save all player medals information that will be necessary to display in gameOver screen
+        SaveScores();
+
+        HighScoreController highScoreController = new HighScoreController();
         highScoreController.SaveScoreInHighScore(score);                                                              // save player score in highscore
 
-        GameObject.FindGameObjectWithTag("GameOver").GetComponent<GameOverController>().UpdateStats(score);           // update stats on gameOver canvas;
+        GameObject.FindGameObjectWithTag("Canvas").GetComponent<MenuManager>().ShowMenu(gameOverMenu);                // find MenuManager and switch menu to gameOver
         StopAllCoroutines();                                                                                          // it prevents to spawn objects after end the game
+
+
 
         CursorController.instance.ShowCursor();                                                                       // player has possibility to move the cursor
         pause.StopPause();                                                                                            // now player can't call the pause menu
@@ -162,6 +165,12 @@ public class GameMaster : MonoBehaviour
         medalAwardingFor.Reset();
         score = 0;
         scoreText.text = "Score: 0";
+    }
+
+
+    void SaveScores()
+    {
+        PlayerPrefs.SetInt("HighScore0", score);
     }
 
 

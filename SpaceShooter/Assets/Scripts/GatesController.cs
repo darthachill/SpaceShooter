@@ -10,6 +10,7 @@ public class GatesController : MonoBehaviour
     public RectTransform rightGateEnd;
     public bool closed;
     public MenuManager menuManager;
+    public GameObject _Menu;
     public Menu menu;
 
     [SerializeField]
@@ -29,18 +30,19 @@ public class GatesController : MonoBehaviour
 
     void Start()
     {
+        leftGateBeginX = leftGate.transform.position.x;
+        rightGateBeginX = rightGate.transform.position.x;
+
         audioSource = gameObject.GetComponent<AudioSource>();
         leftGateEnd.position = new Vector3(leftGateEnd.position.x * 3 / 2, leftGateEnd.position.y, leftGateEnd.position.z);
         rightGateEnd.position = new Vector3(rightGateEnd.position.x * 3 / 2, rightGateEnd.position.y, rightGateEnd.position.z);
 
-        leftGateBeginX = leftGate.transform.position.x;
-        rightGateBeginX = rightGate.transform.position.x;
 
 
         if (closed)
             BeginFromClosedGates();     // set position to closed gates
         else
-            BeginFromOpenedGates();     // set position to opened gates
+            StartCoroutine(BeginFromOpenedGates());     // set position to opened gates
     }
 
 
@@ -49,7 +51,6 @@ public class GatesController : MonoBehaviour
         ShowGates(true);                // show gates
         StartCoroutine(IEOpenGates());
     }
-
 
 
     public void CloseGatesAndChangeSceene()
@@ -61,6 +62,11 @@ public class GatesController : MonoBehaviour
 
     IEnumerator IECloseGatesAndChangeSceene()
     {
+        yield return null;
+
+        if (_Menu)
+            _Menu.SetActive(true);
+
         yield return StartCoroutine(IECloseGates());
         yield return new WaitForSeconds(closedTime);
 
@@ -114,7 +120,7 @@ public class GatesController : MonoBehaviour
     public void UpdateGateState(bool open)
     {
         if (open)
-            BeginFromOpenedGates();
+            StartCoroutine(BeginFromOpenedGates());
         else
         {
             BeginFromClosedGates();
@@ -132,13 +138,16 @@ public class GatesController : MonoBehaviour
     }
 
 
-    void BeginFromOpenedGates()
+    IEnumerator BeginFromOpenedGates()
     {
+        yield return null;              // it neccessary because awak must invoke first
+
         ShowGates(false);               // gates will be inactive, it prevents to show gates when we change sceenes
 
         leftGate.position = new Vector3(leftGateEnd.position.x, leftGate.position.y, leftGate.position.z);
         rightGate.position = new Vector3(rightGateEnd.position.x, rightGate.position.y, rightGate.position.z);
     }
+
 
     void ShowGates(bool state)
     {

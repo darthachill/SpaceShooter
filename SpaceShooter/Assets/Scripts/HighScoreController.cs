@@ -7,7 +7,8 @@ public class HighScoreController : MonoBehaviour
     public Text[] scoreText;
     public MedalLoader[] medals;
 
-    private int medalAmount=18;
+    private int medalAmount = 18;
+    private int scoreAmount = 10;
     string hightScore = "HighScore";
 
 
@@ -38,14 +39,14 @@ public class HighScoreController : MonoBehaviour
         int i = 1;
         int place = 0;                                                     // place to currentScore
 
-        while (i <= scoreText.Length)                                      // go through all scores
+        while (i <= scoreAmount)                                      // go through all scores
         {
             if (currentScore > PlayerPrefs.GetInt(hightScore + i))         // if current score is greatest than this score in high Score
                 place = i;
 
             if (place > 0)
             {
-                for (int j = scoreText.Length; j > place; j--)                   // start from last score in ranking
+                for (int j = scoreAmount; j > place; j--)                   // start from last score in ranking
                 {
                     ChangeMedalsPositios(j - 1, j);                              // first change medal position
                     int previous = PlayerPrefs.GetInt(hightScore + (j - 1));     // save latest score

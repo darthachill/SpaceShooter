@@ -16,7 +16,7 @@ public class MedalController : MonoBehaviour
 
 
 
-    void Start()
+    void Awake()
     {
         animator = GetComponent<Animator>();
         audiosource = GetComponent<AudioSource>();

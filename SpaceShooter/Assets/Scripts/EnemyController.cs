@@ -31,7 +31,7 @@ public class EnemyController : ObjectController
         if (isShooting)                                                    // check if enemy can shoot
             if (GameMaster.instance.CheckIfPlayerIsAlive())                // check if player is still alive 
                 Shot();
-            else  
+            else
                 isShooting = false;                                        // if player is death stop shooting
 
         if (isMoving)
@@ -125,16 +125,15 @@ public class EnemyController : ObjectController
     IEnumerator SwitchMaterial()
     {
         for (int i = 0; i < meshRenderers.Length; i++)
-            meshRenderers[i].material = white;
+            if (meshRenderers[i])
+                meshRenderers[i].material = white;
 
         for (int i = 0; i < whiteFrames; i++)                                     // wait whiteFrames before change material again
             yield return null;
 
         for (int i = 0; i < meshRenderers.Length; i++)
-        {
             if (meshRenderers[i])
                 meshRenderers[i].material = orginalMaterials[i];
-        }
     }
 
     void OnTriggerEnter(Collider other)

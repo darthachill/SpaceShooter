@@ -8,11 +8,13 @@ public class Menu : MonoBehaviour
 
     private string isOpen = "isOpen";
 
+
     public bool IsOpen
     {
         get { return animator.GetBool(isOpen); }
         set { animator.SetBool(isOpen, value); }
     }
+
 
     void Awake()
     {
@@ -30,5 +32,5 @@ public class Menu : MonoBehaviour
             canvasGroup.blocksRaycasts = canvasGroup.interactable = false;
         else
             canvasGroup.blocksRaycasts = canvasGroup.interactable = true;
-    }
+    } 
 }

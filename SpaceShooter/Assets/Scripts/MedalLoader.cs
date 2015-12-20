@@ -4,19 +4,19 @@ using System.Collections;
 public class MedalLoader : MonoBehaviour
 {
     public string playerMedalName = "P0_M";
-    public float timeToShowNextMedal= 0.2f;
+    public float timeToShowNextMedal = 0.2f;
     private MedalController[] medals;
 
 
-    void Start()
+    void Awake()
     {
         medals = GetComponentsInChildren<MedalController>();
     }
 
 
-
     public IEnumerator LoadAllMedals()
     {
+        yield return null;                                                      // Awake will be first 
         HideAlreadyVisibleMedals();                                             // check if any medal is visible after last battle
         yield return new WaitForSeconds(0.5f);
         for (int i = 0; i < medals.Length; i++)                                 // go through all medals
