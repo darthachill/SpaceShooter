@@ -65,7 +65,9 @@ public class EnemyController : ObjectController
     protected override IEnumerator DestroyEffect()
     {
         for (int i = 0; i < meshRenderers.Length; i++)                          // disable all meshh renderers
-            meshRenderers[i].enabled = false;
+            if (meshRenderers[i])
+                meshRenderers[i].enabled = false;
+
         isAlive = false;
 
         GetComponent<Collider>().enabled = false;                               // disable colliders
@@ -134,6 +136,7 @@ public class EnemyController : ObjectController
             if (meshRenderers[i])
                 meshRenderers[i].material = orginalMaterials[i];
     }
+
 
     void OnTriggerEnter(Collider other)
     {

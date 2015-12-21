@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System;
 
-public class CirculatingDroidController :ObjectController {
+public class CirculatingDroidController : ObjectController
+{
 
     public float r;
     public float t;     // circuit travel time
     public GameObject droidPrefab;
-    public List <GameObject> Droids; 
+    public List<GameObject> Droids;
     public int droidCount = 0; //for controll initiial droids in inspector
     public int maxDroids = 3;
     public float[] droidSpawnAngles;
@@ -16,13 +17,14 @@ public class CirculatingDroidController :ObjectController {
     private Transform opponentTransform;    //nearest oponent
 
 
-    void Start () {
-              for(int i = 0; i < droidCount; i++)
-             AddDroid();
+    void Start()
+    {
+        for (int i = 0; i < droidCount; i++)
+            AddDroid();
     }
-	
 
-  public void AddDroid()
+
+    public void AddDroid()
     {
         circulatingSphere = Instantiate(droidPrefab);
         circulatingSphere.transform.SetParent(transform);   // set playership transform as parent transform
@@ -32,7 +34,7 @@ public class CirculatingDroidController :ObjectController {
         Droids.Add(circulatingSphere);
         Droids[Droids.Count - 1].transform.position = Droids[0].transform.position;
         Droids[Droids.Count - 1].transform.rotation = Droids[0].transform.rotation;
-        Droids[ Droids.Count - 1 ].transform.RotateAround(transform.position, Vector3.up, droidSpawnAngles[Droids.Count - 1]);
+        Droids[Droids.Count - 1].transform.RotateAround(transform.position, Vector3.up, droidSpawnAngles[Droids.Count - 1]);
     }
 
 
@@ -46,8 +48,8 @@ public class CirculatingDroidController :ObjectController {
         {
             if (child.tag == "Enemy")
             {
-               distance = (transform.position - child.position).magnitude;
-               if(distance <= smallestDistance)
+                distance = (transform.position - child.position).magnitude;
+                if (distance <= smallestDistance)
                 {
                     enemyTransform = child;
                     smallestDistance = distance;
@@ -59,19 +61,20 @@ public class CirculatingDroidController :ObjectController {
     }
 
 
-    void Update () {
+    void Update()
+    {
 
-        
+
         foreach (GameObject droid in Droids)
         {
-          droid.transform.RotateAround(transform.position, Vector3.up, 360 * Time.deltaTime / t);
+            droid.transform.RotateAround(transform.position, Vector3.up, 360 * Time.deltaTime / t);
         }
 
         opponentTransform = findClosestOponent();
 
         if (isShooting && opponentTransform)
         {
-            
+
             if (opponentTransform)
             {
 
@@ -81,12 +84,12 @@ public class CirculatingDroidController :ObjectController {
                     droid.GetComponent<SlowWeapon>().Shot(false);
                 }
             }
-         }
+        }
 
 
-        if(Input.GetKeyDown(KeyCode.P) && Droids.Count < maxDroids)
+        if (Input.GetKeyDown(KeyCode.P) && Droids.Count < maxDroids)
         {
-           AddDroid();
+            AddDroid();
         }
     }
 

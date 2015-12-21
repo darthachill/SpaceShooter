@@ -134,7 +134,7 @@ GameObject:
   - 114: {fileID: 11445370}
   - 114: {fileID: 11428658}
   - 114: {fileID: 11487282}
-  - 114: {fileID: 11414330}
+  - 114: {fileID: 11408716}
   m_Layer: 9
   m_Name: Shadow
   m_TagString: Player
@@ -639,7 +639,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11414330
+--- !u!114 &11408716
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -650,12 +650,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f992b6c809e8e5a4da2ad0098c498cf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxStamina: 1000
-  skillStamina: 80
-  staminaIncreaseSpeed: 1
+  clipReadyToUse: {fileID: 8300000, guid: e21b9a93e845b514e904c0e716a70f91, type: 3}
+  maxStamina: 100
+  skillStamina: 11
+  staminaIncreaseSpeed: 5
   isIncreaseWithTime: 0
   isIncreaseWithKill: 1
-  staminaBar: {fileID: 0}
 --- !u!114 &11428658
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5396,11 +5396,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: skillStamina
-      value: 20
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: staminaIncreaseSpeed
-      value: 40
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: isIncreaseWithTime

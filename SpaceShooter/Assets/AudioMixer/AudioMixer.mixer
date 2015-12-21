@@ -46,6 +46,7 @@ AudioMixerController:
     - cf2471366eccf6b478ace163820120f8
     - b6f6cc1ee3cc1314da6069a71da14ea5
     - 5fce8af43bb546948a6a83db6e9d5167
+    - ba6f178d5ae77464c91113755952db5f
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500003}
@@ -176,6 +177,7 @@ AudioMixerGroupController:
   m_Children:
   - {fileID: 24338270}
   - {fileID: 24305974}
+  - {fileID: 24369352}
   m_Volume: 551babc0a7df89745a587ff6de0cc90d
   m_Pitch: 33af28cd5639d05469d5c9fc8e961adf
   m_Effects:
@@ -422,6 +424,23 @@ AudioMixerGroupController:
   m_Pitch: c769db10b41503642b2d7aacb4f9cc21
   m_Effects:
   - {fileID: 24437680}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!243 &24369352
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Stamina
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: ba6f178d5ae77464c91113755952db5f
+  m_Children: []
+  m_Volume: 25d194a4dcdf74a47b5486a444eab2a0
+  m_Pitch: a23262477498b484db6dba99519e2904
+  m_Effects:
+  - {fileID: 24434096}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -767,6 +786,19 @@ AudioMixerEffectController:
   m_EffectID: ee787cf44c1aa0c4396107eace305a89
   m_EffectName: Receive
   m_MixLevel: d59e638cc44719144b00fd510701202f
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &24434096
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_EffectID: 27eb871ae889b504dac0d18cea22348f
+  m_EffectName: Attenuation
+  m_MixLevel: 4c3febc76a8e5da4aa77fd23c66914e0
   m_Parameters: []
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
