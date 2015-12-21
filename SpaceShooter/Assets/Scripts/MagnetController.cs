@@ -6,12 +6,12 @@ public class MagnetController : MonoBehaviour {
     public GameObject spherePub;
     public GameObject magnet;
     public float radiusMultipler;
-
+    public float lastingSphereTime; 
 
     private int currentMagnets;
     private int maxMagnets;
-    private float lastingSphereTime; 
     private GameObject sphere;
+    private GameObject magnetingSphere;
     private float startingDistance;
     private Transform shipTransform;
     private MagnetGUI[] magnetGUIController;
@@ -57,7 +57,7 @@ public class MagnetController : MonoBehaviour {
         {
             magnetGUIController[currentMagnets - 1].hideImage();
             currentMagnets--;
-            GameObject magnetingSphere = new GameObject();
+            magnetingSphere = new GameObject();
 
              
             magnetingSphere.gameObject.transform.SetParent(shipTransform);
@@ -68,6 +68,7 @@ public class MagnetController : MonoBehaviour {
             magnetingSphere.transform.position = shipTransform.position;
             magnetingSphere.tag = "PickUp"; // To avoid triggering shots
             sphere = Instantiate(spherePub);
+            sphere.name = "MagnetingSphereClone";
 
             if (!sphere) Debug.Log("Error with sphere reference");
             sphere.transform.SetParent(shipTransform);
@@ -75,10 +76,8 @@ public class MagnetController : MonoBehaviour {
             sphere.transform.localScale =new Vector3( 6f * radiusMultipler, 6f * radiusMultipler, 6f * radiusMultipler);
             sphere.GetComponent<MeshRenderer>().enabled = true;
 
-            lastingSphereTime = 5f;
-            StartCoroutine(DecreaseSphereTime());
-            Destroy(magnetingSphere, 5f);
-            
+         
+            StartCoroutine(DecreaseSphereTime());            
         }
 
     }
@@ -86,14 +85,17 @@ public class MagnetController : MonoBehaviour {
 
     IEnumerator DecreaseSphereTime()
     {
-        while (lastingSphereTime > 0)
+        float lastingTime = lastingSphereTime;
+        while (lastingTime > 0)
         {
-            lastingSphereTime -= Time.deltaTime;                             
+
+            lastingTime -= Time.deltaTime;                             
             yield return null;                                                 
         }
 
         sphere.GetComponent<MeshRenderer>().enabled = false;
-        Destroy(sphere);                               
+        Destroy(sphere);
+        Destroy(magnetingSphere);
     }
 
 

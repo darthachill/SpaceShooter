@@ -329,6 +329,8 @@ public class PlayerController : ObjectController
         isAlive = false;
         gameObject.GetComponent<SphereCollider>().enabled = false;                           // disenabled collider
         transform.FindChild("PlayerModel").transform.gameObject.SetActive(false);            // hide player model;
+        transform.FindChild("MagnetingSphere").transform.gameObject.SetActive(false);
+        transform.FindChild("MagnetingSphereClone").transform.gameObject.SetActive(false);
         Instantiate(destroyExplosion, transform.position, Quaternion.identity);
 
         destroySound.Play();
