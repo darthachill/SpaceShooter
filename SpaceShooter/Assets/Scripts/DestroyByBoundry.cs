@@ -3,9 +3,9 @@ using System.Collections;
 
 public class DestroyByBoundry : MonoBehaviour
 {
-
     void OnTriggerExit(Collider other)
     {
-        Destroy(other.gameObject);
+        GameMaster.instance.RemoveObject(other.transform);
+        Destroy(other.gameObject); 
     }
 }   // Karol Sobanski

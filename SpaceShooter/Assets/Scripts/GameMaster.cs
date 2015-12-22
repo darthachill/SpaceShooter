@@ -62,10 +62,10 @@ public class GameMaster : MonoBehaviour
     private const string scoreAnimation = "GoldLabel";
     private BulletTime bulletTime;                                // reference to BulletTime script
     private MedalAwardingFor medalAwardingFor;                    // reference to the medal Awarding;
-    private List<Transform> objectsList = new List<Transform>();  // list to keep references to all spawned objects, it will be helpful to destroy them after player death
+    public List<Transform> objectsList = new List<Transform>();   // list to keep references to all spawned objects, it will be helpful to destroy them after player death
     private GameObject playerShipToInstatiate;                    // player ship reference
     private Pause pause;                                          // reference to Pause script
-
+    private bool isEnemyShooting = true;                          // flag allows or not to shoot spawning enemy
 
 
     void Awake()
@@ -123,7 +123,7 @@ public class GameMaster : MonoBehaviour
     IEnumerator PlayGame()
     {
         if (isEnemySpawn)
-            StartCoroutine(RandomObjectSpawner(enemies, enemyPosition, enemySpawnTime));
+            StartCoroutine(RandomEnemiesSpawner(enemies, enemyPosition, enemySpawnTime));
 
         if (isPickUpSpawn)
         {
@@ -163,6 +163,12 @@ public class GameMaster : MonoBehaviour
     public void ChooseShip(GameObject newShip)                   // Button will invoke this
     {
         playerShipToInstatiate = newShip;
+    }
+
+
+    public void RemoveObject(Transform go)
+    {
+        objectsList.Remove(go);
     }
 
 
@@ -248,10 +254,29 @@ public class GameMaster : MonoBehaviour
     }
 
 
+    public void EnemiesShoot(bool state)                                                  // disable/enable enemies possibility to shoot
+    {
+        isEnemyShooting = state;
+        foreach (Transform enemy in objectsList)
+            if (enemy && enemy.tag.Equals("Enemy"))                                       // if object gas tag "Enemy"
+                enemy.GetComponent<EnemyController>().isShooting = state;                 // disable enemy possibility to shot
+    }
+
+
     void SpawnPlayer()
     {
         IsplayerAlive = true;
         Instantiate(playerShipToInstatiate, playerSpawnSpot, Quaternion.identity);
+    }
+
+
+    IEnumerator SilverCoinSpawner()
+    {
+        while (IsplayerAlive)                                                                                                                   // spawn objects all the time
+        {
+            yield return new WaitForSeconds(silverCoinSpawnTime);
+            GetComponent<SilverCoinSpawnController>().SpawnCoins();                                                                             // parent Enemy to  hierarchyGuard
+        }
     }
 
 
@@ -269,16 +294,6 @@ public class GameMaster : MonoBehaviour
     }
 
 
-    IEnumerator SilverCoinSpawner()
-    {
-        while (IsplayerAlive)                                                                                                                   // spawn objects all the time
-        {
-            yield return new WaitForSeconds(silverCoinSpawnTime);
-            GetComponent<SilverCoinSpawnController>().SpawnCoins();                                                                             // parent Enemy to  hierarchyGuard
-        }
-    }
-
-
     IEnumerator RandomObjectSpawner(GameObject objectToSpawn, Boundry objectsPosition, float objectSpawnTime)                                   // method for only one gameobject
     {
         while (IsplayerAlive)                                                                                                                   // spawn objects all the time
@@ -290,4 +305,22 @@ public class GameMaster : MonoBehaviour
             newObject.transform.SetParent(hierarchyGuard);                                                                                      // parent Enemy to  hierarchyGuard
         }
     }
+
+
+    IEnumerator RandomEnemiesSpawner(GameObject[] objectsToSpawn, Boundry objectsPosition, float objectSpawnTime)
+    {
+        while (IsplayerAlive)                                                                                                                   // spawn objects all the time
+        {
+            yield return new WaitForSeconds(objectSpawnTime);
+            GameObject randObject = objectsToSpawn[Random.Range(0, objectsToSpawn.Length)];                                                     // choose random object
+            Vector3 randPosition = new Vector3(Random.Range(-objectsPosition.left, objectsPosition.right), 0, objectsPosition.up);              // choose random object position
+            GameObject newObject = Instantiate(randObject, randPosition, Quaternion.identity) as GameObject;                                    // create new object
+            objectsList.Add(newObject.transform);                                                                                               // add object to list
+            newObject.transform.SetParent(hierarchyGuard);                                                                                      // parent Enemy to  hierarchyGuard
+
+            if (!isEnemyShooting)
+                newObject.GetComponent<EnemyController>().isShooting = false;
+        }
+    }
+
 }   // Karol Sobanski

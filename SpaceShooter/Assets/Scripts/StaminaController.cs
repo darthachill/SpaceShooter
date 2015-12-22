@@ -2,104 +2,114 @@
 using System.Collections;
 
 
-public class StaminaController : MonoBehaviour
+public abstract class StaminaController : MonoBehaviour
 {
-    [HideInInspector]
-    public AudioClip clipReadyToUse;                        // when stamina is full make noise. Clip will charged to script not to object
+    [Header("Stamina settings")]
+    public AudioClip readyToUseClip;                        // when stamina is full make noise.
+    public AudioClip failClip;                              // when player try to use skill but he hasn't enough stamina, play fail sound
+    public AudioClip usedClip;                              // when player use skill play  suitable for skill sound
+    public AudioClip endClip;                               // when skill will end
+
+    protected AudioSource audioSource;                      // reference to audioSource
 
 
     [SerializeField]
-    private int maxStamina = 100;                            // max amount of stamina that player has
+    private int maxStamina = 100;                           // max amount of stamina that player has
     [SerializeField]
     private int skillStamina = 80;                          // how many stamina skill will use
     [SerializeField]
     private float staminaIncreaseSpeed = 1;                 // how fast stamina will increase with time
     [SerializeField]
-    private bool isIncreaseWithTime;
+    private bool isIncreaseWithTime;                        // player can increase his stamina with time
     [SerializeField]
-    private bool isIncreaseWithKill;
+    private bool isIncreaseWithKill;                        // player can increase his stamina with 
 
-    private bool isStaminaFull=true;
-    private bool isIncreasingWithTimeOn;
+    private bool isStaminaFull = true;                      // flag to know that stamina is increase by time in this moment
     private float currentStamina;                           // how many stamina player has in this moment
-    private AudioSource audioSource;
-    private VisualBar staminaBar;
+    private VisualBar staminaBar;                           // reference to staminaBar that controll bar on screen
 
 
     void OnEnable()
     {
-        staminaBar = GameObject.FindWithTag("StaminaBar").GetComponent<VisualBar>();
-        GameMaster.instance.staminaController = this;
-        audioSource = staminaBar.gameObject.GetComponent<AudioSource>();
+        staminaBar = GameObject.FindWithTag("StaminaBar").GetComponent<VisualBar>();    // get reference to stamina bar that controlls bar on screen
+        GameMaster.instance.staminaController = this;                                   // set in GameMaster reference to stamina Controller
+        audioSource = staminaBar.gameObject.GetComponent<AudioSource>();                // get reference to audioSource in staminaBar object
 
-        currentStamina = maxStamina;
-        staminaBar.UpdateBar(currentStamina, maxStamina);
+        currentStamina = maxStamina;                                                    // set current stamina value to max
+        staminaBar.UpdateBar(currentStamina, maxStamina);                               // update this value on bar
 
-        if (isIncreaseWithTime)
-            StartCoroutine(IncreaseWithTime());
+        if (isIncreaseWithTime)                                                         // if IncreaseWithTime is On
+            StartCoroutine(IncreaseWithTime());                                         // Run coroutine that will increase stamina with time
 
-        if (isIncreaseWithKill)                                         //s can be both option active Time and kill
-            GameMaster.instance.StaminaByKill = true;
+        if (isIncreaseWithKill)                                                         // if - because can be both option active Time and kill
+            GameMaster.instance.StaminaByKill = true;                                   // set in GameMaster bollen to true, because GameMaster will invoke method IncreaseWithKilling when player kill the enemy
 
-        ReadyToUse();
+        ReadyToUse();                                                                   // invoke animation, sounds that shows that stamina is full
     }
 
 
     IEnumerator IncreaseWithTime()
     {
-        isIncreasingWithTimeOn = true;
         isStaminaFull = false;
 
-        while (isIncreasingWithTimeOn)
+        while (!isStaminaFull)                                          // go to while when current will be full
         {
             currentStamina += Time.deltaTime * staminaIncreaseSpeed;    // increase stamina with time
 
             if (currentStamina > maxStamina)                            // if current stamina value is greatest than max
             {
-                ReadyToUse();
-                isIncreasingWithTimeOn = false;                         // stop increase stamina
+                ReadyToUse();                                           // invoke animation, sounds that shows that stamina is full
+                isStaminaFull = true;                                   // stop increase stamina, stop while loop
             }
 
-            staminaBar.UpdateBar(currentStamina, maxStamina);           // update stamina bar on HUD
+            staminaBar.UpdateBar(currentStamina, maxStamina);           // update stamina bar on screen
 
             yield return null;                                          // refresh screen
         }
     }
 
 
-    public void IncreaseWithKilling(int points)
+    public void IncreaseWithKilling(int points)                         // GameMaster'll invoke this when player killed the enemy
     {
-        currentStamina += points;
+        currentStamina += points;                                       // to current stamina add points that enemy gives player for killed him
 
-        if (currentStamina >= maxStamina)                                // if current stamina value is greatest than max
-            ReadyToUse();
+        if (currentStamina >= maxStamina)                               // if current stamina value is greatest than max
+            ReadyToUse();                                               // invoke animation, sounds that shows that stamina is full
 
-        staminaBar.UpdateBar(currentStamina, maxStamina);
+        staminaBar.UpdateBar(currentStamina, maxStamina);               // update stamina bar on screen
     }
 
 
     public void UseSkill()
     {
+
+        if (currentStamina <= skillStamina)
+        {
+            PlaySound(ref failClip);                                    // play fail sound if player hasn't enough stamina
+            return;
+        }
+
+
         if (isStaminaFull)
         {
             isStaminaFull = false;
             staminaBar.BlueIcone(false);
         }
 
-        if (currentStamina <= skillStamina) return;
+        Skill();                                                        // call function responsible for skill action
 
         currentStamina -= skillStamina;
         staminaBar.UpdateBar(currentStamina, maxStamina);
 
-        if (isIncreaseWithTime && !isIncreasingWithTimeOn)
+        if (isIncreaseWithTime && !isStaminaFull)
             StartCoroutine(IncreaseWithTime());
     }
 
 
     void ReadyToUse()
     {
-        if (audioSource.clip != clipReadyToUse)
-            audioSource.clip = clipReadyToUse;
+        if (audioSource.clip != readyToUseClip)
+            audioSource.clip = readyToUseClip;
 
         if (!isStaminaFull)
             audioSource.Play();
@@ -108,4 +118,14 @@ public class StaminaController : MonoBehaviour
         staminaBar.BlueIcone(true);                             // active blue icone on screen
         isStaminaFull = true;
     }
+
+
+    protected void PlaySound(ref AudioClip clip)                // derived class will use it
+    {
+        if (clip)                                               // if there is no clip, do nothing
+            audioSource.PlayOneShot(clip);
+    }
+
+
+    public abstract void Skill();                              // derived class will fill this method, every skill is different
 }   // Karol Sobański

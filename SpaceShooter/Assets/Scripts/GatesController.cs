@@ -93,7 +93,7 @@ public class GatesController : MonoBehaviour
             rightGate.position = Vector3.Lerp(rightGate.position, rightGateEnd.position, gateOpenSpeed * Time.deltaTime);
             yield return null;
         }
-
+        print("wylacz drzwi!!");
         ShowGates(false); // inactive gates 
     }
 

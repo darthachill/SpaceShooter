@@ -134,7 +134,7 @@ GameObject:
   - 114: {fileID: 11445370}
   - 114: {fileID: 11428658}
   - 114: {fileID: 11487282}
-  - 114: {fileID: 11408716}
+  - 114: {fileID: 11459644}
   m_Layer: 9
   m_Name: Shadow
   m_TagString: Player
@@ -284,7 +284,8 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: c4e0f0520d23e4043a63404c37bba34c, type: 2}
+  - {fileID: 2100000, guid: b158c6b6de73c1d419c8a0a1892565a8, type: 2}
+  - {fileID: 2100000, guid: 848918a99d11f25f110026ca44295342, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -639,23 +640,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11408716
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 158458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f992b6c809e8e5a4da2ad0098c498cf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clipReadyToUse: {fileID: 8300000, guid: e21b9a93e845b514e904c0e716a70f91, type: 3}
-  maxStamina: 100
-  skillStamina: 11
-  staminaIncreaseSpeed: 5
-  isIncreaseWithTime: 0
-  isIncreaseWithKill: 1
 --- !u!114 &11428658
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -697,6 +681,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bomb: {fileID: 158766, guid: c9817dfc3e1c2b949a0455d0043b0aaa, type: 2}
+--- !u!114 &11459644
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81ca7f39c36aa6f4f973304ab2d8c3ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  readyToUseClip: {fileID: 8300000, guid: e21b9a93e845b514e904c0e716a70f91, type: 3}
+  failClip: {fileID: 0}
+  usedClip: {fileID: 8300000, guid: 348d4db58d0f2754baa9f6ba41be1325, type: 3}
+  endClip: {fileID: 8300000, guid: 4759a6c892127264980ce02cc7001591, type: 3}
+  maxStamina: 100
+  skillStamina: 80
+  staminaIncreaseSpeed: 0.5
+  isIncreaseWithTime: 1
+  isIncreaseWithKill: 1
+  activeTime: 3
+  rendererShipModel: {fileID: 2347092}
+  dissolveMaps:
+  - {fileID: 2800000, guid: b32d4e02d0552734183f4f35905868ba, type: 3}
+  - {fileID: 2800000, guid: 5b19d1959743894488bbf0122890f138, type: 3}
+  - {fileID: 2800000, guid: 0b6fbaf6784b8db4fafb26df8f7d8a96, type: 3}
+  - {fileID: 2800000, guid: d2ad450d3d5e2144f94892ae45f8966c, type: 3}
+  - {fileID: 2800000, guid: e8cffd8eca71a9f448c48f1ce3b1de61, type: 3}
+  smooth: 1
+  refractionMaterialMax: 70
 --- !u!114 &11461624
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5400,11 +5414,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: staminaIncreaseSpeed
-      value: 5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: isIncreaseWithTime
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: isIncreaseWithKill
@@ -5430,6 +5444,22 @@ Prefab:
       propertyPath: lastingSphereTime
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: readyToUseClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e21b9a93e845b514e904c0e716a70f91, type: 3}
+    - target: {fileID: 0}
+      propertyPath: activeTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: usedClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 348d4db58d0f2754baa9f6ba41be1325, type: 3}
+    - target: {fileID: 0}
+      propertyPath: endClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4759a6c892127264980ce02cc7001591, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 158458}

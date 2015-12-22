@@ -217,7 +217,7 @@ MonoBehaviour:
   - {fileID: 150196, guid: 97a0b9c9ec055674393da85179fa753c, type: 2}
   - {fileID: 150196, guid: 9ab86dadb94fa4a4bb56fd5665c61ae8, type: 2}
   - {fileID: 150196, guid: 29652526c97e5f2468f3e66980dfd234, type: 2}
-  destroySnd: {fileID: 8286080}
+  destroySnd: {fileID: 0}
   disableControl: 0
   howLong: 2
 --- !u!114 &11447654
@@ -1443,10 +1443,6 @@ Prefab:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: destroySnd
-      value: 
-      objectReference: {fileID: 8286080}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 187096}

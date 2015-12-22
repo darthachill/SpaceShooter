@@ -91,6 +91,7 @@ public class EnemyController : ObjectController
 
     protected virtual void Death()                                              // virtual because sometimes we will destroy parent (RocketTower)
     {
+        GameMaster.instance.RemoveObject(transform);
         Destroy(gameObject);
     }
 

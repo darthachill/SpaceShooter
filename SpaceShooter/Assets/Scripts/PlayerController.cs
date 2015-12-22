@@ -107,7 +107,7 @@ public class PlayerController : ObjectController
             GameMaster.instance.GetComponent<SilverCoinSpawnController>().SpawnCoins();
         if (Input.GetKeyDown(KeyCode.H))                        //TEST
             magnetController.AddMagnet();
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftControl))
             staminaController.UseSkill();
 
         if (isShooting)                                            // if player is able to shot
@@ -161,7 +161,7 @@ public class PlayerController : ObjectController
         healthBar.UpdateBar(currentHealth, maxHealth);                                  // update healthBar 
 
         if (currentHealth <= 0 && isAlive)                                              // if player haven't health but he isn't dead
-            Death();                                                                    // kill the player
+            StartCoroutine(Death());                                                    // kill the player
     }
 
 
@@ -323,14 +323,15 @@ public class PlayerController : ObjectController
         }
     }
 
-
-    void Death()
+    IEnumerator Death()
     {
         isAlive = false;
+        yield return null;                                                                   // wait because Update must finish perform
+
         gameObject.GetComponent<SphereCollider>().enabled = false;                           // disenabled collider
         transform.FindChild("PlayerModel").transform.gameObject.SetActive(false);            // hide player model;
-        transform.FindChild("MagnetingSphere").transform.gameObject.SetActive(false);
-        transform.FindChild("MagnetingSphereClone").transform.gameObject.SetActive(false);
+        //transform.FindChild("MagnetingSphere").transform.gameObject.SetActive(false);      // NAPRAWIĆ
+        //transform.FindChild("MagnetingSphereClone").transform.gameObject.SetActive(false); // NAPRAWIĆ
         Instantiate(destroyExplosion, transform.position, Quaternion.identity);
 
         destroySound.Play();

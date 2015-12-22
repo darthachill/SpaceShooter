@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-//[RequireComponent(typeof(AudioSource))]
+
 public class DestroyByCollision : MonoBehaviour
 {
     public int damage = 30;
@@ -60,6 +60,7 @@ public class DestroyByCollision : MonoBehaviour
                 yield return null;
         }
 
+        GameMaster.instance.RemoveObject(transform);
         Destroy(gameObject);
     }
 
