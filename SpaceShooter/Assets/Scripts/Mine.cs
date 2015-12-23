@@ -4,7 +4,7 @@ using System.Collections;
 public class Mine : EnemyController
 {
     public float detectRange;                   // how far mine can detects player
-
+    public AudioSource mineDetectorAudio;
     private int detectLayer;                    // detect only layer "Player"
     private Animator animator;
     private const string explose = "explose";
@@ -39,10 +39,19 @@ public class Mine : EnemyController
         Collider[] colliders = Physics.OverlapSphere(transform.position, detectRange, detectLayer);
 
         if (colliders.Length > 0)
-        {
-            base.DestroyEffect();
-            Explose();
-        }
+            StartCoroutine(DestroyEffect());
+    }
+
+
+    protected override IEnumerator DestroyEffect()
+    {
+        isAlive = false;
+
+        mineDetectorAudio.Play();
+        yield return new WaitForSeconds(mineDetectorAudio.clip.length);
+
+        base.DestroyEffect();
+        Explose();
     }
 
 
@@ -50,7 +59,7 @@ public class Mine : EnemyController
     {
         animator.SetTrigger(explose);
         foreach (BoxCollider collider in minepartsColliders)                 // disable all DestroyByCollision, it prevents destroy parts where mine is complite. Will be active again when mine will explose
-            if(collider)
+            if (collider)
                 collider.enabled = true;
     }
 

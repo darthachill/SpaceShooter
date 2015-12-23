@@ -78,7 +78,7 @@ public class GameMaster : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         nextGoldenScore = goldenScore;                            // initial first golden Score
-        scoreText.text = "Score: 0";
+        scoreText.text = "0";
 
         hierarchyGuard = new GameObject("HierarchyGuard").transform;
 
@@ -176,7 +176,7 @@ public class GameMaster : MonoBehaviour
     {
         medalAwardingFor.Reset();
         score = 0;
-        scoreText.text = "Score: 0";
+        scoreText.text = "0";
     }
 
 
@@ -201,7 +201,7 @@ public class GameMaster : MonoBehaviour
     public void IncreaseScore(int amount)                                                // for killing enemies
     {
         this.score += amount;
-        scoreText.text = "Score: " + score;
+        scoreText.text =  score.ToString();
 
         if (score > nextGoldenScore)
         {

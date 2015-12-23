@@ -367,6 +367,7 @@ MonoBehaviour:
   magnet: 0
   silverCoin: 0
   bulletTime: 0
+  stamina: 0
   gun: {fileID: 162388, guid: 902c73cd569839d4e9a7f9864f819027, type: 2}
 --- !u!198 &19801532
 ParticleSystem:

@@ -418,6 +418,7 @@ MonoBehaviour:
   magnet: 0
   silverCoin: 0
   bulletTime: 0
+  stamina: 0
   gun: {fileID: 163518, guid: 0b3415876a1d7114a9457765847630aa, type: 2}
 --- !u!114 &11429158
 MonoBehaviour:

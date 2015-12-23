@@ -76,7 +76,7 @@ public class PlayerController : ObjectController
         smokeController = GetComponent<SmokeController>();
         staminaController = GetComponent<StaminaController>();
 
-        ammunitionText.text = "Ammo: " + ammunitionLeft;
+        ammunitionText.text = ammunitionLeft.ToString();
         enemyLayer = LayerMask.GetMask("Enemy");                                        // Get enemy mask
         currentFuel = maxFuel;
         healthBar.UpdateBar(currentHealth, maxHealth);                                  // update healthBar
@@ -168,7 +168,7 @@ public class PlayerController : ObjectController
     public void AddAmmo(int ammo)
     {
         ammunitionLeft += ammo;                                 // add amunition
-        ammunitionText.text = "Ammo: " + ammunitionLeft;        // update text on GUI
+        ammunitionText.text = ammunitionLeft.ToString();       // update text on GUI
 
         if (ammunitionText.color != Color.white)                // if ammo color is different than white
             ammunitionText.color = Color.white;                 // set Color to white
@@ -343,7 +343,7 @@ public class PlayerController : ObjectController
 
     void Shot()
     {
-        if (Input.GetKey(KeyCode.Space) && !isAmmoOver)                                            // if player press fire button and he have ammo
+        if (Input.GetKey(KeyCode.Space) && !isAmmoOver)                                             // if player press fire button and he have ammo
         {
             CameraShake.instance.ShotShake();                                                       // shake camera when player shot
 
@@ -352,7 +352,7 @@ public class PlayerController : ObjectController
                     DecreaseAmmunition();                                                           // decrease ammunition
 
         }
-        else if (Input.GetKeyDown(KeyCode.Space))                                                  // else if  player press fire button and he haven't ammo
+        else if (Input.GetKeyDown(KeyCode.Space))                                                   // else if  player press fire button and he haven't ammo
             SoundManager.instance.RandomizeSfx(ref emptyMagazineSnd);                               // play sound empty magazine
     }
 
@@ -362,7 +362,7 @@ public class PlayerController : ObjectController
         if (ammunitionLeft > 0)
         {
             ammunitionLeft--;                                                                  // decrease ammunition amount
-            ammunitionText.text = "Ammo: " + ammunitionLeft;                                   // Update GUI text
+            ammunitionText.text = ammunitionLeft.ToString();                                   // Update GUI text
 
             if (ammunitionLeft < 10)                                                           // if ammunition is less than 10 bullets
                 ammunitionText.color = Color.red;                                              // change ammo label to red Color

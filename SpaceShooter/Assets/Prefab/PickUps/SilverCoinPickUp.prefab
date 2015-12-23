@@ -146,7 +146,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 165246}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -36.7, y: 0, z: 10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children:
   - {fileID: 496376}
@@ -320,6 +320,7 @@ MonoBehaviour:
   magnet: 0
   silverCoin: 1
   bulletTime: 0
+  stamina: 0
   gun: {fileID: 0}
 --- !u!198 &19807574
 ParticleSystem:
@@ -6498,6 +6499,10 @@ Prefab:
       value: 
       objectReference: {fileID: 24320234, guid: 313991fdd3b7f274f8b5dfe6de6cdbc3,
         type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 165246}

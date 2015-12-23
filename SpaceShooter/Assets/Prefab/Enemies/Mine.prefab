@@ -266,6 +266,7 @@ GameObject:
   - 135: {fileID: 13565162}
   - 95: {fileID: 9585878}
   - 82: {fileID: 8265466}
+  - 82: {fileID: 8237260}
   - 114: {fileID: 11460162}
   m_Layer: 8
   m_Name: Mine
@@ -1289,6 +1290,81 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.09208204, y: 0.30617008, z: 0.13251668}
   m_Center: {x: 0.0000000018626458, y: -0.0000020563602, z: 0.007769746}
+--- !u!82 &8237260
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 193332}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24388392, guid: 313991fdd3b7f274f8b5dfe6de6cdbc3,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: b1fe17206b8d1934983ca29349320d67, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!82 &8265466
 AudioSource:
   m_ObjectHideFlags: 1
@@ -1533,15 +1609,16 @@ MonoBehaviour:
   verticalMove: -1
   destroyExplosion: {fileID: 141406, guid: aa9232bbb0dc7ce4f9d2b47eab6461d4, type: 2}
   destroySound: {fileID: 8265466}
-  isShooting: 0
-  isMoving: 1
   visualWeapons: []
   weaponLevel: 1
+  isShooting: 0
+  isMoving: 1
   pointForKill: 30
   white: {fileID: 2100000, guid: a2b28c37441690a45868b2c821b22cde, type: 2}
   isTakingCollisionDamage: 0
   DamageByCollision: 0
   detectRange: 4
+  mineDetectorAudio: {fileID: 8237260}
 --- !u!114 &11464816
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1652,7 +1729,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 7763a3a80d6e5414db17c784e6e88676, type: 3}
+      objectReference: {fileID: 8300000, guid: b1fe17206b8d1934983ca29349320d67, type: 3}
     - target: {fileID: 0}
       propertyPath: destroyExplosion
       value: 
@@ -1663,6 +1740,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: mineDetectorAudio
+      value: 
+      objectReference: {fileID: 8237260}
+    - target: {fileID: 0}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24388392, guid: 313991fdd3b7f274f8b5dfe6de6cdbc3,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
