@@ -239,7 +239,7 @@ public class GameMaster : MonoBehaviour
     public void AddKilledEnemy(int points)
     {
         if (StaminaByKill)
-            staminaController.IncreaseWithKilling(points);
+            staminaController.IncreaseStamina(points);
 
         IncreaseScore(points);
         medalAwardingFor.KillingEnemies();
@@ -259,7 +259,7 @@ public class GameMaster : MonoBehaviour
         isEnemyShooting = state;
         foreach (Transform enemy in objectsList)
             if (enemy && enemy.tag.Equals("Enemy"))                                       // if object gas tag "Enemy"
-                enemy.GetComponent<EnemyController>().isShooting = state;                 // disable enemy possibility to shot
+                enemy.GetComponent<EnemyController>().SetShooting(state);                 // disable/enable enemy possibility to shot
     }
 
 
@@ -318,8 +318,9 @@ public class GameMaster : MonoBehaviour
             objectsList.Add(newObject.transform);                                                                                               // add object to list
             newObject.transform.SetParent(hierarchyGuard);                                                                                      // parent Enemy to  hierarchyGuard
 
-            if (!isEnemyShooting)
-                newObject.GetComponent<EnemyController>().isShooting = false;
+            if (!isEnemyShooting)                                                                                                               // if flag means that enemy shouldn't shoot
+                newObject.GetComponent<EnemyController>().SetShooting(false);                                                                   // enemy after spawn won't be eable to shoot
+
         }
     }
 

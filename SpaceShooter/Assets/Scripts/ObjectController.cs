@@ -29,19 +29,20 @@ public abstract class ObjectController : MonoBehaviour
     public GameObject destroyExplosion;               // destroy explosion particle effect
     public AudioSource destroySound;
    
-    protected Boundry boundryPosition;
-
-    [Header("Control")]
-    public bool isShooting = true;                    // some weapons can disable object ability to shot
-    public bool isMoving = true;                      // some weapons can disable object ability to move
 
     [Header("Weapons")]
     public List<VisualWeapon> visualWeapons = new List<VisualWeapon>();
-
     [HideInInspector]
     public int weaponLevel = 1;
 
 
+    [Header("Control")]
+    [SerializeField]
+    protected bool isShooting = true;                    // some weapons can disable object ability to shot
+    [SerializeField]
+    protected bool isMoving = true;                      // some weapons can disable object ability to move
+
+    protected Boundry boundryPosition;
     protected Rigidbody rigidbody;
     protected VisualBar healthBar;
     protected int currentHealth;

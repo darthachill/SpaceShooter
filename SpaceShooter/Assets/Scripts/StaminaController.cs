@@ -22,7 +22,7 @@ public abstract class StaminaController : MonoBehaviour
     [SerializeField]
     private bool isIncreaseWithTime;                        // player can increase his stamina with time
     [SerializeField]
-    private bool isIncreaseWithKill;                        // player can increase his stamina with 
+    private bool isIncreaseWithKill;                        // player can increase his stamina with killing enemy
 
     private bool isStaminaFull = true;                      // flag to know that stamina is increase by time in this moment
     private float currentStamina;                           // how many stamina player has in this moment
@@ -69,7 +69,7 @@ public abstract class StaminaController : MonoBehaviour
     }
 
 
-    public void IncreaseWithKilling(int points)                         // GameMaster'll invoke this when player killed the enemy
+    public void IncreaseStamina(int points)                             // GameMaster and pick up will invoke this when player killed the enemy
     {
         currentStamina += points;                                       // to current stamina add points that enemy gives player for killed him
 

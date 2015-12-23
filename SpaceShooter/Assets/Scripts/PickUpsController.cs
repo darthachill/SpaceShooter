@@ -16,6 +16,7 @@ public class PickUpsController : MonoBehaviour
     public bool magnet;
     public bool silverCoin;
     public bool bulletTime;
+    public bool stamina;
     public GameObject gun;
 
 
@@ -85,15 +86,14 @@ public class PickUpsController : MonoBehaviour
             }
             else if (silverCoin)
                 GameMaster.instance.IncreaseScore(1);
-
+            else if (stamina)
+                other.GetComponent<StaminaController>().IncreaseStamina(value);
 
             if (audioSource)                                                                     // if there is sound attacheds
                 audioSource.Play();
 
             animator.SetTrigger(collected);
-
-
-
+            
             StartCoroutine(DestroyAfterFinishAnimation());
         }
     }

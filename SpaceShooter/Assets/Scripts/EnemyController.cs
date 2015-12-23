@@ -28,30 +28,30 @@ public class EnemyController : ObjectController
 
     protected virtual void Update()
     {
-        if (isShooting)                                                    // check if enemy can shoot
-            if (GameMaster.instance.CheckIfPlayerIsAlive())                // check if player is still alive 
+        if (isShooting)                                                         // check if enemy can shoot
+            if (GameMaster.instance.CheckIfPlayerIsAlive())                     // check if player is still alive 
                 Shot();
             else
-                isShooting = false;                                        // if player is death stop shooting
+                isShooting = false;                                             // if player is death stop shooting
 
         if (isMoving)
             Move();
     }
 
 
-    public void DisplayHealthBar()                                         // Player has access to this method,  if he see anamy he will invoke method
+    public void DisplayHealthBar()                                              // Player has access to this method,  if he see anamy he will invoke method
     {
-        healthBar.DisplayBar(transform);                                   // Display visual health bar on screen
-        healthBar.UpdateBar(currentHealth, maxHealth);                     // Update health bar values
+        healthBar.DisplayBar(transform);                                        // Display visual health bar on screen
+        healthBar.UpdateBar(currentHealth, maxHealth);                          // Update health bar values
     }
 
 
-    public override void TakeDamage(int damage, Vector3 damagePosition)            // Player has access to this method, 
+    public override void TakeDamage(int damage, Vector3 damagePosition)         // Player has access to this method, 
     {
-        if (!isAlive) return;                                                      // if enemy is killed  do nothing
+        if (!isAlive) return;                                                   // if enemy is killed  do nothing
 
 
-        StartCoroutine(SwitchMaterial());                                          // switch material for while to white
+        StartCoroutine(SwitchMaterial());                                       // switch material for while to white
         ExplosionController.instance.RandomExplosionEffect(damagePosition);
 
         currentHealth -= damage;
@@ -59,6 +59,13 @@ public class EnemyController : ObjectController
 
         if (currentHealth <= 0)
             StartCoroutine(DestroyEffect());
+    }
+
+
+    public void SetShooting(bool state)                                         // GameMaster will invoke this
+    {
+        if(isAlive)                                                             // if enemy is still alive
+            isShooting = state;
     }
 
 
@@ -107,17 +114,17 @@ public class EnemyController : ObjectController
 
     protected virtual void Shot()
     {
-        for (int i = 0; i < visualWeapons.Count; i++)      // Shot from all weapons
+        for (int i = 0; i < visualWeapons.Count; i++)                            // Shot from all weapons
             visualWeapons[i].weaponScripts.Shot(false);
     }
 
 
     void SetMaterialArrays()
     {
-        meshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>();       // get all mesh renderes in objects
+        meshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>();      // get all mesh renderes in objects
 
         int size = meshRenderers.Length;
-        orginalMaterials = new Material[size];                                    // set array size
+        orginalMaterials = new Material[size];                                   // set array size
 
         for (int i = 0; i < size; i++)
             orginalMaterials[i] = meshRenderers[i].material;

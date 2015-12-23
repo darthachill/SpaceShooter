@@ -692,8 +692,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81ca7f39c36aa6f4f973304ab2d8c3ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  readyToUseClip: {fileID: 8300000, guid: e21b9a93e845b514e904c0e716a70f91, type: 3}
-  failClip: {fileID: 0}
+  readyToUseClip: {fileID: 8300000, guid: 7680863750c6666448b043baa2be9248, type: 3}
+  failClip: {fileID: 8300000, guid: 30ceec33d8d4c1e4091ee378800dd577, type: 3}
   usedClip: {fileID: 8300000, guid: 348d4db58d0f2754baa9f6ba41be1325, type: 3}
   endClip: {fileID: 8300000, guid: 4759a6c892127264980ce02cc7001591, type: 3}
   maxStamina: 100
@@ -727,13 +727,13 @@ MonoBehaviour:
   verticalMove: 10
   destroyExplosion: {fileID: 100008, guid: a93496017806b7740910df5fd946f306, type: 2}
   destroySound: {fileID: 8244484}
-  isShooting: 1
-  isMoving: 1
   visualWeapons:
   - weapon: {fileID: 163518, guid: 0b3415876a1d7114a9457765847630aa, type: 2}
     weaponSpawn: {fileID: 442006}
     weaponScripts: {fileID: 0}
   weaponLevel: 1
+  isShooting: 1
+  isMoving: 1
   weaponSpawnMain: {fileID: 442006}
   weaponSpawnLeft: {fileID: 410370}
   weaponSpawnRight: {fileID: 417548}
@@ -790,10 +790,10 @@ MonoBehaviour:
   verticalMove: -1
   destroyExplosion: {fileID: 0}
   destroySound: {fileID: 0}
-  isShooting: 1
-  isMoving: 0
   visualWeapons: []
   weaponLevel: 1
+  isShooting: 1
+  isMoving: 0
   r: 2
   t: 3
   droidPrefab: {fileID: 106166, guid: 7c7fffea69a6a714ab549e1998b028a6, type: 2}
@@ -5447,7 +5447,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: readyToUseClip
       value: 
-      objectReference: {fileID: 8300000, guid: e21b9a93e845b514e904c0e716a70f91, type: 3}
+      objectReference: {fileID: 8300000, guid: 7680863750c6666448b043baa2be9248, type: 3}
     - target: {fileID: 0}
       propertyPath: activeTime
       value: 3
@@ -5460,6 +5460,10 @@ Prefab:
       propertyPath: endClip
       value: 
       objectReference: {fileID: 8300000, guid: 4759a6c892127264980ce02cc7001591, type: 3}
+    - target: {fileID: 0}
+      propertyPath: failClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 30ceec33d8d4c1e4091ee378800dd577, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 158458}
