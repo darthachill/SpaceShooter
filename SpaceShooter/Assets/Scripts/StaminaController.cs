@@ -31,12 +31,14 @@ public abstract class StaminaController : MonoBehaviour
 
     void OnEnable()
     {
-        staminaBar = GameObject.FindWithTag("StaminaBar").GetComponent<VisualBar>();    // get reference to stamina bar that controlls bar on screen
-        GameMaster.instance.staminaController = this;                                   // set in GameMaster reference to stamina Controller
-        audioSource = staminaBar.gameObject.GetComponent<AudioSource>();                // get reference to audioSource in staminaBar object
-
         currentStamina = maxStamina;                                                    // set current stamina value to max
+
+        GameMaster.instance.staminaController = this;                                   // set in GameMaster reference to stamina Controller
+
+        staminaBar = GameObject.FindWithTag("StaminaBar").GetComponent<VisualBar>();    // get reference to stamina bar that controlls bar on screen
         staminaBar.UpdateBar(currentStamina, maxStamina);                               // update this value on bar
+
+        audioSource = staminaBar.gameObject.GetComponent<AudioSource>();                // get reference to audioSource in staminaBar object                                                      
 
         if (isIncreaseWithTime)                                                         // if IncreaseWithTime is On
             StartCoroutine(IncreaseWithTime());                                         // Run coroutine that will increase stamina with time
@@ -83,7 +85,7 @@ public abstract class StaminaController : MonoBehaviour
     public void UseSkill()
     {
 
-        if (currentStamina <= skillStamina)
+        if (currentStamina < skillStamina)
         {
             PlaySound(ref failClip);                                    // play fail sound if player hasn't enough stamina
             return;

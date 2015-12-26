@@ -6,6 +6,7 @@ using System.Collections;
 public class PickUpsController : MonoBehaviour
 {
     public int value;
+    public float activeTime;
 
     public bool recoveryPackage;
     public bool fuel;
@@ -17,6 +18,8 @@ public class PickUpsController : MonoBehaviour
     public bool silverCoin;
     public bool bulletTime;
     public bool stamina;
+    public bool speed;
+    public bool fireRate;
     public GameObject gun;
 
 
@@ -58,15 +61,7 @@ public class PickUpsController : MonoBehaviour
         {
             isCollected = true;
 
-            PlayerController playerController = other.GetComponent<PlayerController>();          // Get reference to player controller
-
-            if (recoveryPackage)
-                playerController.IncreaseHealth(value);
-            else if (fuel)
-                playerController.Refuel(value);
-            else if (ammo)
-                playerController.AddAmmo(value);
-            else if (bomb)
+            if (bomb)
                 other.GetComponent<BombController>().AddBomb(value);
             else if (shield)
                 other.GetComponent<ShieldController>().ActiveShield(value);                      // get refenence to shield Controller and active player shield
@@ -74,26 +69,42 @@ public class PickUpsController : MonoBehaviour
                 GameMaster.instance.AddStars(value);                                             // increase player score and add star
             else if (bulletTime)
                 GameMaster.instance.BulletTimeOn();                                              // change timeScale to achive bullettime effect
-            else if (gun)                                                                        // if there is any gun attached
-            {
-                playerController.ChangeWeapons(ref gun);                                         // change player weapon 
-                playerController.AddAmmo(value);                                                 // add aditional ammo
-            }
+            else if (silverCoin)
+                GameMaster.instance.IncreaseScore(1);
+            else if (stamina)
+                other.GetComponent<StaminaController>().IncreaseStamina(value);
             else if (magnet)
             {
                 other.GetComponent<MagnetController>().AddMagnet();
                 other.GetComponent<MagnetController>().UseMagnet();
             }
-            else if (silverCoin)
-                GameMaster.instance.IncreaseScore(1);
-            else if (stamina)
-                other.GetComponent<StaminaController>().IncreaseStamina(value);
+            else
+            {
+                PlayerController playerController = other.GetComponent<PlayerController>();          // Get reference to player controller
+
+                if (recoveryPackage)
+                    playerController.IncreaseHealth(value);
+                else if (fuel)
+                    playerController.Refuel(value);
+                else if (ammo)
+                    playerController.AddAmmo(value);
+                else if (fireRate)
+                    playerController.ChangeFireRate(value, activeTime);
+                else if (speed)
+                    playerController.ChangeSpeed(value, activeTime);
+                else if (gun)                                                                        // if there is any gun attached
+                {
+                    playerController.ChangeWeapons(ref gun);                                         // change player weapon 
+                    playerController.AddAmmo(value);                                                 // add aditional ammo
+                }
+            }
+
 
             if (audioSource)                                                                     // if there is sound attacheds
                 audioSource.Play();
 
             animator.SetTrigger(collected);
-            
+
             StartCoroutine(DestroyAfterFinishAnimation());
         }
     }

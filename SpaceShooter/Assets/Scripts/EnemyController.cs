@@ -29,7 +29,7 @@ public class EnemyController : ObjectController
     protected virtual void Update()
     {
         if (isShooting)                                                         // check if enemy can shoot
-            if (GameMaster.instance.CheckIfPlayerIsAlive())                     // check if player is still alive 
+            if (GameMaster.instance.IsPlayerAlive)                     // check if player is still alive 
                 Shot();
             else
                 isShooting = false;                                             // if player is death stop shooting

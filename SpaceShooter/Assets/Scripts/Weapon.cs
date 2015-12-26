@@ -34,7 +34,7 @@ public abstract class Weapon : MonoBehaviour
     protected void ShotEffects()
     {
         if (gunAudio)                                                               // if there is audio clip attached to object
-        SoundManager.instance.RandomizeSfx(ref gunAudio, ref audioSource);
+            SoundManager.instance.RandomizeSfx(ref gunAudio, ref audioSource);
 
         if (gunLight)                                                               // if there is gunLight
             gunLight.enabled = true;
@@ -44,6 +44,24 @@ public abstract class Weapon : MonoBehaviour
     }
 
 
-    public abstract bool Shot(bool controllShot);                                  // controll shot allows parent bullet to gameobject, when ship is rotate bullet rotate with him
+    public void ChangeFireRate(float IncrasePercentFireRate, float howLong)
+    {
+        StartCoroutine(IEChangeFireRate(IncrasePercentFireRate, howLong));
+    }
+
+
+    IEnumerator IEChangeFireRate(float IncrasePercentFireRate, float howLong)
+    {
+        print(timeBetweenBullets);
+        float orginalFireRate = timeBetweenBullets;
+        timeBetweenBullets /= IncrasePercentFireRate/ 100;    // increase by percent amount
+        print(timeBetweenBullets);
+        yield return new WaitForSeconds(howLong);
+        timeBetweenBullets = orginalFireRate;
+        print(timeBetweenBullets);
+    }
+
+
+    public abstract bool Shot(bool controllShot);                                   // controll shot allows parent bullet to gameobject, when ship is rotate bullet rotate with him
 
 }   // Karol Sobanski

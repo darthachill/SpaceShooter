@@ -697,7 +697,7 @@ MonoBehaviour:
   usedClip: {fileID: 8300000, guid: 348d4db58d0f2754baa9f6ba41be1325, type: 3}
   endClip: {fileID: 8300000, guid: 4759a6c892127264980ce02cc7001591, type: 3}
   maxStamina: 100
-  skillStamina: 80
+  skillStamina: 100
   staminaIncreaseSpeed: 0.5
   isIncreaseWithTime: 1
   isIncreaseWithKill: 1
@@ -722,7 +722,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b339039f44d2d444900ce718bb88eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 200
+  maxHealth: 500
   horizontalMove: 10
   verticalMove: 10
   destroyExplosion: {fileID: 100008, guid: a93496017806b7740910df5fd946f306, type: 2}
@@ -745,7 +745,7 @@ MonoBehaviour:
   isStaminaByKill: 0
   maxFuel: 75
   factorMoveWithoutFuel: 3
-  speedFallDownFuel: 6
+  speedFallDownFuel: 2
   emptyMagazineSnd: {fileID: 8256210}
   wingsTiltSnd: {fileID: 8223502}
   engineSnd: {fileID: 8232766}
@@ -5402,7 +5402,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: maxStamina
-      value: 1000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: currentStamina
@@ -5410,7 +5410,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: skillStamina
-      value: 11
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: staminaIncreaseSpeed
@@ -5464,6 +5464,14 @@ Prefab:
       propertyPath: failClip
       value: 
       objectReference: {fileID: 8300000, guid: 30ceec33d8d4c1e4091ee378800dd577, type: 3}
+    - target: {fileID: 0}
+      propertyPath: maxHealth
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: speedFallDownFuel
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 158458}

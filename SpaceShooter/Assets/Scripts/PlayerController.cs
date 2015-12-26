@@ -23,7 +23,7 @@ public class PlayerController : ObjectController
     [Tooltip("when player fuel will over, we change his movement speed by divide a factor")]
     public float factorMoveWithoutFuel = 3;
     [Tooltip("How fast player change his velocity from normal value to value without fuel")]
-    public float speedFallDownFuel = 3f;
+    public float speedFallDownFuel = 0.01f;
 
     [Header("Audio")]
     public AudioSource emptyMagazineSnd;                    // if player doesn't have ammo play empty magazine sound;
@@ -47,6 +47,7 @@ public class PlayerController : ObjectController
     private Color damageColor = new Color(255, 0, 0, 0.2f); // what color screen will have when player'll take damage
 
     // References
+    private Animator animator;
     private BombController bombController;                  // reference, controlls all bomb operations
     private SmokeController smokeController;
     private MagnetController magnetController;
@@ -70,6 +71,7 @@ public class PlayerController : ObjectController
         bombController = GetComponent<BombController>();
         magnetController = GetComponent<MagnetController>();
         // get references
+        animator = transform.FindChild("PlayerModel").GetComponent<Animator>();
         damageImage = GameObject.Find("DamageImage").GetComponent<Image>();
         enemyHealthBar = GameObject.Find("EnemyHealth").GetComponent<VisualBar>();
         ammunitionText = GameObject.Find("Ammunition").GetComponent<Text>();
@@ -81,9 +83,6 @@ public class PlayerController : ObjectController
         currentFuel = maxFuel;
         healthBar.UpdateBar(currentHealth, maxHealth);                                  // update healthBar
     }
-    //if(isStaminaByKill)
-
-
 
 
     void Update()
@@ -95,8 +94,8 @@ public class PlayerController : ObjectController
 
         if (Input.GetKeyDown(KeyCode.Escape))                      // TEST
             Application.Quit();
-        if (Input.GetKeyDown(KeyCode.Q))                           // TEST
-            TakeDamage(60, transform.position);
+        //if (Input.GetKeyDown(KeyCode.Q))                           // TEST
+        //TakeDamage(60, transform.position);
         if (Input.GetKeyDown(KeyCode.R))                           // TEST
             IncreaseHealth(50);
         if (Input.GetKeyDown(KeyCode.E))                           // Create Bombs 
@@ -107,9 +106,10 @@ public class PlayerController : ObjectController
             GameMaster.instance.GetComponent<SilverCoinSpawnController>().SpawnCoins();
         if (Input.GetKeyDown(KeyCode.H))                        //TEST
             magnetController.AddMagnet();
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.Q))
             staminaController.UseSkill();
-
+        if (Input.GetKeyDown(KeyCode.C))
+            animator.SetTrigger("Rotate");
         if (isShooting)                                            // if player is able to shot
             Shot();                                                // shot
 
@@ -129,10 +129,10 @@ public class PlayerController : ObjectController
         {
             isFuelOver = false;                                    // if fuel over was true, now ship can fly
 
-            float newHorizontal = horizontalMove * factorMoveWithoutFuel;              // change his horizontal movement speed to normal after refuel
-            float newVertical = verticalMove * factorMoveWithoutFuel;                  // change his vertical movement speed to normal after refuel
+            float newHorizontal = horizontalMove * factorMoveWithoutFuel;                // change his horizontal movement speed to normal after refuel
+            float newVertical = verticalMove * factorMoveWithoutFuel;                    // change his vertical movement speed to normal after refuel
 
-            StartCoroutine(LerpMovementChange(newHorizontal, newVertical));            // use Lerp to change velocity       
+            StartCoroutine(LerpMovementChange(newHorizontal, newVertical));              // use Lerp to change velocity       
         }
     }
 
@@ -153,6 +153,7 @@ public class PlayerController : ObjectController
     public override void TakeDamage(int damage, Vector3 damagePosition)
     {
         if (isShieldActive) return;                                                     // if shield is active don't take damage to player
+
         ExplosionController.instance.RandomExplosionEffect(damagePosition);
         currentHealth -= damage;
         StartCoroutine(DamageScreen());                                                 // show red screen
@@ -242,6 +243,19 @@ public class PlayerController : ObjectController
     }
 
 
+    public void ChangeSpeed(int increasePercent, float howLong)
+    {
+        StartCoroutine(IEChangeSpeed(increasePercent, howLong));
+    }
+
+
+    public void ChangeFireRate(float IncrasePercentFireRate, float activeTime)
+    {
+        foreach (VisualWeapon w in visualWeapons)                                     // go through all visualWeapon class
+            w.weaponScripts.ChangeFireRate(IncrasePercentFireRate, activeTime);       // set weapon script and call set new fire rate for established time
+    }
+
+
     protected override void CheckBoundry()                                            // Check if player try leave the boundy
     {
         rigidbody.position = new Vector3(                                             // set his position in boundry
@@ -299,15 +313,26 @@ public class PlayerController : ObjectController
     }
 
 
+    IEnumerator IEChangeSpeed(int percentSpeed, float howLong)
+    {
+        float orginalSpeed = horizontalMove;                                          // remember orgianl values
+        float newSpeed = orginalSpeed + orginalSpeed * percentSpeed / 100;            // new speed increased by percent value
+
+        yield return StartCoroutine(LerpMovementChange(newSpeed, newSpeed));          // set new speed for both values horizontal and vertical
+        yield return new WaitForSeconds(howLong);                                     // wait some time
+        yield return StartCoroutine(LerpMovementChange(orginalSpeed, orginalSpeed));  // set orginal speed back    
+    }
+
+
     IEnumerator LerpMovementChange(float newHorizontal, float newVertical)                  // change player ship movement  from one value to another by using lerp
     {
-        while (!Mathf.Approximately(horizontalMove, newHorizontal))                         // if  velocities aren't the same
+        while (Mathf.Abs(horizontalMove - newHorizontal) > 0.1f)                            // if  velocities aren't similar
         {
-            print(horizontalMove);
             horizontalMove = Mathf.Lerp(horizontalMove, newHorizontal, speedFallDownFuel * Time.deltaTime);
             verticalMove = Mathf.Lerp(verticalMove, newVertical, speedFallDownFuel * Time.deltaTime);
             yield return null;
         }
+        horizontalMove = newHorizontal;                                                     // to make sure that values are the same
     }
 
 
@@ -322,6 +347,7 @@ public class PlayerController : ObjectController
             yield return null;
         }
     }
+
 
     IEnumerator Death()
     {

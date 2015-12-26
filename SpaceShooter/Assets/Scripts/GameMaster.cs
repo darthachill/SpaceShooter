@@ -5,6 +5,10 @@ using System.Collections.Generic;                       // Lists
 
 public class GameMaster : MonoBehaviour
 {
+    public GameObject PlayerShipToInstatiate {get; set;}                    // player ship reference
+    public Transform PlayerShip { get; set; }
+    public bool IsPlayerAlive { get; set; }
+
     [HideInInspector]
     public bool StaminaByKill { get; set; }
 
@@ -28,6 +32,7 @@ public class GameMaster : MonoBehaviour
     public GameObject[] formations;
     public GameObject[] pickUps;
     public GameObject[] dropItems;
+    [Space(5)]
     public GameObject fuelTank;
     public GameObject ammo;
 
@@ -58,12 +63,10 @@ public class GameMaster : MonoBehaviour
 
     private int nextGoldenScore;                                  // nextGoldenScore is sum of all previous goldenScores
     private int score;                                            // how many scores player has
-    private bool IsplayerAlive;
     private const string scoreAnimation = "GoldLabel";
     private BulletTime bulletTime;                                // reference to BulletTime script
     private MedalAwardingFor medalAwardingFor;                    // reference to the medal Awarding;
     public List<Transform> objectsList = new List<Transform>();   // list to keep references to all spawned objects, it will be helpful to destroy them after player death
-    private GameObject playerShipToInstatiate;                    // player ship reference
     private Pause pause;                                          // reference to Pause script
     private bool isEnemyShooting = true;                          // flag allows or not to shoot spawning enemy
 
@@ -133,7 +136,7 @@ public class GameMaster : MonoBehaviour
         }
         StartCoroutine(SilverCoinSpawner());
 
-        while (CheckIfPlayerIsAlive())                                                        // if player will die quit the loop
+        while (IsPlayerAlive)                                                        // if player will die quit the loop
             yield return null;
     }
 
@@ -157,12 +160,6 @@ public class GameMaster : MonoBehaviour
 
         CursorController.instance.ShowCursor();                                                                       // player has possibility to move the cursor
         pause.StopPause();                                                                                            // now player can't call the pause menu
-    }
-
-
-    public void ChooseShip(GameObject newShip)                   // Button will invoke this
-    {
-        playerShipToInstatiate = newShip;
     }
 
 
@@ -194,7 +191,7 @@ public class GameMaster : MonoBehaviour
 
     public void PlayerDie()
     {
-        IsplayerAlive = false;
+        IsPlayerAlive = false;
     }
 
 
@@ -220,12 +217,6 @@ public class GameMaster : MonoBehaviour
         GameObject newDrop = Instantiate(dropItems[Random.Range(0, dropItems.Length)], spawnPoint, Quaternion.identity) as GameObject;
         objectsList.Add(newDrop.transform);                                               // add to object list new drop item
         newDrop.transform.SetParent(hierarchyGuard);
-    }
-
-
-    public bool CheckIfPlayerIsAlive()                                                    // check if player is still alive
-    {
-        return IsplayerAlive ? true : false;
     }
 
 
@@ -265,14 +256,15 @@ public class GameMaster : MonoBehaviour
 
     void SpawnPlayer()
     {
-        IsplayerAlive = true;
-        Instantiate(playerShipToInstatiate, playerSpawnSpot, Quaternion.identity);
+        IsPlayerAlive = true;
+        GameObject playerShipGO = Instantiate(PlayerShipToInstatiate, playerSpawnSpot, Quaternion.identity) as GameObject;
+        PlayerShip = playerShipGO.transform;
     }
 
 
     IEnumerator SilverCoinSpawner()
     {
-        while (IsplayerAlive)                                                                                                                   // spawn objects all the time
+        while (IsPlayerAlive)                                                                                                                   // spawn objects all the time
         {
             yield return new WaitForSeconds(silverCoinSpawnTime);
             GetComponent<SilverCoinSpawnController>().SpawnCoins();                                                                             // parent Enemy to  hierarchyGuard
@@ -282,7 +274,7 @@ public class GameMaster : MonoBehaviour
 
     IEnumerator RandomObjectSpawner(GameObject[] objectsToSpawn, Boundry objectsPosition, float objectSpawnTime)
     {
-        while (IsplayerAlive)                                                                                                                   // spawn objects all the time
+        while (IsPlayerAlive)                                                                                                                   // spawn objects all the time
         {
             yield return new WaitForSeconds(objectSpawnTime);
             GameObject randObject = objectsToSpawn[Random.Range(0, objectsToSpawn.Length)];                                                     // choose random object
@@ -296,7 +288,7 @@ public class GameMaster : MonoBehaviour
 
     IEnumerator RandomObjectSpawner(GameObject objectToSpawn, Boundry objectsPosition, float objectSpawnTime)                                   // method for only one gameobject
     {
-        while (IsplayerAlive)                                                                                                                   // spawn objects all the time
+        while (IsPlayerAlive)                                                                                                                   // spawn objects all the time
         {
             yield return new WaitForSeconds(objectSpawnTime);
             Vector3 randPosition = new Vector3(Random.Range(-objectsPosition.left, objectsPosition.right), 0, objectsPosition.up);              // choose random object position
@@ -309,7 +301,7 @@ public class GameMaster : MonoBehaviour
 
     IEnumerator RandomEnemiesSpawner(GameObject[] objectsToSpawn, Boundry objectsPosition, float objectSpawnTime)
     {
-        while (IsplayerAlive)                                                                                                                   // spawn objects all the time
+        while (IsPlayerAlive)                                                                                                                   // spawn objects all the time
         {
             yield return new WaitForSeconds(objectSpawnTime);
             GameObject randObject = objectsToSpawn[Random.Range(0, objectsToSpawn.Length)];                                                     // choose random object

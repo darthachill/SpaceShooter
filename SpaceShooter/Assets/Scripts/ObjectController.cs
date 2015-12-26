@@ -62,7 +62,7 @@ public abstract class ObjectController : MonoBehaviour
     }
 
 
-    public IEnumerator DisableShotAndMove(float howLong)  // some weapons projectiles can disable object ability to move and shoot for while
+    public IEnumerator DisableShotAndMove(float howLong)      // some weapons projectiles can disable object ability to move and shoot for while
     {
         if (!isShieldActive)                                  // if shield isn't active
         {
