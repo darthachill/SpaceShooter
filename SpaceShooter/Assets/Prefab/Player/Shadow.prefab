@@ -127,7 +127,6 @@ GameObject:
   - 82: {fileID: 8223502}
   - 82: {fileID: 8256210}
   - 82: {fileID: 8244484}
-  - 114: {fileID: 11447108}
   - 114: {fileID: 11463336}
   - 114: {fileID: 11461624}
   - 114: {fileID: 11480520}
@@ -135,6 +134,7 @@ GameObject:
   - 114: {fileID: 11428658}
   - 114: {fileID: 11487282}
   - 114: {fileID: 11459644}
+  - 114: {fileID: 11493980}
   m_Layer: 9
   m_Name: Shadow
   m_TagString: Player
@@ -652,7 +652,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spherePub: {fileID: 110052, guid: 3ed0e38a44a7ef14792dfb770e9b4ac5, type: 2}
-  magnet: {fileID: 0}
   radiusMultipler: 1
   lastingSphereTime: 5
 --- !u!114 &11445370
@@ -669,18 +668,6 @@ MonoBehaviour:
   engineSmoke: {fileID: 19801762}
   whiteSmoke: {fileID: 19836992}
   blackSmoke: {fileID: 19820706}
---- !u!114 &11447108
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 158458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94d19344d397d1940b32f1b6438089d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bomb: {fileID: 158766, guid: c9817dfc3e1c2b949a0455d0043b0aaa, type: 2}
 --- !u!114 &11459644
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -805,6 +792,19 @@ MonoBehaviour:
   - 180
   - 90
   - 270
+--- !u!114 &11493980
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d2be989e71870641aaf68cd5e7a13d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startAmount: 1
+  bomb: {fileID: 158766, guid: c9817dfc3e1c2b949a0455d0043b0aaa, type: 2}
 --- !u!135 &13537378
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -5471,6 +5471,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: speedFallDownFuel
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: startAmount
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

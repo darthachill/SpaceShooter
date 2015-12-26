@@ -17,7 +17,6 @@ public class PlayerController : ObjectController
     public bool isStaminaByTime;                            // increase stamina with time
     public bool isStaminaByKill;                            // increase stamina with killing enemies
 
-
     [Header("Fuel")]
     public int maxFuel = 100;                               // how many fuel player has
     [Tooltip("when player fuel will over, we change his movement speed by divide a factor")]
@@ -45,13 +44,15 @@ public class PlayerController : ObjectController
     private Text ammunitionText;                            // ammount of ammunition display on screen
     private Image damageImage;                              // damage image will show on screen when player take damage
     private Color damageColor = new Color(255, 0, 0, 0.2f); // what color screen will have when player'll take damage
+    private float orginalSpeed;
+    private bool isSpeedChanged;                            // flag to know that orginal player speed was change
 
     // References
     private Animator animator;
-    private BombController bombController;                  // reference, controlls all bomb operations
     private SmokeController smokeController;
     private MagnetController magnetController;
     private StaminaController staminaController;
+    private BombController bombController;
 
     private const string namePlayerHealth = "PlayerHealth";
     private const string namePlayerFuel = "PlayerFuel";
@@ -68,18 +69,20 @@ public class PlayerController : ObjectController
     {
         base.Start();
         ammunitionLeft = maxammunition;
-        bombController = GetComponent<BombController>();
-        magnetController = GetComponent<MagnetController>();
+
         // get references
+        magnetController = GetComponent<MagnetController>();
         animator = transform.FindChild("PlayerModel").GetComponent<Animator>();
         damageImage = GameObject.Find("DamageImage").GetComponent<Image>();
         enemyHealthBar = GameObject.Find("EnemyHealth").GetComponent<VisualBar>();
         ammunitionText = GameObject.Find("Ammunition").GetComponent<Text>();
         smokeController = GetComponent<SmokeController>();
         staminaController = GetComponent<StaminaController>();
+        bombController = GetComponent<BombController>();
 
         ammunitionText.text = ammunitionLeft.ToString();
         enemyLayer = LayerMask.GetMask("Enemy");                                        // Get enemy mask
+        orginalSpeed = horizontalMove;                                                  // remember orginal speed because some method can change it
         currentFuel = maxFuel;
         healthBar.UpdateBar(currentHealth, maxHealth);                                  // update healthBar
     }
@@ -94,18 +97,14 @@ public class PlayerController : ObjectController
 
         if (Input.GetKeyDown(KeyCode.Escape))                      // TEST
             Application.Quit();
-        //if (Input.GetKeyDown(KeyCode.Q))                           // TEST
-        //TakeDamage(60, transform.position);
+        if (Input.GetKeyDown(KeyCode.E))                           // TEST
+            bombController.UseBomb();
         if (Input.GetKeyDown(KeyCode.R))                           // TEST
             IncreaseHealth(50);
-        if (Input.GetKeyDown(KeyCode.E))                           // Create Bombs 
-            bombController.CreateBoombs();
         if (Input.GetKeyDown(KeyCode.F))
             magnetController.UseMagnet();
         if (Input.GetKeyDown(KeyCode.O))                        //TEST
             GameMaster.instance.GetComponent<SilverCoinSpawnController>().SpawnCoins();
-        if (Input.GetKeyDown(KeyCode.H))                        //TEST
-            magnetController.AddMagnet();
         if (Input.GetKeyDown(KeyCode.Q))
             staminaController.UseSkill();
         if (Input.GetKeyDown(KeyCode.C))
@@ -243,16 +242,24 @@ public class PlayerController : ObjectController
     }
 
 
-    public void ChangeSpeed(int increasePercent, float howLong)
+    public void ChangeSpeed(int increasePercent, float activeTime)
     {
-        StartCoroutine(IEChangeSpeed(increasePercent, howLong));
+        if(isSpeedChanged)
+        {
+            StopCoroutine("IEChangeSpeed");
+               horizontalMove = verticalMove = orginalSpeed;  // set orginal speed
+        }
+        PickUpGUIController.instance.ActiveForWhile(PickUpGUIController.instance.speed, activeTime);
+        StartCoroutine(IEChangeSpeed(increasePercent, activeTime));
     }
 
 
     public void ChangeFireRate(float IncrasePercentFireRate, float activeTime)
     {
-        foreach (VisualWeapon w in visualWeapons)                                     // go through all visualWeapon class
-            w.weaponScripts.ChangeFireRate(IncrasePercentFireRate, activeTime);       // set weapon script and call set new fire rate for established time
+        PickUpGUIController.instance.ActiveForWhile(PickUpGUIController.instance.fireRate, activeTime);    // active HUD Icone
+
+        foreach (VisualWeapon w in visualWeapons)                                                          // go through all visualWeapon class
+            w.weaponScripts.ChangeFireRate(IncrasePercentFireRate, activeTime);                            // set weapon script and call set new fire rate for established time
     }
 
 
@@ -315,12 +322,15 @@ public class PlayerController : ObjectController
 
     IEnumerator IEChangeSpeed(int percentSpeed, float howLong)
     {
-        float orginalSpeed = horizontalMove;                                          // remember orgianl values
+        isSpeedChanged = true;
         float newSpeed = orginalSpeed + orginalSpeed * percentSpeed / 100;            // new speed increased by percent value
 
         yield return StartCoroutine(LerpMovementChange(newSpeed, newSpeed));          // set new speed for both values horizontal and vertical
+
         yield return new WaitForSeconds(howLong);                                     // wait some time
-        yield return StartCoroutine(LerpMovementChange(orginalSpeed, orginalSpeed));  // set orginal speed back    
+
+        yield return StartCoroutine(LerpMovementChange(orginalSpeed, orginalSpeed));  // set orginal speed back  
+        isSpeedChanged = false;
     }
 
 

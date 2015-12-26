@@ -14,6 +14,8 @@ public abstract class Weapon : MonoBehaviour
     protected Light gunLight;
 
     private AudioSource audioSource;
+    private bool isFireRateIncreased;                               // prevents to increase many firerate many time in while
+    private float orginalFireRate;
 
 
 
@@ -28,6 +30,7 @@ public abstract class Weapon : MonoBehaviour
         audioSource = GetComponent<AudioSource>();                                   // get reference to AudioSource
         gunParticle = bulletSpawn.GetComponent<ParticleSystem>();                    // get reference to ParticleSystem
         gunLight = bulletSpawn.GetComponent<Light>();                                // get reference to Light
+        orginalFireRate = timeBetweenBullets;                                        // re
     }
 
 
@@ -46,19 +49,26 @@ public abstract class Weapon : MonoBehaviour
 
     public void ChangeFireRate(float IncrasePercentFireRate, float howLong)
     {
+        if (isFireRateIncreased)                                                      // if corutine is already play
+        {
+            StopCoroutine("IEChangeFireRate");                                        // stop it 
+            timeBetweenBullets = orginalFireRate;                                     // and set orginal value
+        }
+
         StartCoroutine(IEChangeFireRate(IncrasePercentFireRate, howLong));
     }
 
 
     IEnumerator IEChangeFireRate(float IncrasePercentFireRate, float howLong)
     {
-        print(timeBetweenBullets);
-        float orginalFireRate = timeBetweenBullets;
-        timeBetweenBullets /= IncrasePercentFireRate/ 100;    // increase by percent amount
-        print(timeBetweenBullets);
+        isFireRateIncreased = true;
+
+        timeBetweenBullets /= IncrasePercentFireRate / 100;    // increase by percent amount
+
         yield return new WaitForSeconds(howLong);
+
         timeBetweenBullets = orginalFireRate;
-        print(timeBetweenBullets);
+        isFireRateIncreased = false;
     }
 
 

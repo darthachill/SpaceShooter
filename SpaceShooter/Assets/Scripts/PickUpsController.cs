@@ -74,10 +74,7 @@ public class PickUpsController : MonoBehaviour
             else if (stamina)
                 other.GetComponent<StaminaController>().IncreaseStamina(value);
             else if (magnet)
-            {
-                other.GetComponent<MagnetController>().AddMagnet();
                 other.GetComponent<MagnetController>().UseMagnet();
-            }
             else
             {
                 PlayerController playerController = other.GetComponent<PlayerController>();          // Get reference to player controller
@@ -113,6 +110,7 @@ public class PickUpsController : MonoBehaviour
     IEnumerator DestroyAfterFinishAnimation()
     {
         yield return new WaitForEndOfFrame();
+
         float animationLength = animator.GetCurrentAnimatorStateInfo(0).length;
 
         Destroy(gameObject, animationLength);

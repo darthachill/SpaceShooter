@@ -1,54 +1,48 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
 
 public class BombController : MonoBehaviour
 {
-
+    [Tooltip("How many bombs player has when he starts game")]
+    public int startAmount = 1;
     public GameObject bomb;
-    
-    private int maxBombs = 3;                      // how many bombs player can has
-    private int currentBombs = 1;                  // current bomb, that player have after start a game
-    private BombGUI[] bombsGUIController;          // boombs controller on GUI controls  image display and animations
 
+
+    private int currentBombs;
 
 
     void Start()
     {
-        bombsGUIController = new BombGUI[maxBombs];
-        FindBombImages();
+        currentBombs = startAmount;                                                                       // asign start bombs value to current value
 
-        for (int i = 0; i < currentBombs; i++)
-            bombsGUIController[i].BombCollected();           // Display bombs on GUI after start a game   
-    }
+        if (currentBombs > 0)                                                                             // if player  has any bomb
+            PickUpGUIController.instance.Active(PickUpGUIController.instance.bombs);                      // light bomb on HUD
 
-
-    void FindBombImages()
-    {
-        for (int i = 0; i < maxBombs; i++)
-            bombsGUIController[i] = GameObject.Find("Bomb" + i).GetComponent<BombGUI>();
-    }
-
-
-    public void CreateBoombs()
-    {
-        if (currentBombs > 0)          // if player have any boomb
-        {
-            GameObject newBomb = Instantiate(bomb, transform.position, Quaternion.identity) as GameObject;    // Create bomb on map
-            newBomb.transform.SetParent(GameMaster.instance.hierarchyGuard);                                  // parent do guardhierarchy
-            bombsGUIController[currentBombs - 1].BombUsed();                                                  // create bomb on GUI
-            currentBombs--;
-        }
+        PickUpGUIController.instance.UpdateBombsText(currentBombs);                                       // update amount of bombs on HUD
     }
 
 
     public void AddBomb(int newBomb)
     {
-        currentBombs += newBomb;
+        if (currentBombs == 0)                                                                            // if player already hasn't any bomb
+            PickUpGUIController.instance.Active(PickUpGUIController.instance.bombs);                      // light bomb on HUD
 
-        if (currentBombs > maxBombs)                            // check if player has more bomb that he should
-            currentBombs = maxBombs;
-
-        bombsGUIController[currentBombs - 1].BombCollected();   // show bomb on screen
+        currentBombs += newBomb;                                                                          // add new bomb
+        PickUpGUIController.instance.UpdateBombsText(currentBombs);                                       // update amount of bombs on HUD
     }
-}   // Karol Sobanski
+
+
+    public void UseBomb()
+    {
+        if (currentBombs == 0) return;                                                                    // if player hasn't any bomb - do nothing  
+
+        if (currentBombs == 1)                                                                            // if it was last bomb
+            PickUpGUIController.instance.Inactive(PickUpGUIController.instance.bombs);                    // light off bomb icone
+
+        GameObject newBomb = Instantiate(bomb, transform.position, Quaternion.identity) as GameObject;    // Create bomb on map
+        newBomb.transform.SetParent(GameMaster.instance.hierarchyGuard);                                  // parent do guardhierarchy
+
+        currentBombs--;                                                                                   // subtract bomb
+        PickUpGUIController.instance.UpdateBombsText(currentBombs);                                       // update amount of bombs on HUD
+    }
+}   // Karol Sobański

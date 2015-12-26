@@ -24,6 +24,8 @@ public class ShieldController : MonoBehaviour
 
     public void ActiveShield(int howLong)
     {
+        PickUpGUIController.instance.ActiveForWhile(PickUpGUIController.instance.shield, howLong);   // light icone on HUD
+
         currentShieldTime = howLong;                           // set current shield time
         maxShieldTime = howLong;                               // set max shield time
         playerShield.SetActive(true);                          // turn on shield

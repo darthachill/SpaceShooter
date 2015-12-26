@@ -113,7 +113,6 @@ GameObject:
   - 82: {fileID: 8244040}
   - 82: {fileID: 8299562}
   - 82: {fileID: 8205608}
-  - 114: {fileID: 11485140}
   - 114: {fileID: 11477098}
   - 114: {fileID: 11451418}
   - 114: {fileID: 11483658}
@@ -795,10 +794,10 @@ MonoBehaviour:
   verticalMove: -1
   destroyExplosion: {fileID: 0}
   destroySound: {fileID: 0}
-  isShooting: 1
-  isMoving: 0
   visualWeapons: []
   weaponLevel: 1
+  isShooting: 1
+  isMoving: 0
   r: 2
   t: 3
   droidPrefab: {fileID: 106166, guid: 7c7fffea69a6a714ab549e1998b028a6, type: 2}
@@ -826,13 +825,13 @@ MonoBehaviour:
   verticalMove: 10
   destroyExplosion: {fileID: 100008, guid: a93496017806b7740910df5fd946f306, type: 2}
   destroySound: {fileID: 8205608}
-  isShooting: 1
-  isMoving: 1
   visualWeapons:
   - weapon: {fileID: 163518, guid: 0b3415876a1d7114a9457765847630aa, type: 2}
     weaponSpawn: {fileID: 405178}
     weaponScripts: {fileID: 0}
   weaponLevel: 1
+  isShooting: 1
+  isMoving: 1
   weaponSpawnMain: {fileID: 405178}
   weaponSpawnLeft: {fileID: 428476}
   weaponSpawnRight: {fileID: 477774}
@@ -887,18 +886,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c2f95feb89c1a54f934a3a0b48855f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11485140
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 147344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94d19344d397d1940b32f1b6438089d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bomb: {fileID: 158766, guid: c9817dfc3e1c2b949a0455d0043b0aaa, type: 2}
 --- !u!135 &13569790
 SphereCollider:
   m_ObjectHideFlags: 1

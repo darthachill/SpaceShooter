@@ -15,7 +15,6 @@ public class uGUITools : MonoBehaviour
                                             t.anchorMin.y + t.offsetMin.y / pt.rect.height);
         Vector2 newAnchorsMax = new Vector2(t.anchorMax.x + t.offsetMax.x / pt.rect.width,
                                             t.anchorMax.y + t.offsetMax.y / pt.rect.height);
-        print("dsdsd");
         t.anchorMin = newAnchorsMin;
         t.anchorMax = newAnchorsMax;
         t.offsetMin = t.offsetMax = new Vector2(0, 0);

@@ -16,6 +16,7 @@ public class BulletTime : MonoBehaviour                                      // 
 
     public IEnumerator TurnOnBulletTime()                                             // PickUpController has access to this method
     {
+        PickUpGUIController.instance.ActiveForWhile(PickUpGUIController.instance.bulletTime, bulletTime);   // light icone on screen
         Time.timeScale = timeScale;                                                   // change  timeScale to new lower timeScale
         Time.fixedDeltaTime = 0.02f * Time.timeScale;                                 // If you lower timeScale it is recommended to also lower Time.fixedDeltaTime by the same amount.
 
