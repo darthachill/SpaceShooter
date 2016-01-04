@@ -366,8 +366,16 @@ public class PlayerController : ObjectController
 
         gameObject.GetComponent<SphereCollider>().enabled = false;                           // disenabled collider
         transform.FindChild("PlayerModel").transform.gameObject.SetActive(false);            // hide player model;
-        //transform.FindChild("MagnetingSphere").transform.gameObject.SetActive(false);      // NAPRAWIĆ
-        //transform.FindChild("MagnetingSphereClone").transform.gameObject.SetActive(false); // NAPRAWIĆ
+        if (transform.FindChild("MagnetingSphere"))
+        {
+            transform.FindChild("MagnetingSphere").transform.gameObject.SetActive(false);
+        }
+        if (transform.FindChild("MagnetingSphereClone"))
+        {
+            transform.FindChild("MagnetingSphereClone").transform.gameObject.SetActive(false);
+        }
+        gameObject.GetComponent<CirculatingDroidController>().DestroyAllDroids();
+
         Instantiate(destroyExplosion, transform.position, Quaternion.identity);
 
         destroySound.Play();
