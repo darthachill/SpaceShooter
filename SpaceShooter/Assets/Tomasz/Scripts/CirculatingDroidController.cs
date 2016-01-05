@@ -61,13 +61,23 @@ public class CirculatingDroidController : ObjectController
     }
 
 
+  public  void DestroyAllDroids()
+    {
+        foreach (GameObject droid in Droids)
+        {
+            Destroy(droid);
+        }
+        Droids.Clear();
+    }
+    
+
     void Update()
     {
 
 
         foreach (GameObject droid in Droids)
         {
-            droid.transform.RotateAround(transform.position, Vector3.up, 360 * Time.deltaTime / t);
+            droid.transform.RotateAround(transform.position, transform.up, 360 * Time.deltaTime / t);
         }
 
         opponentTransform = findClosestOponent();
