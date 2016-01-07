@@ -1382,7 +1382,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -1493,8 +1493,6 @@ MonoBehaviour:
   verticalMove: -3
   destroyExplosion: {fileID: 183240, guid: a74b8eac27f2a214f9034305f1106c0c, type: 2}
   destroySound: {fileID: 8263204}
-  isShooting: 1
-  isMoving: 1
   visualWeapons:
   - weapon: {fileID: 158324, guid: bc33b0779d2ffd4458e68f0d2e227434, type: 2}
     weaponSpawn: {fileID: 420118}
@@ -1503,6 +1501,8 @@ MonoBehaviour:
     weaponSpawn: {fileID: 456294}
     weaponScripts: {fileID: 0}
   weaponLevel: 1
+  isShooting: 1
+  isMoving: 1
   pointForKill: 40
   white: {fileID: 2100000, guid: a2b28c37441690a45868b2c821b22cde, type: 2}
   isTakingCollisionDamage: 0
@@ -4624,6 +4624,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spreadCustomCurve.m_RotationOrder
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

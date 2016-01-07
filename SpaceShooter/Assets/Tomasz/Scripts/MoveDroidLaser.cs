@@ -22,10 +22,7 @@ public class MoveDroidLaser : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         rigidbody = GetComponent<Rigidbody>();
-
-        if (target)
-        {
+        
            rigidbody.velocity = transform.forward * moveSpeed * Time.deltaTime;
-        }
     }
 }

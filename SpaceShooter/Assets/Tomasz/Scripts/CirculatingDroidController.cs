@@ -90,6 +90,9 @@ public class CirculatingDroidController : ObjectController
 
                 foreach (GameObject droid in Droids)
                 {
+                    droid.transform.GetChild(0).localPosition = Vector3.forward / 2 ;
+                    droid.transform.LookAt(opponentTransform);
+                   
                     droid.GetComponent<SlowWeapon>().bullet.GetComponent<MoveDroidLaser>().target = opponentTransform;
                     droid.GetComponent<SlowWeapon>().Shot(false);
                 }

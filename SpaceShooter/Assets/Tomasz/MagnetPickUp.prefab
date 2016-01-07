@@ -270,7 +270,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -311,6 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 1
+  activeTime: 0
   recoveryPackage: 0
   fuel: 0
   ammo: 0
@@ -320,6 +321,9 @@ MonoBehaviour:
   magnet: 1
   silverCoin: 0
   bulletTime: 0
+  stamina: 0
+  speed: 0
+  fireRate: 0
   gun: {fileID: 0}
 --- !u!198 &19859422
 ParticleSystem:
@@ -6469,6 +6473,10 @@ Prefab:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 973272561b1fa0c40b8a883bedf6c669, type: 3}
+    - target: {fileID: 0}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 120664}
