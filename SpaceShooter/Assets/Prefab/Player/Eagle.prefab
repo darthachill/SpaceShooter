@@ -722,9 +722,9 @@ MonoBehaviour:
   isMoving: 0
   r: 2
   t: 3
-  droidPrefab: {fileID: 106166, guid: 7c7fffea69a6a714ab549e1998b028a6, type: 2}
+  droidPrefab: {fileID: 161418, guid: 34115a1b9355d2142a33e4328bdb7a80, type: 2}
   Droids: []
-  droidCount: 0
+  droidCount: 1
   maxDroids: 4
   droidSpawnAngles:
   - 0
@@ -5526,7 +5526,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: droidPrefab
       value: 
-      objectReference: {fileID: 106166, guid: 7c7fffea69a6a714ab549e1998b028a6, type: 2}
+      objectReference: {fileID: 161418, guid: 34115a1b9355d2142a33e4328bdb7a80, type: 2}
     - target: {fileID: 0}
       propertyPath: r
       value: 2
@@ -5562,6 +5562,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: lastingSphereTime
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: droidCount
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

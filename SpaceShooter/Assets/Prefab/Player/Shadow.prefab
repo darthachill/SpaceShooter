@@ -866,6 +866,7 @@ MonoBehaviour:
   weaponLevel: 1
   isShooting: 1
   isMoving: 1
+  white: {fileID: 0}
   weaponSpawnMain: {fileID: 442006}
   weaponSpawnLeft: {fileID: 410370}
   weaponSpawnRight: {fileID: 417548}
@@ -917,17 +918,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeeadc126171dc546805adb1f5e18491, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  horizontalMove: 0
-  verticalMove: -1
-  destroyExplosion: {fileID: 0}
-  visualWeapons: []
-  weaponLevel: 1
-  isShooting: 1
-  isMoving: 0
   r: 2
   t: 3
-  droidPrefab: {fileID: 106166, guid: 7c7fffea69a6a714ab549e1998b028a6, type: 2}
+  droidPrefab: {fileID: 161418, guid: 34115a1b9355d2142a33e4328bdb7a80, type: 2}
   Droids: []
   droidCount: 0
   maxDroids: 3
@@ -936,6 +929,8 @@ MonoBehaviour:
   - 180
   - 90
   - 270
+  opponentTransform: {fileID: 0}
+  circulatingSphere: {fileID: 0}
 --- !u!114 &11493980
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5543,7 +5538,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: droidPrefab
       value: 
-      objectReference: {fileID: 106166, guid: 7c7fffea69a6a714ab549e1998b028a6, type: 2}
+      objectReference: {fileID: 161418, guid: 34115a1b9355d2142a33e4328bdb7a80, type: 2}
     - target: {fileID: 0}
       propertyPath: r
       value: 2
@@ -5636,6 +5631,10 @@ Prefab:
       propertyPath: visualWeapons.Array.data[0].weapon
       value: 
       objectReference: {fileID: 172006, guid: 5169190d9bbc0fa4b8d708d59ad51faa, type: 2}
+    - target: {fileID: 0}
+      propertyPath: droidCount
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 158458}
