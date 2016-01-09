@@ -20,7 +20,7 @@ public class SmokeController : MonoBehaviour
     }
 
 
-    public void UpdateSmoke(int currentValue, int maxValue)
+    public void UpdateSmoke(float currentValue, int maxValue)
     {
         float percente = currentValue / (float)maxValue;        // calculate percente
 

@@ -12,25 +12,30 @@ public abstract class Weapon : MonoBehaviour
     protected float timeToShot;                                     // time to next shot
     protected ParticleSystem gunParticle;
     protected Light gunLight;
+    protected AudioSource audioSource;
 
-    private AudioSource audioSource;
+
     private bool isFireRateIncreased;                               // prevents to increase many firerate many time in while
     private float orginalFireRate;
 
-
-
+    
     protected virtual void Update()
     {
         timeToShot += Time.deltaTime;                               // update time to next shot
     }
 
 
-    protected virtual void Start()
+    void Awake()
     {
         audioSource = GetComponent<AudioSource>();                                   // get reference to AudioSource
+    }
+
+
+    protected virtual void Start()
+    {
         gunParticle = bulletSpawn.GetComponent<ParticleSystem>();                    // get reference to ParticleSystem
         gunLight = bulletSpawn.GetComponent<Light>();                                // get reference to Light
-        orginalFireRate = timeBetweenBullets;                                        // re
+        orginalFireRate = timeBetweenBullets;                                        
     }
 
 

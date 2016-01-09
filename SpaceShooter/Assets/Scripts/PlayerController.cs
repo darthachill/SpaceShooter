@@ -113,7 +113,6 @@ public class PlayerController : ObjectController
             Shot();                                                // shot
 
         if (isMoving) Move();                                      // if player is able to move, move his ship
-
     }
 
 
@@ -149,7 +148,7 @@ public class PlayerController : ObjectController
     }
 
 
-    public override void TakeDamage(int damage, Vector3 damagePosition)
+    public override void TakeDamage(float damage, Vector3 damagePosition)
     {
         if (isShieldActive) return;                                                     // if shield is active don't take damage to player
 
@@ -378,7 +377,6 @@ public class PlayerController : ObjectController
 
         Instantiate(destroyExplosion, transform.position, Quaternion.identity);
 
-        destroySound.Play();
         GameMaster.instance.PlayerDie();
         enemyHealthBar.HideBar();
         Destroy(gameObject, 1);
@@ -415,4 +413,9 @@ public class PlayerController : ObjectController
             isAmmoOver = true;                                                                 // there is no ammo in magazine so player can't shot
     }
 
+
+    public override void IEConstandDamageByTimeAdditional()
+    {
+        throw new System.NotImplementedException();
+    }
 }   // Karol Sobański

@@ -312,7 +312,6 @@ public class GameMaster : MonoBehaviour
 
             if (!isEnemyShooting)                                                                                                               // if flag means that enemy shouldn't shoot
                 newObject.GetComponent<EnemyController>().SetShooting(false);                                                                   // enemy after spawn won't be eable to shoot
-
         }
     }
 

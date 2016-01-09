@@ -61,7 +61,7 @@ public class CirculatingDroidController : ObjectController
     }
 
 
-  public  void DestroyAllDroids()
+    public void DestroyAllDroids()
     {
         foreach (GameObject droid in Droids)
         {
@@ -69,7 +69,7 @@ public class CirculatingDroidController : ObjectController
         }
         Droids.Clear();
     }
-    
+
 
     void Update()
     {
@@ -104,7 +104,7 @@ public class CirculatingDroidController : ObjectController
     }
 
 
-    public override void TakeDamage(int damage, Vector3 damagePosition)
+    public override void TakeDamage(float damage, Vector3 damagePosition)
     {
         throw new NotImplementedException();
     }
@@ -115,4 +115,9 @@ public class CirculatingDroidController : ObjectController
         throw new NotImplementedException();
     }
 
+
+    public override void IEConstandDamageByTimeAdditional()
+    {
+        throw new NotImplementedException();
+    }
 }

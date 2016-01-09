@@ -39,18 +39,17 @@ public class Mine : EnemyController
         Collider[] colliders = Physics.OverlapSphere(transform.position, detectRange, detectLayer);
 
         if (colliders.Length > 0)
-            StartCoroutine(DestroyEffect());
+            StartCoroutine(MineDestroyEffect());
     }
 
 
-    protected override IEnumerator DestroyEffect()
+    IEnumerator MineDestroyEffect()
     {
         isAlive = false;
 
         mineDetectorAudio.Play();
         yield return new WaitForSeconds(mineDetectorAudio.clip.length);
 
-        base.DestroyEffect();
         Explose();
     }
 

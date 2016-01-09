@@ -39,8 +39,7 @@ public class FastWeapon : Weapon
         gunLine.enabled = false;
         gunLight.enabled = false;
     }
-
-
+    
 
     public override bool Shot(bool controllShot)
     {

@@ -9,10 +9,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 54: {fileID: 5400000}
-  - 82: {fileID: 8226110}
   - 136: {fileID: 13628046}
-  - 114: {fileID: 11454750}
   - 114: {fileID: 11464956}
+  - 114: {fileID: 11454750}
   m_Layer: 8
   m_Name: Done_Asteroid 01
   m_TagString: Enemy
@@ -83,7 +82,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
@@ -110,77 +109,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!82 &8226110
-AudioSource:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24366210, guid: 313991fdd3b7f274f8b5dfe6de6cdbc3,
-    type: 2}
-  m_audioClip: {fileID: 8300000, guid: ae397c945e6759d488ea9d71b0470e25, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
 --- !u!114 &11454750
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -196,11 +124,10 @@ MonoBehaviour:
   horizontalMove: 0
   verticalMove: -7
   destroyExplosion: {fileID: 100004, guid: 2857e183f4cd3df4e9096e5b578bd32f, type: 2}
-  destroySound: {fileID: 8226110}
-  isShooting: 1
-  isMoving: 1
   visualWeapons: []
   weaponLevel: 1
+  isShooting: 1
+  isMoving: 1
   pointForKill: 20
   white: {fileID: 2100000, guid: a2b28c37441690a45868b2c821b22cde, type: 2}
   isTakingCollisionDamage: 1
@@ -226,7 +153,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: .514508367
+  m_Radius: 0.51450837
   m_Height: 1.503492
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -252,7 +179,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: destroySound
       value: 
-      objectReference: {fileID: 8226110}
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: OutputAudioMixerGroup
       value: 
@@ -289,6 +216,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: panLevelCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

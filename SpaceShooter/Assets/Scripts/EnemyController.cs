@@ -5,16 +5,8 @@ using System.Collections;
 public class EnemyController : ObjectController
 {
     public int pointForKill;                          // points for player
-    [HideInInspector]
-    public Material white;
     public bool isTakingCollisionDamage;              // take damage with colider with player
     public int DamageByCollision;                     // how many damage player will take with collision
-
-    // object take damage to player when hit
-    [Tooltip("How many frames object will change his material to white after taking damage")]
-    private float whiteFrames = 2;
-    private MeshRenderer[] meshRenderers;             // all renderer in model will be change to white color after taking damage
-    private Material[] orginalMaterials;
 
 
     protected override void Start()
@@ -29,7 +21,7 @@ public class EnemyController : ObjectController
     protected virtual void Update()
     {
         if (isShooting)                                                         // check if enemy can shoot
-            if (GameMaster.instance.IsPlayerAlive)                     // check if player is still alive 
+            if (GameMaster.instance.IsPlayerAlive)                              // check if player is still alive 
                 Shot();
             else
                 isShooting = false;                                             // if player is death stop shooting
@@ -41,12 +33,12 @@ public class EnemyController : ObjectController
 
     public void DisplayHealthBar()                                              // Player has access to this method,  if he see anamy he will invoke method
     {
-        healthBar.DisplayBar(transform);                                        // Display visual health bar on screen
+        healthBar.DisplayBar(transform);                                        // Display visual health bar on screen attatch to enemy
         healthBar.UpdateBar(currentHealth, maxHealth);                          // Update health bar values
     }
 
 
-    public override void TakeDamage(int damage, Vector3 damagePosition)         // Player has access to this method, 
+    public override void TakeDamage(float damage, Vector3 damagePosition)         // Player has access to this method, 
     {
         if (!isAlive) return;                                                   // if enemy is killed  do nothing
 
@@ -55,43 +47,29 @@ public class EnemyController : ObjectController
         ExplosionController.instance.RandomExplosionEffect(damagePosition);
 
         currentHealth -= damage;
+
         healthBar.UpdateBar(currentHealth, maxHealth);
 
         if (currentHealth <= 0)
-            StartCoroutine(DestroyEffect());
+            DestroyEffect();
     }
 
 
     public void SetShooting(bool state)                                         // GameMaster will invoke this
     {
-        if(isAlive)                                                             // if enemy is still alive
+        if (isAlive)                                                             // if enemy is still alive
             isShooting = state;
     }
 
 
-    protected override IEnumerator DestroyEffect()
+    protected override void DestroyEffect()
     {
-        for (int i = 0; i < meshRenderers.Length; i++)                          // disable all meshh renderers
-            if (meshRenderers[i])
-                meshRenderers[i].enabled = false;
-
         isAlive = false;
-
-        GetComponent<Collider>().enabled = false;                               // disable colliders
-
-        ParticleSystem[] particles = GetComponentsInChildren<ParticleSystem>(); // get  all particles in children
-
-        foreach (ParticleSystem particle in particles)                          // disable all particle system
-            particle.Stop();
-
-        isShooting = false;                                                     // disable moving
-        isMoving = false;                                                       // disable shooting
 
         GameMaster.instance.DropRandomItem(transform.position);                 // choose random item to drop
         GameMaster.instance.AddKilledEnemy(pointForKill);                       // Add Killed enemy to stats and send points for him
 
-        yield return StartCoroutine(base.DestroyEffect());                      // play musics and particle effects
-
+        base.DestroyEffect();
         Death();
     }
 
@@ -119,33 +97,6 @@ public class EnemyController : ObjectController
     }
 
 
-    void SetMaterialArrays()
-    {
-        meshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>();      // get all mesh renderes in objects
-
-        int size = meshRenderers.Length;
-        orginalMaterials = new Material[size];                                   // set array size
-
-        for (int i = 0; i < size; i++)
-            orginalMaterials[i] = meshRenderers[i].material;
-    }
-
-
-    IEnumerator SwitchMaterial()
-    {
-        for (int i = 0; i < meshRenderers.Length; i++)
-            if (meshRenderers[i])
-                meshRenderers[i].material = white;
-
-        for (int i = 0; i < whiteFrames; i++)                                     // wait whiteFrames before change material again
-            yield return null;
-
-        for (int i = 0; i < meshRenderers.Length; i++)
-            if (meshRenderers[i])
-                meshRenderers[i].material = orginalMaterials[i];
-    }
-
-
     void OnTriggerEnter(Collider other)
     {
         if (other.tag.Equals("Player") && isTakingCollisionDamage)
@@ -155,6 +106,24 @@ public class EnemyController : ObjectController
         }
     }
 
+
+    public override void ConstantDamageByTime(float damage)                         // ConstantWeapon'll invoke this
+    {
+        base.ConstantDamageByTime(damage);
+    }
+
+
+    public override void InterruptConstantDamage()                                  // ConstantWeapon'll invoke this
+    {
+        healthBar.HideBar();                                                        // hide healthbar;
+        base.InterruptConstantDamage();
+    }
+
+
+    public override void IEConstandDamageByTimeAdditional()
+    {
+        DisplayHealthBar();                                                         // display healthbar when  object is taking damage
+    }
 }   // Karol Sobanski
 
 

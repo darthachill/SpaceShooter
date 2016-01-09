@@ -6,6 +6,7 @@ public class SlowWeapon : Weapon
 {
     public GameObject bullet;                                                             // bullet tkat takes damage to object
 
+
     public override bool Shot(bool controllShot)
     {
         if (timeToShot > timeBetweenBullets && Time.timeScale != 0)                       // if player press button, time to next shot left, pause is off)

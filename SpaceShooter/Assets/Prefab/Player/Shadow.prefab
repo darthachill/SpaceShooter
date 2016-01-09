@@ -142,7 +142,6 @@ GameObject:
   - 82: {fileID: 8232766}
   - 82: {fileID: 8223502}
   - 82: {fileID: 8256210}
-  - 82: {fileID: 8244484}
   - 114: {fileID: 11463336}
   - 114: {fileID: 11461624}
   - 114: {fileID: 11480520}
@@ -633,81 +632,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!82 &8244484
-AudioSource:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 158458}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24398924, guid: 313991fdd3b7f274f8b5dfe6de6cdbc3,
-    type: 2}
-  m_audioClip: {fileID: 8300000, guid: 9e2f88744ee646d498e539c14f16c1a1, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
 --- !u!82 &8256210
 AudioSource:
   m_ObjectHideFlags: 1
@@ -935,9 +859,8 @@ MonoBehaviour:
   horizontalMove: 10
   verticalMove: 10
   destroyExplosion: {fileID: 100008, guid: a93496017806b7740910df5fd946f306, type: 2}
-  destroySound: {fileID: 8244484}
   visualWeapons:
-  - weapon: {fileID: 163518, guid: 0b3415876a1d7114a9457765847630aa, type: 2}
+  - weapon: {fileID: 172006, guid: 5169190d9bbc0fa4b8d708d59ad51faa, type: 2}
     weaponSpawn: {fileID: 442006}
     weaponScripts: {fileID: 0}
   weaponLevel: 1
@@ -998,7 +921,6 @@ MonoBehaviour:
   horizontalMove: 0
   verticalMove: -1
   destroyExplosion: {fileID: 0}
-  destroySound: {fileID: 0}
   visualWeapons: []
   weaponLevel: 1
   isShooting: 1
@@ -5710,6 +5632,10 @@ Prefab:
       propertyPath: startAmount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: visualWeapons.Array.data[0].weapon
+      value: 
+      objectReference: {fileID: 172006, guid: 5169190d9bbc0fa4b8d708d59ad51faa, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 158458}

@@ -77,7 +77,6 @@ GameObject:
   - 4: {fileID: 446756}
   - 65: {fileID: 6550984}
   - 54: {fileID: 5407306}
-  - 82: {fileID: 8263204}
   - 114: {fileID: 11436294}
   m_Layer: 8
   m_Name: Jet
@@ -1319,81 +1318,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.21, y: 1.79, z: 1.3}
   m_Center: {x: 0, y: 0, z: 0.07}
---- !u!82 &8263204
-AudioSource:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 128844}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24398924, guid: 313991fdd3b7f274f8b5dfe6de6cdbc3,
-    type: 2}
-  m_audioClip: {fileID: 8300000, guid: 4c26e4e1ea8b9aa4890b20c5311105f7, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
 --- !u!95 &9570928
 Animator:
   serializedVersion: 3
@@ -1491,10 +1415,7 @@ MonoBehaviour:
   maxHealth: 100
   horizontalMove: 0
   verticalMove: -3
-  destroyExplosion: {fileID: 183240, guid: a74b8eac27f2a214f9034305f1106c0c, type: 2}
-  destroySound: {fileID: 8263204}
-  isShooting: 1
-  isMoving: 1
+  destroyExplosion: {fileID: 183240, guid: 8c64f894220e4eb4db071c7e7ec2f8db, type: 2}
   visualWeapons:
   - weapon: {fileID: 158324, guid: bc33b0779d2ffd4458e68f0d2e227434, type: 2}
     weaponSpawn: {fileID: 420118}
@@ -1503,6 +1424,8 @@ MonoBehaviour:
     weaponSpawn: {fileID: 456294}
     weaponScripts: {fileID: 0}
   weaponLevel: 1
+  isShooting: 1
+  isMoving: 1
   pointForKill: 40
   white: {fileID: 2100000, guid: a2b28c37441690a45868b2c821b22cde, type: 2}
   isTakingCollisionDamage: 0
@@ -4569,7 +4492,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: destroyExplosion
       value: 
-      objectReference: {fileID: 183240, guid: a74b8eac27f2a214f9034305f1106c0c, type: 2}
+      objectReference: {fileID: 183240, guid: 8c64f894220e4eb4db071c7e7ec2f8db, type: 2}
     - target: {fileID: 0}
       propertyPath: destroySound
       value: 
