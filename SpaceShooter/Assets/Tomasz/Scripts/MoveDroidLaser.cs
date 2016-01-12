@@ -4,6 +4,7 @@ using System.Collections;
 public class MoveDroidLaser : MonoBehaviour {
 
     public float moveSpeed = 500;
+    [HideInInspector]
     public Transform target;
 
 
@@ -12,7 +13,7 @@ public class MoveDroidLaser : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
+        
         rigidbody = GetComponent<Rigidbody>();
         transform.LookAt(target);
        
@@ -21,7 +22,7 @@ public class MoveDroidLaser : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-      
+        
            rigidbody.velocity = transform.forward * moveSpeed * Time.deltaTime;
     }
 }

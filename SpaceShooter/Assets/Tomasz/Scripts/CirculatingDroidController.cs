@@ -12,10 +12,11 @@ public class CirculatingDroidController : MonoBehaviour
     public int droidCount = 0; //for controll initiial droids in inspector
     public int maxDroids = 3;
     public float[] droidSpawnAngles;
+   // [HideInInspector]
     public Transform opponentTransform;    //nearest oponent
-    public GameObject circulatingSphere;   //prefab for droid
+    
 
-
+    private GameObject circulatingSphere;   
     private SingleCirculatingDroidController singleCirculatingDroidController;
 
 
@@ -57,8 +58,7 @@ public class CirculatingDroidController : MonoBehaviour
     {
         foreach (GameObject droid in Droids)
         {
-            circulatingSphere.GetComponent<SingleCirculatingDroidController>().isDroidAlive = false;
-            Destroy(droid);
+          Destroy(droid);
         }
         Droids.Clear();
     }
