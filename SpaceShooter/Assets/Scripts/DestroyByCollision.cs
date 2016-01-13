@@ -23,9 +23,9 @@ public class DestroyByCollision : MonoBehaviour
         if (other.tag == "Background" || gameObject.tag == other.tag || other.tag == "PickUp") return;
         if (tag == "PlayerBullet" && other.tag == "Player" || tag == "EnemyBullet" && other.tag == "Enemy")
             return;
+        if( tag == "PlayerBullet" && other.tag == "Droid") return;  //if player shot have collision with Droid
 
-
-        if (destroyEffects.Length > 0)                                                                              // if ther is some destroyeffects attached
+            if (destroyEffects.Length > 0)                                                                              // if ther is some destroyeffects attached
         {
             int randIndex = Random.Range(0, destroyEffects.Length);                                                 // choose random index in array
             GameObject randEffect = destroyEffects[randIndex];                                                      // choose GameObject with randIndex from array

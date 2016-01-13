@@ -39,7 +39,8 @@ AudioSource:
   m_GameObject: {fileID: 154256}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24304210, guid: 313991fdd3b7f274f8b5dfe6de6cdbc3,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -117,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBetweenBullets: 0.5
-  bulletSpawn: {fileID: 457608, guid: 34115a1b9355d2142a33e4328bdb7a80, type: 2}
+  bulletSpawn: {fileID: 460894}
   gunAudio: {fileID: 8300000, guid: 3c29a4bfd231aac4ba6fd03bdec7cef9, type: 3}
   bullet: {fileID: 101212, guid: cd25b104bb167964181ee3347d5c613c, type: 2}
 --- !u!198 &19814430
@@ -1766,7 +1767,12 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: bulletSpawn
       value: 
-      objectReference: {fileID: 457608, guid: 34115a1b9355d2142a33e4328bdb7a80, type: 2}
+      objectReference: {fileID: 460894}
+    - target: {fileID: 0}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24304210, guid: 313991fdd3b7f274f8b5dfe6de6cdbc3,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 154256}

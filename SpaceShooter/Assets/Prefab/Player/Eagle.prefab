@@ -712,14 +712,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeeadc126171dc546805adb1f5e18491, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  horizontalMove: 0
-  verticalMove: -1
-  destroyExplosion: {fileID: 0}
-  visualWeapons: []
-  weaponLevel: 1
-  isShooting: 1
-  isMoving: 0
   r: 2
   t: 3
   droidPrefab: {fileID: 161418, guid: 34115a1b9355d2142a33e4328bdb7a80, type: 2}
@@ -731,6 +723,7 @@ MonoBehaviour:
   - 180
   - 90
   - 270
+  opponentTransform: {fileID: 0}
 --- !u!114 &11451418
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -753,6 +746,7 @@ MonoBehaviour:
   weaponLevel: 1
   isShooting: 1
   isMoving: 1
+  white: {fileID: 0}
   weaponSpawnMain: {fileID: 405178}
   weaponSpawnLeft: {fileID: 428476}
   weaponSpawnRight: {fileID: 477774}

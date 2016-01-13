@@ -358,8 +358,8 @@ MonoBehaviour:
   weaponLevel: 1
   isShooting: 1
   isMoving: 1
-  pointForKill: 60
   white: {fileID: 2100000, guid: a2b28c37441690a45868b2c821b22cde, type: 2}
+  pointForKill: 60
   isTakingCollisionDamage: 0
   DamageByCollision: 0
 --- !u!198 &19837660
@@ -3517,6 +3517,10 @@ Prefab:
       propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: visualWeapons.Array.data[0].weapon
+      value: 
+      objectReference: {fileID: 133526, guid: 8b085e955e653b74997bad2466c03fa2, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 132884}

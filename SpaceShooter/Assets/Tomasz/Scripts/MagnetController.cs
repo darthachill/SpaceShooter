@@ -70,7 +70,7 @@ public class MagnetController : MonoBehaviour
             yield return null;
         }
 
-        sphere.GetComponent<MeshRenderer>().enabled = false;
+       // sphere.GetComponent<MeshRenderer>().enabled = false;
         Destroy(sphere);
         Destroy(magnetingSphere);
     }

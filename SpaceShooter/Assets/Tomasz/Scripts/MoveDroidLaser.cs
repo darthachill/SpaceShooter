@@ -15,7 +15,7 @@ public class MoveDroidLaser : MonoBehaviour {
     void Start () {
         
         rigidbody = GetComponent<Rigidbody>();
-        transform.LookAt(target);
+        transform.LookAt(target);               //set good rotation of the bullet
        
     }
 	

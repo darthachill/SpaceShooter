@@ -4,64 +4,65 @@ using System;
 public class SingleCirculatingDroidController : ObjectController
 {
     [HideInInspector]
-    public Transform playerTransform;
-    [HideInInspector]
-    public float travelingTime;
+    public Transform playerTransform;    //used to rotate droid around
 
-    private SlowWeapon slowWeapon;
-    private MoveDroidLaser moveDroidLaser;
-    private CirculatingDroidController circulatingDroidController;
-    private Transform opponentTransform;
-    private Transform weaponTransform; // where particle are spawned
+    [HideInInspector]
+    public float travelingTime;         //time of making full circle travel
+
+
+    private CirculatingDroidController circulatingDroidController;  //used to have updated Transform of nearest opponent
 
 
     void Start()
     {
+        base.Start();
 
-          slowWeapon =  visualWeapons[0].weapon.GetComponent<SlowWeapon>();
-           moveDroidLaser =  slowWeapon.bullet.GetComponent<MoveDroidLaser>(); 
-        
         circulatingDroidController = playerTransform.GetComponent<CirculatingDroidController>();
-        weaponTransform = transform.GetChild(0);
         StartCoroutine(RotateDroid());
     }
 
 
-    public IEnumerator RotateDroid()
+    public IEnumerator RotateDroid()        //rotate single droid and shot to opponents
     {
-        slowWeapon.Shot(false);
         while (isAlive)
         {
-           
-          if (circulatingDroidController.opponentTransform && isShooting)
+
+            if (circulatingDroidController.opponentTransform && isShooting)     // if there is opponent in hierarhyGuard
             {
+                transform.LookAt(circulatingDroidController.opponentTransform);     // have opponent in front of droid
+                Shot();
+            }
 
-                transform.LookAt(circulatingDroidController.opponentTransform);
-                weaponTransform.localPosition =  Vector3.forward / 2;
-              
-          transform.LookAt(circulatingDroidController.opponentTransform);
-         moveDroidLaser = visualWeapons[0].weapon.GetComponent<SlowWeapon>().bullet.GetComponent<MoveDroidLaser>();
-       moveDroidLaser.target = circulatingDroidController.opponentTransform;
-       visualWeapons[0].weapon.GetComponent<SlowWeapon>().bullet.GetComponent<MoveDroidLaser>().target = circulatingDroidController.opponentTransform; 
-       visualWeapons[0].weapon.GetComponent<SlowWeapon>().Shot(false);
-               // GetComponent<SlowWeapon>().Shot(false);
-     
-   }
-
-            transform.RotateAround(playerTransform.position, playerTransform.up, 360 * Time.deltaTime / travelingTime);
+              transform.RotateAround(playerTransform.position, playerTransform.up, 360 * Time.deltaTime / travelingTime); //rotate around player
 
             yield return null;
         }
     }
 
 
-    public override void TakeDamage(float damage, Vector3 damagePosition)
+
+    protected virtual void Shot()
     {
-        throw new NotImplementedException();
+        for (int i = 0; i < visualWeapons.Count; i++)             // Shot from all weapons
+            visualWeapons[i].weaponScripts.Shot(false);
     }
 
 
-    protected override void CheckBoundry()
+    public override void TakeDamage(float damage, Vector3 damagePosition)
+    {
+        currentHealth -= damage;
+
+        if (currentHealth <= 0)
+            Death();
+    }
+
+
+    protected void Death()
+    {
+        Destroy(gameObject);
+    }
+
+    protected override void CheckBoundry()      //droid has to stick near player
     {
         throw new NotImplementedException();
     }

@@ -19,6 +19,7 @@ TagManager:
   - GameOver
   - ShieldBar
   - StaminaBar
+  - Droid
   layers:
   - Default
   - TransparentFX
