@@ -15,14 +15,13 @@ public class MoveDroidLaser : MonoBehaviour {
     void Start () {
         
         rigidbody = GetComponent<Rigidbody>();
-        transform.LookAt(target);               //set good rotation of the bullet
        
     }
 	
 
 	// Update is called once per frame
 	void Update () {
-        
-           rigidbody.velocity = transform.forward * moveSpeed * Time.deltaTime;
+          
+		 rigidbody.velocity = transform.forward * moveSpeed * Time.deltaTime;
     }
 }

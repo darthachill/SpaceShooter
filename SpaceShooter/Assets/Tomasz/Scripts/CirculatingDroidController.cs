@@ -49,10 +49,9 @@ public class CirculatingDroidController : MonoBehaviour
         singleCirculatingDroidController.playerTransform = transform;       //set player transform reference in single droid
         Droids.Add(circulatingSphere);
 
-        Droids[Droids.Count - 1].transform.position = Droids[0].transform.position;
-        Droids[Droids.Count - 1].transform.rotation = Droids[0].transform.rotation;
+        Droids[Droids.Count - 1].transform.position = Droids[0].transform.position;        
         Droids[Droids.Count - 1].transform.RotateAround(transform.position, Vector3.up, droidSpawnAngles[Droids.Count - 1]);
-
+        Droids[Droids.Count - 1].transform.rotation = Droids[0].transform.rotation;
     }
 
 

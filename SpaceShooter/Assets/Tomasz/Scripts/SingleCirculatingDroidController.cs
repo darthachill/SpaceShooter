@@ -33,7 +33,7 @@ public class SingleCirculatingDroidController : ObjectController
                 Shot();
             }
 
-              transform.RotateAround(playerTransform.position, playerTransform.up, 360 * Time.deltaTime / travelingTime); //rotate around player
+            transform.RotateAround(playerTransform.position, playerTransform.up, 360 * Time.deltaTime / travelingTime); //rotate around player
 
             yield return null;
         }
@@ -53,7 +53,10 @@ public class SingleCirculatingDroidController : ObjectController
         currentHealth -= damage;
 
         if (currentHealth <= 0)
+        {
             Death();
+        }
+
     }
 
 
